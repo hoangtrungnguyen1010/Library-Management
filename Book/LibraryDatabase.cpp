@@ -10,8 +10,8 @@ void LibraryDatabase::uploadBook() {
 		stringstream ss(temp);
 		getline(ss, ISBN, ',');
 		getline(ss, name, ',');
+		getline(ss,author, ',');
 		getline(ss, publisher, ',');
-		getline(ss, author, ',');
 		getline(ss, tag, ',');
 		Book newBook(name, ISBN, publisher, author, tag);
 		this->List.push_back(newBook);

@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>bg.png</file>
+        <file>../../Downloads/bg1.webp</file>
+        <file>../../Downloads/bg2.webp</file>
+        <file>../../Downloads/bg3.jpg</file>
+        <file>../../Downloads/bg4.png</file>
+        <file>../../Downloads/gr.jpg</file>
+        <file>../../Downloads/bg5.jpg</file>
+        <file>../../Downloads/bg6.jpg</file>
+        <file>../../Downloads/white.jpg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>../../Downloads/white.jpg</file>
+    </qresource>
+</RCC>

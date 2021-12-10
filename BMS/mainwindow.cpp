@@ -34,6 +34,7 @@ void MainWindow::on_Submit_clicked()
            ui->stackedWidget->setCurrentIndex(1);
            break;
        }
+
    }
    if(f==0){
         QMessageBox::information(this,"Login failed.", "Try again!");

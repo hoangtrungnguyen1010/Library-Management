@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QTextStream>
+#include <QStringList>
 #include "Book.h"
 #include "LibraryDatabase.h"
 QT_BEGIN_NAMESPACE
@@ -20,12 +21,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-    void on_Submit_clicked();
+//private slots:
+//    void on_Submit_clicked();
 
-    void on_pushButton_clicked();
+//    void on_pushButton_clicked();
 
-    void on_pushButton_4_clicked();
+//    void on_pushButton_4_clicked();
+
+//    void on_pushButton_6_clicked();
 
 private:
     Ui::MainWindow *ui;

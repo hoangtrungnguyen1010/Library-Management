@@ -1,0 +1,12 @@
+RM001,On a Highland Shore,Kathleen Givens,Pocket Star,Romance
+RM002,The case of the confirmed bachelor,Diana Palmer,Harlequin,Romance
+RM003,An Old-Fashioned Girl,Betty Neels,Harlequin,Romance
+KD001,Harry Potter and the Deathly Hallows,J. K. Rowling,Arthur A. Levine Books,Kids
+KD002,The treasure of Easter Island,Elisabetta Dami,Pocket Star,Kids
+KD003,Tengal,Adam Blade,Hachette Children's Group,Kids
+TH001,Misery,Stephen King,Viking,Thrillers
+TH002,Cell,Stephen King,Scribner,Thrillers
+TH003,A,Stephen King,NAL Books / New American Library,Thrillers
+TB001,Political ideologies,Leon P. Baradat,Prentice-Hall,TextBooks
+TB002,The principles of learning & behavior,Michael Domjan,Brooks/Cole Pub. Co.,TextBooks
+TB003,Environmental science,Bernard J. Nebel-Richard T. Wright,Prentice Hall,TextBooks

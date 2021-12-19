@@ -1,0 +1,5 @@
+20120609|Nguyen Hoang Trung|Female|Quang Binh|Admin 
+20120099|Tran Huynh Huong|Female|Long An|Vip User
+20120128|Nguyen Thi Cam Lai|Female|Lam Dong|User
+20120523|Nguyen Van A|Male|Ha Noi|User
+20120614|Nguyen Van B|Male|Ha Nam|User

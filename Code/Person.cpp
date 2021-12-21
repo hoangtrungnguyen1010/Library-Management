@@ -9,7 +9,7 @@ Person::Person(){
     this->_acc=temp;
 }
 
-Person::Person(QString id, QString name, QString gender, QString address, QString username, QString password){
+Person::Person(QString id, QString name, bool gender, QString address, QString username, QString password){
     this->_id = id;
     this->_name =name;
     this->_gender=gender;
@@ -18,14 +18,26 @@ Person::Person(QString id, QString name, QString gender, QString address, QStrin
     this->_acc = temp;
 }
 
-QString Person::showInfor(){
+QString Person::toString(){
     QString buffer="";
     QTextStream out(&buffer,QIODevice::ReadWrite);
-    out<<"Full Name: "<<this->_name<<"\n"<<endl;
-    out<<"Gender: "<<this->_gender<<"\n"<<endl;
-    out<<"Address: "<<this->_address<<"\n"<<endl;
+
+    out<<this->_id<<"|";
+    out<<this->_name<<"|";
+    out<<this->_gender<<"|";
+    out<<this->_address<<"|";
+    out<<this->_acc.toString();
+
     QString res=out.readAll();
     return res;
+}
+
+bool Person::checkIsUsername(QString username){
+    return this->_acc.checkIsUserName(username);
+}
+
+bool Person::checkIsID(QString id){
+    return this->_id == id;
 }
 
 QString Person::showName(){
@@ -33,7 +45,8 @@ QString Person::showName(){
 }
 
 QString Person:: showGender(){
-    return this->_gender;
+    if (this->_gender==0) return "Male";
+    return "Female";
 }
 
 QString Person:: showAddress(){
@@ -48,6 +61,6 @@ void Person::editName(QString newName){
     this->_name=newName;
 }
 
-void Person::editGender(QString Gender){
+void Person::editGender(bool Gender){
     this->_gender=Gender;
 }

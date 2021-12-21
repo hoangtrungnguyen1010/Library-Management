@@ -10,11 +10,9 @@ private:
 
 public:
     Admin(){};
-    Admin(QString id, QString name, QString gender, QString address, QString account, QString password);
-    void viewBorrowedBook();
-    void viewDamagedBook();
-    void addBook(Book addedBook, int num);
-    void deleteBook(Book delBook, int num);
+    Admin(QString id, QString name, bool gender, QString address, QString account, QString password);
+
+    QString toString();
 };
 
 #endif // ADMIN_H

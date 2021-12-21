@@ -3,6 +3,8 @@
 #ifndef BOOKSTATE_H
 #define BOOKSTATE_H
 #include<iostream>
+#include<QString>
+#include<QTextStream>
 using namespace std;
 
 class BookState{
@@ -18,6 +20,7 @@ public:
     void updateQuantiy(int num);
     void updateBorrowedBooks(int num);
     void updateDamagedBooks(int num);
+    QString toString() const;
 };
 
 #endif // BOOKSTATE_H

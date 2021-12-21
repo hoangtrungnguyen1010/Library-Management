@@ -14,19 +14,20 @@
 using namespace std;
 
 class Person{
-public:
-    static LibraryDatabase LibData;
 private:
     QString _id;
     QString _name;
-    QString _gender;
+    bool _gender; //0 : male, 1: female
     QString _address;
     Account _acc;
 public:
     Person();
-    Person(QString id, QString name, QString gender, QString address, QString username, QString password);
-    QString showInfor();
+    Person(QString id, QString name, bool gender, QString address, QString username, QString password);
+    QString toString();
     QString showID();
+
+    bool checkIsUsername(QString username);
+    bool checkIsID(QString id);
 
     QString showName();
     QString showGender();
@@ -34,8 +35,7 @@ public:
 
     void editID(QString newID);
     void editName(QString newName);
-    void editGender(QString Gender);
-
+    void editGender(bool Gender);
 };
 
 #endif // PERSON_H

@@ -21,6 +21,6 @@ public:
     QString getName();
 public:
     Book();
-    Book( QString ISBN,QString name, QString publisher, QString author, QString tag );
-    QString showBookInfor() const;
+    Book( QString ISBN, QString name, QString publisher, QString author, QString tag, int quality, int numOfBorrowedBooks, int numOfDamagedBooks );
+    QString toString() const;
 };

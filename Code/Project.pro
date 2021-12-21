@@ -14,9 +14,8 @@ SOURCES += \
     Book.cpp \
     BookState.cpp \
     HumanDatabase.cpp \
-    LibraryDatabase.cpp \
     Person.cpp \
-    Proxy.cpp \
+    ProxyLibraryDataBase.cpp \
     RealLibraryDatabase.cpp \
     User.cpp \
     VipUser.cpp \
@@ -30,7 +29,7 @@ HEADERS += \
     HumanDatabase.h \
     LibraryDatabase.h \
     Person.h \
-    Proxy.h \
+    ProxyLibraryDataBase.h \
     QuickSort.h \
     RealLibraryDatabase.h \
     User.h \

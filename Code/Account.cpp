@@ -12,3 +12,16 @@ Account::Account(QString username, QString password){
 void Account::changePassWord(QString newPassWord){
     this->_password=newPassWord;
 }
+
+QString Account::toString() const{
+    QString buffer="";
+    QTextStream out(&buffer,QIODevice::ReadWrite);
+    out<<this->_username<<"|";
+    out<<this->_password;
+    QString res=out.readAll();
+    return res;
+}
+
+bool Account::checkIsUserName(QString name){
+    return this->_username==name;
+}

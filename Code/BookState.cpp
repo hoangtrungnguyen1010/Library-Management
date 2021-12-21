@@ -1,7 +1,7 @@
 #include"BookState.h"
 
 int BookState::getNumOfRemaingBooks(){
-    return this->_quantity- this->_numOfBorrowedBooks;
+    return this->_quantity- this->_numOfBorrowedBooks - this->_numOfDamagedBooks;
 }
 
 BookState::BookState(){
@@ -16,7 +16,7 @@ BookState::BookState(int quantity, int numOfBorrowedBooks, int numOfDamagedBooks
     this->_numOfDamagedBooks=numOfDamagedBooks;
 }
 
-void BookState:: updateQuantiy(int num){
+void BookState::updateQuantiy(int num){
     this->_quantity++;
 }
 
@@ -28,3 +28,12 @@ void BookState::updateDamagedBooks(int num){
     this->_numOfDamagedBooks++;
 }
 
+QString BookState::toString() const{
+    QString buffer="";
+    QTextStream out(&buffer,QIODevice::ReadWrite);
+    out<<"|"<<QString::number(this->_quantity);
+    out<<"|"<<QString::number(this->_numOfDamagedBooks);
+
+    QString res=out.readAll();
+    return res;
+}

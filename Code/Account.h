@@ -3,6 +3,7 @@
 #define ACCOUNT_H
 #include<iostream>
 #include<QString>
+#include<QTextStream>
 
 using namespace std;
 class Account{
@@ -13,6 +14,8 @@ public:
     Account();
     Account(QString username, QString password);
     void changePassWord(QString newPassWord);
+    QString toString() const;
+    bool checkIsUserName(QString name);
 };
 
 #endif // ACCOUNT_H

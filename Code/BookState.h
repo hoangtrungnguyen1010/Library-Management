@@ -5,6 +5,8 @@
 #include<iostream>
 #include<QString>
 #include<QTextStream>
+#include <QFile>
+#include <QIODevice>
 using namespace std;
 
 class BookState{

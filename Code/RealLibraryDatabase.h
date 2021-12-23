@@ -11,7 +11,7 @@
 
 class RealLibraryDatabase : public LibraryDatabase{
 private:
-    QString _fileName = "..//Project/BookData.txt" ;
+    QString _fileName = ":/Data/Resource/Data/BookData.txt" ;
     QVector<Book> List;
 public:
     void sortByID();
@@ -33,6 +33,7 @@ public:
 
     QString toString() const;
 
+    QVector<Book> getListBook();
     void viewBorrowedBook();
     void viewDamagedBook();
 

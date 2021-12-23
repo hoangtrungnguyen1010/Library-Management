@@ -112,7 +112,9 @@ void RealLibraryDatabase::saveDTB(){
         }
     }
 }
-
+QVector<Book> RealLibraryDatabase::getListBook(){
+    return this->List;
+}
 void RealLibraryDatabase::viewBorrowedBook(){
 
 };

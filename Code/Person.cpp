@@ -7,6 +7,7 @@ Person::Person(){
     this->_address="unknown";
     Account temp("unknown", "unknown");
     this->_acc=temp;
+    this->_type="Admin";
 }
 
 Person::Person(QString id, QString name, bool gender, QString address, QString username, QString password){
@@ -51,6 +52,9 @@ QString Person:: showGender(){
 
 QString Person:: showAddress(){
     return this->_address;
+}
+QString Person::showType(){
+    return this->_type;
 }
 
 void Person::editID(QString newID){

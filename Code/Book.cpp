@@ -7,7 +7,21 @@ QString Book:: getID(){
 QString Book:: getName(){
     return this->_name;
 }
-
+int Book::getQuanlity()
+{
+    return this->state.getNumOfRemaingBooks();
+}
+QString Book::getPublisher()
+{
+    return this->_publisher;
+}
+QString Book::getAuthor()
+{
+    return this->_author;
+}
+QString Book::getTag(){
+    return this->_tag;
+}
 Book::Book(){
     _name = "unknown";
     _ISBN = "unknown";

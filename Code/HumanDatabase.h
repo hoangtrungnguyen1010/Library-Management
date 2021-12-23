@@ -15,7 +15,7 @@ class HumanDatabase{
 private:
     QVector<User*> UserData;
     QVector<Admin> AdData;
-    QString _fileName="..//Project/UserData.txt";
+    QString _fileName=":/Data/Resource/Data/UserData.txt";
 
 public:
     bool addNewUser(QString id, QString name, bool gender, QString address, QString username, QString password, QString type);

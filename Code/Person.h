@@ -19,6 +19,7 @@ private:
     QString _name;
     bool _gender; //0 : male, 1: female
     QString _address;
+    QString _type;
     Account _acc;
 public:
     Person();
@@ -32,6 +33,7 @@ public:
     QString showName();
     QString showGender();
     QString showAddress();
+    QString showType();
 
     void editID(QString newID);
     void editName(QString newName);

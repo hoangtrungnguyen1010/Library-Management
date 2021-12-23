@@ -1,9 +1,13 @@
 #include<QVector>
 #include<QDebug>
 #include<QDateTime>
+#include <QApplication>
 #include"HumanDatabase.h"
 #include"LibraryDatabase.h"
 #include"RealLibraryDatabase.h"
+#include "mainwindow.h"
+#include "loginpage.h"
+Person p;
 int main(int argc, char *argv[])
 {
     RealLibraryDatabase Lib;
@@ -16,7 +20,12 @@ int main(int argc, char *argv[])
     Human.saveDTB();
     Lib.sortByID();
     Lib.saveDTB();
-
+    QApplication a(argc, argv);
+    LoginPage_2 b;
+    b.show();
+   //    QDialog b;
+   //    b.show();
+       return a.exec();
 
 //    qDebug()<<Lib.viewListBook();
 //    qDebug()<<"-------------------------sorted---------------------------------------";

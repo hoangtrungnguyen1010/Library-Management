@@ -4,6 +4,7 @@
 #include<iostream>
 #include<QString>
 #include<QTextStream>
+#include <QIODevice>
 
 using namespace std;
 class Account{

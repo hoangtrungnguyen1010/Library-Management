@@ -19,6 +19,10 @@ private:
 public:
     QString getID();
     QString getName();
+    int getQuanlity();
+    QString getPublisher();
+    QString getAuthor();
+    QString getTag();
 public:
     Book();
     Book( QString ISBN, QString name, QString publisher, QString author, QString tag, int quality, int numOfBorrowedBooks, int numOfDamagedBooks );

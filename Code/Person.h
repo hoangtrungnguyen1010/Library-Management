@@ -28,6 +28,8 @@ public:
     QString showID();
 
     bool checkIsUsername(QString username);
+    bool checkIsPassword(QString password);
+
     bool checkIsID(QString id);
 
     QString showName();

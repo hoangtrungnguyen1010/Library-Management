@@ -17,6 +17,8 @@ public:
     void changePassWord(QString newPassWord);
     QString toString() const;
     bool checkIsUserName(QString name);
+    bool checkIsPassword(QString name);
+
 };
 
 #endif // ACCOUNT_H

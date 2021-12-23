@@ -8,20 +8,18 @@
 #include "mainwindow.h"
 #include "loginpage.h"
 Person p;
+RealLibraryDatabase* RealLibraryDatabase:: _LibDTB;
+HumanDatabase* HumanDatabase:: _HumanDTB;
+
 int main(int argc, char *argv[])
 {
-    RealLibraryDatabase Lib;
-    Lib.uploadBook();
-    HumanDatabase Human;
-    Human.loadDTB(Lib);
-    qDebug()<<Human.addNewUser("20120609", "sdfsd", 1, "wefsdf", "sdfsdf", "sdfsdf", "Vip User");
+    RealLibraryDatabase* Lib= RealLibraryDatabase::GetInstance();
+    HumanDatabase* Human = HumanDatabase::GetInstance();
+    qDebug()<<Human->addNewUser("20120609", "sdfsd", 1, "wefsdf", "sdfsdf", "sdfsdf", "Vip User");
 
-    Human.printDTB();
-    Human.saveDTB();
-    Lib.sortByID();
-    Lib.saveDTB();
+    Lib->sortByID();
     QApplication a(argc, argv);
-    LoginPage_2 b;
+    LoginPage_2 b(nullptr, Human);
     b.show();
    //    QDialog b;
    //    b.show();

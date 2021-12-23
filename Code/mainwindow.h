@@ -14,6 +14,7 @@
 #include "Book.h"
 #include "LibraryDatabase.h"
 #include "RealLibraryDatabase.h"
+#include"User.h"
 #include "Person.h"
 #include "Button.h"
 
@@ -28,7 +29,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr, User* user=nullptr);
     ~MainWindow();
 
 public:
@@ -42,6 +43,7 @@ private slots:
     void on_add_to_cart_btn_clicked();
 
 private:
+    User* _user;
     Ui::MainWindow *ui;
     AddToCartBtn* add_to_cart_btn;
 };

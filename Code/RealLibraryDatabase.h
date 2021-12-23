@@ -10,10 +10,25 @@
 #include"LibraryDatabase.h"
 
 class RealLibraryDatabase : public LibraryDatabase{
+protected:
+    static RealLibraryDatabase* _LibDTB;
 private:
     QString _fileName = ":/Data/Resource/Data/BookData.txt" ;
     QVector<Book> List;
 public:
+    RealLibraryDatabase(){};
+    RealLibraryDatabase(const RealLibraryDatabase &other) = delete;
+    void operator=(const RealLibraryDatabase &) = delete;
+    static RealLibraryDatabase *GetInstance(){
+        if ( !_LibDTB){
+            _LibDTB= new RealLibraryDatabase();
+        }
+        _LibDTB->uploadBook();
+        return _LibDTB;
+    }
+    ~RealLibraryDatabase(){
+        _LibDTB->saveDTB();
+    }
     void sortByID();
     void sortByName();
 

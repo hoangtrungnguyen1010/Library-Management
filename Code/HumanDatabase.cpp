@@ -1,6 +1,6 @@
 #include<HumanDatabase.h>
 
-void HumanDatabase::loadDTB(RealLibraryDatabase Lib){
+void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
     QFile file(_fileName);
 
     if(!file.open(QIODevice::ReadOnly)){
@@ -38,7 +38,7 @@ void HumanDatabase::loadDTB(RealLibraryDatabase Lib){
                 QStringList templist=string.split(",");
                 Book temp;
 
-                if (Lib.findBookByID(templist[1], temp)){
+                if (Lib->findBookByID(templist[1], temp)){
                     user->addToCart(temp);
 
                 }
@@ -52,7 +52,7 @@ void HumanDatabase::loadDTB(RealLibraryDatabase Lib){
                 QString string=info[i];
                 QStringList templist=string.split(",");
                 Book temp;
-                if (Lib.findBookByID(templist[1], temp)){
+                if (Lib->findBookByID(templist[1], temp)){
                     user->borrowBook(temp, info[++i].toInt(), info[++i]);
                 }
                 i++;
@@ -134,7 +134,19 @@ bool HumanDatabase::addNewAdmin(QString id, QString name, bool gender, QString a
     return 1;
 }
 
+User* HumanDatabase::getUser(QString username, QString password){
+    int size= this->UserData.size();
+    for (int i=0;i<size;i++){
+        if (UserData[i]->checkIsUsername(username) && UserData[i]->checkIsPassword(password) ){
+            return UserData[i];
+        }
+    }
+    return NULL;
+}
+
+
 HumanDatabase::~HumanDatabase(){
+    this->saveDTB();
     int size= this->UserData.size();
 
     for(int i=0;i<size;i++){

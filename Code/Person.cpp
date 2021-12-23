@@ -37,6 +37,11 @@ bool Person::checkIsUsername(QString username){
     return this->_acc.checkIsUserName(username);
 }
 
+bool Person::checkIsPassword(QString password){
+    return this->_acc.checkIsPassword(password);
+}
+
+
 bool Person::checkIsID(QString id){
     return this->_id == id;
 }

@@ -5,16 +5,26 @@
 #include <iostream>
 #include <QTextStream>
 #include <QDebug>
+#include"BookState.h"
 using namespace std;
 
-class Book {
+class Book : public BookState{
 private:
     QString _name;
     QString _ISBN;
     QString _publisher;
     QString _author;
     QString _tag;
+    BookState state;
 public:
-    Book( QString ISBN,QString name, QString publisher, QString author, QString tag );
-    QString showBookInfor() const;
+    QString getID();
+    QString getName();
+    int getQuanlity();
+    QString getPublisher();
+    QString getAuthor();
+    QString getTag();
+public:
+    Book();
+    Book( QString ISBN, QString name, QString publisher, QString author, QString tag, int quality, int numOfBorrowedBooks, int numOfDamagedBooks );
+    QString toString() const;
 };

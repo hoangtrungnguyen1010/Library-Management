@@ -591,5 +591,22 @@
         <file>Resource/Images/admin_login.png</file>
         <file>Resource/Images/user_login.png</file>
         <file>Resource/Images/vip_login.png</file>
+        <file>Resource/Images/KD001.jpg</file>
+        <file>Resource/Images/KD002.jpg</file>
+        <file>Resource/Images/KD003.jpg</file>
+        <file>Resource/Images/RM001.jpg</file>
+        <file>Resource/Images/RM002.jpg</file>
+        <file>Resource/Images/TB001.jpg</file>
+        <file>Resource/Images/TB002.jpg</file>
+        <file>Resource/Images/TH001.jpg</file>
+        <file>Resource/Images/TH002.jpg</file>
+        <file>Resource/Images/RM003.jpg</file>
+        <file>Resource/Images/TB003.jpg</file>
+        <file>Resource/Images/TH003.jpg</file>
+    </qresource>
+    <qresource prefix="/Data">
+        <file>Resource/Data/account.txt</file>
+        <file>Resource/Data/BookData.txt</file>
+        <file>Resource/Data/UserData.txt</file>
     </qresource>
 </RCC>

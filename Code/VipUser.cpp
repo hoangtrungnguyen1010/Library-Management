@@ -22,5 +22,4 @@ QString VipUser::toString(){
 
     QString res=out.readAll();
     return res;
-
 }

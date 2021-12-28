@@ -1,0 +1,12 @@
+KD001|Harry Potter and the Deathly Hallows|Arthur A. Levine Books|J. K. Rowling|Kids|123|22
+KD002|The treasure of Easter Island|Pocket Star|Elisabetta Dami|Kids|123|22
+KD003|Tengal|Hachette Children's Group|Adam Blade|Kids|123|22
+RM001|On a Highland Shore|Pocket Star|Kathleen Givens|Romance|123|22
+RM002|The case of the confirmed bachelor|Harlequin|Diana Palmer|Romance|568|22
+RM003|An Old-Fashioned Girl|Harlequin|Betty Neels|Romance|123|22
+TB001|Political ideologies|Prentice-Hall|Leon P. Baradat|TextBooks|123|22
+TB002|The principles of learning & behavior|Brooks/Cole Pub. Co.|Michael Domjan|TextBooks|123|22
+TB003|Environmental science|Prentice Hall|Bernard J. Nebel-Richard T. Wright|TextBooks|123|22
+TH001|Misery|Viking|Stephen King|Thrillers|123|22
+TH002|Cell|Scribner|Stephen King|Thrillers|123|22
+TH003|The Bachman Books|NAL Books / New American Library|Stephen King|Thrillers|123|22

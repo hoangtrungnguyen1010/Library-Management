@@ -3,9 +3,12 @@
 #include"RealLibraryDatabase.h"
 class ProxyLibraryDatabase: public LibraryDatabase{
 private:
+
     bool _type; //User=0  Admin =1
     RealLibraryDatabase * _libdata;
+
 public:
+    bool check();
     void sortByID();
     void sortByName();
 

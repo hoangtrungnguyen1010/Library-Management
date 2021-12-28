@@ -1,0 +1,6 @@
+20120609|Nguyen Hoang Trung|1|Quang Binh|hoangtrung|123456|Admin
+20120609|Nguyen Hoang Trung|1|Quang Binh|hoangtrung|123456|Vip User|b,RM001|0|15:56:44 20-12-2021|b,RM002|1|15:56:44 20-12-2021
+20120099|Tran Huynh Huong|1|Long An|huynhhuong|123456|Vip User|b,RM001|1|15:56:44 20-12-2021|b,RM002|0|15:56:44 20-12-2021
+20120128|Nguyen Thi Cam Lai|1|Lam Dong|camlai|123456|Vip User|b,RM001|1|15:56:44 20-12-2021|b,RM002|0|15:56:44 20-12-2021
+20120523|Nguyen Van A|0|Ha Noi|iorjt|123456|User|c,TH001|c,TH002|b,RM001|0|15:56:44 20-12-2021|b,RM002|1|15:56:44 20-12-2021
+20120614|Nguyen Van B|0|Ha Nam|asdfk|123456|User|c,TH001|c,TH002|b,RM001|0|15:56:44 20-12-2021|b,RM002|1|15:56:44 20-12-2021

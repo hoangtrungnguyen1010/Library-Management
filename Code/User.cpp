@@ -10,7 +10,7 @@ User::User(){
     this->_checkExtended=checkExtended;
     this->_timeWhenBorrowed=timeWhenBorrowed;
 };
-
+//user muon duoc 5, vip muon duoc 10
 void User::addToCart(Book b){
     this->_cart.push_back(b);
 }

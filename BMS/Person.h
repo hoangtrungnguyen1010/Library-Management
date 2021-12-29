@@ -23,6 +23,7 @@ private:
     Account _acc;
 public:
     Person();
+    virtual ~Person(){};
     Person(QString id, QString name, bool gender, QString address, QString username, QString password);
     QString toString();
     QString showID();

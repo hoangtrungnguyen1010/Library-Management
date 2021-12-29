@@ -22,8 +22,8 @@ public:
 
     void uploadBook();
 
-    bool findBookByName(QString name, Book& res);
-    bool findBookByID(QString id, Book& res);
+    QVector<Book> findBookByName(QString name);
+    QVector<Book> findBookByID(QString id);
 
     int getBookPos(QString id);
 

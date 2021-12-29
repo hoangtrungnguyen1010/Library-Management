@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>764</width>
-    <height>639</height>
+    <width>866</width>
+    <height>671</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,6 +43,9 @@
     </item>
     <item>
      <widget class="QStackedWidget" name="stackedWidget_2">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -68,6 +71,7 @@
              <property name="font">
               <font>
                <pointsize>20</pointsize>
+               <weight>75</weight>
                <italic>false</italic>
                <bold>true</bold>
               </font>
@@ -110,6 +114,7 @@
              <property name="font">
               <font>
                <pointsize>16</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -380,6 +385,7 @@ cursor: pointer;
            <property name="font">
             <font>
              <pointsize>20</pointsize>
+             <weight>75</weight>
              <italic>false</italic>
              <bold>true</bold>
             </font>
@@ -403,6 +409,7 @@ cursor: pointer;
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -985,6 +992,7 @@ border: none</string>
            <property name="font">
             <font>
              <pointsize>15</pointsize>
+             <weight>50</weight>
              <bold>false</bold>
             </font>
            </property>
@@ -1029,6 +1037,7 @@ cursor: pointer;
            <property name="font">
             <font>
              <pointsize>15</pointsize>
+             <weight>50</weight>
              <bold>false</bold>
             </font>
            </property>
@@ -1069,6 +1078,7 @@ cursor: pointer;
            <property name="font">
             <font>
              <pointsize>20</pointsize>
+             <weight>75</weight>
              <italic>false</italic>
              <bold>true</bold>
             </font>
@@ -1092,6 +1102,7 @@ cursor: pointer;
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -1153,6 +1164,7 @@ cursor: pointer;
               <property name="font">
                <font>
                 <pointsize>13</pointsize>
+                <weight>75</weight>
                 <italic>false</italic>
                 <bold>true</bold>
                </font>
@@ -1619,6 +1631,7 @@ border: none</string>
            <property name="font">
             <font>
              <pointsize>15</pointsize>
+             <weight>50</weight>
              <bold>false</bold>
             </font>
            </property>
@@ -1663,6 +1676,7 @@ cursor: pointer;
            <property name="font">
             <font>
              <pointsize>15</pointsize>
+             <weight>50</weight>
              <bold>false</bold>
             </font>
            </property>

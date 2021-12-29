@@ -38,28 +38,26 @@ QString RealLibraryDatabase::toString() const{
     return out.readAll();
 }
 
-bool RealLibraryDatabase::findBookByName(QString name, Book &res){
+QVector<Book> RealLibraryDatabase::findBookByName(QString name){
+    QVector<Book> res;
     int size=this->List.size();
-
     for(int i=0;i<size;i++){
         if (QString::compare(this->List[i].getName(),name)==0){
-            res=this->List[i];
-            return 1;
+            res.push_back(this->List[i]);
         }
     }
-    return 0;
+   return res;
 }
 
-bool RealLibraryDatabase::findBookByID(QString ID, Book& res){
+QVector<Book> RealLibraryDatabase::findBookByID(QString ID){
     int size=this->List.size();
-
+    QVector<Book> res;
     for(int i=0;i<size;i++){
         if (QString::compare(this->List[i].getID(),ID)==0){
-            res=this->List[i];
-            return 1;
+            res.push_back(this->List[i]);
         }
     }
-    return 0;
+    return res;
 }
 
 void RealLibraryDatabase::sortByID(){

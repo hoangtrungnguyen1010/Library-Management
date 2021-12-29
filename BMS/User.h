@@ -29,6 +29,7 @@ public:
 //    }
 /*    virtual void getTimeRemaining();*/ //for all books borrowed
     User();
+    ~User(){};
     User(QString id, QString name, bool gender, QString address, QString username, QString password):Person(id,name, gender,address,username, password)
     {};
     void addToCart(Book b);

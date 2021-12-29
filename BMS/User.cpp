@@ -30,6 +30,7 @@ bool User::borrowBook(Book book){
     this->_borrowedBook.push_back(book);
     QDateTime cd= QDateTime::currentDateTime();
     this->_timeWhenBorrowed.push_back(cd);
+    this->_checkExtended.push_back(1);
     return 1;
 }
 

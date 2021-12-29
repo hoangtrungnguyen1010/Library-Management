@@ -54,6 +54,9 @@ public:
     QVector<Book> getBorrowedBook(){
         return _borrowedBook;
     }
+    QVector<Book> getInCartBook(){
+        return _cart;
+    }
     QVector<QDateTime> getStartedTime(){
         return _timeWhenBorrowed;
     }

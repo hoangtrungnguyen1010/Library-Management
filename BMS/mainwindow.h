@@ -35,6 +35,7 @@ public:
 public:
     QFrame* createViewListFrame(Book book);
     QFrame* createYourBookFrame(Book book,QString time_start,int time_remaining);
+    QFrame* createCartFrame(Book book);
 private slots:
 
 
@@ -51,8 +52,9 @@ private slots:
 
     void on_your_book_btn_clicked();
 
+    void on_cart_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
-    AddToCartBtn* add_to_cart_btn;
 };
 #endif // MAINWINDOW_H

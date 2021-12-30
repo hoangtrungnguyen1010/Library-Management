@@ -88,9 +88,7 @@ background-color: rgb(239, 249, 254);</string>
             </property>
             <property name="font">
              <font>
-              <family>Freestyle Script</family>
               <pointsize>20</pointsize>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -280,9 +278,7 @@ background-color: transparent;
                  <widget class="QLabel" name="label_11">
                   <property name="font">
                    <font>
-                    <family>MS Shell Dlg 2</family>
                     <pointsize>15</pointsize>
-                    <weight>75</weight>
                     <italic>false</italic>
                     <bold>true</bold>
                    </font>
@@ -435,7 +431,7 @@ font: bold;</string>
              </sizepolicy>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="MainFramePage1">
              <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -492,7 +488,6 @@ font: bold;</string>
                          <property name="font">
                           <font>
                            <pointsize>12</pointsize>
-                           <weight>75</weight>
                            <italic>false</italic>
                            <bold>true</bold>
                            <strikeout>false</strikeout>
@@ -682,7 +677,6 @@ color: white;</string>
                               <widget class="QLabel" name="label_2">
                                <property name="font">
                                 <font>
-                                 <weight>75</weight>
                                  <bold>true</bold>
                                 </font>
                                </property>
@@ -732,7 +726,6 @@ color: white;</string>
                               <widget class="QLabel" name="label_20">
                                <property name="font">
                                 <font>
-                                 <weight>50</weight>
                                  <italic>true</italic>
                                  <bold>false</bold>
                                  <underline>true</underline>
@@ -881,7 +874,6 @@ color: white;</string>
                               <widget class="QLabel" name="label_5">
                                <property name="font">
                                 <font>
-                                 <weight>75</weight>
                                  <bold>true</bold>
                                 </font>
                                </property>
@@ -1233,7 +1225,6 @@ background-color: white;</string>
                    <property name="font">
                     <font>
                      <pointsize>9</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -1443,8 +1434,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>64</width>
-                   <height>32</height>
+                   <width>712</width>
+                   <height>600</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1518,7 +1509,6 @@ background-color: #DFD3C3
                       <property name="font">
                        <font>
                         <pointsize>15</pointsize>
-                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -1952,8 +1942,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>64</width>
-                   <height>32</height>
+                   <width>712</width>
+                   <height>600</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_25">

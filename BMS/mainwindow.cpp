@@ -47,7 +47,7 @@ QFrame* MainWindow::createViewListFrame(Book book){
     name->setText(book.getName());
     name->setMinimumHeight(35);
     name->setStyleSheet("QLabel {font-size: 15pt;font-family: Freestyle Script}");
-      name->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
+     name->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
       //Book's ID
       QLabel* id=new QLabel;

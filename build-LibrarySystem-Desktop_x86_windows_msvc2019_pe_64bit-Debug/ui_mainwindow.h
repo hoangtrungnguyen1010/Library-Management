@@ -239,11 +239,9 @@ public:
         label_19->setObjectName(QString::fromUtf8("label_19"));
         label_19->setMinimumSize(QSize(0, 0));
         QFont font;
-        font.setFamily(QString::fromUtf8("Freestyle Script"));
         font.setPointSize(20);
         font.setBold(false);
         font.setItalic(false);
-        font.setWeight(50);
         label_19->setFont(font);
         label_19->setStyleSheet(QString::fromUtf8("color: white;\n"
 "font: 20pt \"Freestyle Script\";\n"
@@ -346,11 +344,9 @@ public:
         label_11 = new QLabel(widget_4);
         label_11->setObjectName(QString::fromUtf8("label_11"));
         QFont font2;
-        font2.setFamily(QString::fromUtf8("MS Shell Dlg 2"));
         font2.setPointSize(15);
         font2.setBold(true);
         font2.setItalic(false);
-        font2.setWeight(75);
         label_11->setFont(font2);
         label_11->setStyleSheet(QString::fromUtf8("font: 75 15pt \"MS Shell Dlg 2\";\n"
 "color: #DE834D;\n"
@@ -448,7 +444,6 @@ public:
         font3.setPointSize(12);
         font3.setBold(true);
         font3.setItalic(false);
-        font3.setWeight(75);
         font3.setStrikeOut(false);
         font3.setKerning(false);
         Popular->setFont(font3);
@@ -554,7 +549,6 @@ public:
         label_2->setObjectName(QString::fromUtf8("label_2"));
         QFont font5;
         font5.setBold(true);
-        font5.setWeight(75);
         label_2->setFont(font5);
 
         horizontalLayout_13->addWidget(label_2, 0, Qt::AlignTop);
@@ -583,7 +577,6 @@ public:
         font6.setBold(false);
         font6.setItalic(true);
         font6.setUnderline(true);
-        font6.setWeight(50);
         label_20->setFont(font6);
 
         horizontalLayout_14->addWidget(label_20);
@@ -849,7 +842,6 @@ public:
         QFont font10;
         font10.setPointSize(9);
         font10.setBold(true);
-        font10.setWeight(75);
         accountBtn->setFont(font10);
         accountBtn->setStyleSheet(QString::fromUtf8(""));
         accountBtn->setPixmap(QPixmap(QString::fromUtf8(":/WhiteIcons/Resource/White/user.svg")));
@@ -1014,7 +1006,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 64, 32));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 712, 600));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         frame = new QFrame(scrollAreaWidgetContents);
@@ -1063,7 +1055,6 @@ public:
         QFont font12;
         font12.setPointSize(15);
         font12.setBold(true);
-        font12.setWeight(75);
         label->setFont(font12);
 
         verticalLayout_23->addWidget(label);
@@ -1332,7 +1323,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 64, 32));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 712, 600));
         verticalLayout_25 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_25->setObjectName(QString::fromUtf8("verticalLayout_25"));
         frame_17 = new QFrame(scrollAreaWidgetContents_2);
@@ -1365,7 +1356,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        MainFrame->setCurrentIndex(0);
+        MainFrame->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

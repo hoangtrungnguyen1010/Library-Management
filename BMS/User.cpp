@@ -15,7 +15,7 @@ void User::addToCart(Book b){
     this->_cart.push_back(b);
 }
 
-unsigned long long User::getTimeRemainingBook(Book book){
+int User::getTimeRemainingBook(Book book){
     int i = this->getPosBookInBorrowedBookStack(book);
     int timeRemaining = User::_BorrowingTime-this->_timeWhenBorrowed[i].secsTo(QDateTime::currentDateTime());
     if (_checkExtended[i]==1){
@@ -26,12 +26,14 @@ unsigned long long User::getTimeRemainingBook(Book book){
 
 bool User::borrowBook(Book book){
     if(book.getNumOfRemaingBooks()==0) return 0;
+    if(this->_borrowedBook.size()==User::numOfBooksCanBorrowAtTheSameTime) return 0;
     book.updateBorrowedBooks(1);
     this->_borrowedBook.push_back(book);
     QDateTime cd= QDateTime::currentDateTime();
     this->_timeWhenBorrowed.push_back(cd);
     return 1;
 }
+
 
 bool User::borrowBook(Book book, bool checkExtended, QString time){
     if(book.getNumOfRemaingBooks()==0) return 0;

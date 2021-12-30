@@ -146,7 +146,7 @@ public:
     {
         if (LoginPage_2->objectName().isEmpty())
             LoginPage_2->setObjectName(QString::fromUtf8("LoginPage_2"));
-        LoginPage_2->resize(764, 639);
+        LoginPage_2->resize(866, 671);
         LoginPage_2->setStyleSheet(QString::fromUtf8(""));
         centralwidget = new QWidget(LoginPage_2);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
@@ -164,6 +164,7 @@ public:
 
         stackedWidget_2 = new QStackedWidget(centralwidget);
         stackedWidget_2->setObjectName(QString::fromUtf8("stackedWidget_2"));
+        stackedWidget_2->setStyleSheet(QString::fromUtf8(""));
         stackedWidget_2Page1 = new QWidget();
         stackedWidget_2Page1->setObjectName(QString::fromUtf8("stackedWidget_2Page1"));
         verticalLayout = new QVBoxLayout(stackedWidget_2Page1);
@@ -179,6 +180,7 @@ public:
         font.setPointSize(20);
         font.setBold(true);
         font.setItalic(false);
+        font.setWeight(75);
         label_2->setFont(font);
         label_2->setStyleSheet(QString::fromUtf8("color: black"));
 
@@ -204,6 +206,7 @@ public:
         QFont font1;
         font1.setPointSize(16);
         font1.setBold(true);
+        font1.setWeight(75);
         label_4->setFont(font1);
         label_4->setStyleSheet(QString::fromUtf8("color: #9B0000"));
 
@@ -367,6 +370,7 @@ public:
         QFont font4;
         font4.setPointSize(18);
         font4.setBold(true);
+        font4.setWeight(75);
         label_10->setFont(font4);
         label_10->setStyleSheet(QString::fromUtf8("color: #9B0000"));
 
@@ -642,6 +646,7 @@ public:
         QFont font6;
         font6.setPointSize(15);
         font6.setBold(false);
+        font6.setWeight(50);
         pushButton_4->setFont(font6);
         pushButton_4->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "color:  #F9DFDC;\n"
@@ -718,6 +723,7 @@ public:
         font7.setPointSize(13);
         font7.setBold(true);
         font7.setItalic(false);
+        font7.setWeight(75);
         label_24->setFont(font7);
         label_24->setStyleSheet(QString::fromUtf8("color: blue;"));
 

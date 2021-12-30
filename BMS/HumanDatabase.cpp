@@ -39,11 +39,14 @@ void HumanDatabase::loadDTB(RealLibraryDatabase Lib){
             while(info[i][0]=='c'){
                 QString string=info[i];
                 QStringList templist=string.split(",");
-                Book temp;
+               QVector<Book> temp=Lib.findBookByID(templist[1]);
 
-                if (Lib.findBookByID(templist[1], temp)){
-                    user->addToCart(temp);
+//                if (Lib.findBookByID(templist[1], temp)){
+//                    user->addToCart(temp);
 
+//                }
+                for(auto book:temp){
+                    user->addToCart(book);
                 }
                 i++;
             }
@@ -54,9 +57,14 @@ void HumanDatabase::loadDTB(RealLibraryDatabase Lib){
 
                 QString string=info[i];
                 QStringList templist=string.split(",");
-                Book temp;
-                if (Lib.findBookByID(templist[1], temp)){
-                    user->borrowBook(temp, info[++i].toInt(), info[++i]);
+                QVector<Book> temp=Lib.findBookByID(templist[1]);
+               for(auto book:temp){
+                    QString checkExtended=info[++i];
+                    QString time=info[++i];
+                    qDebug()<<checkExtended;
+                    qDebug()<<time;
+                    user->borrowBook(book, checkExtended.toInt(), time);
+                     qDebug()<<user->getStartedTime()[0].toString();
                 }
                 i++;
                 if (i>=info.size()) break;

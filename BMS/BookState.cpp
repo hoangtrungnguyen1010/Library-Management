@@ -4,6 +4,14 @@ int BookState::getNumOfRemaingBooks(){
     return this->_quantity- this->_numOfBorrowedBooks - this->_numOfDamagedBooks;
 }
 
+int BookState::getNumOfDamagedBooks(){
+    return this->_numOfDamagedBooks;
+}
+
+int BookState::getNumOfOfBorrowedBooks(){
+    return this->_numOfBorrowedBooks;
+}
+
 BookState::BookState(){
     this->_quantity=1;
     this->_numOfBorrowedBooks=0;

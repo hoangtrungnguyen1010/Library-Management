@@ -1,5 +1,6 @@
 #include"RealLibraryDatabase.h"
 #include"QuickSort.h"
+#include"SearchHelper.h"
 
 void RealLibraryDatabase::uploadBook() {
     QFile fin(_fileName);
@@ -38,28 +39,31 @@ QString RealLibraryDatabase::toString() const{
     return out.readAll();
 }
 
-bool RealLibraryDatabase::findBookByName(QString name, Book &res){
-    int size=this->List.size();
+QVector<Book> RealLibraryDatabase::findBookByName(QString name){
 
+    int size=this->List.size();
+    QVector<int> similarity;
+    QVector<Book> res;
     for(int i=0;i<size;i++){
-        if (QString::compare(this->List[i].getName(),name)==0){
-            res=this->List[i];
-            return 1;
+        double temp = similarityBetweenTwoString(name, this->List[i].getName());
+        if (temp > 0) {
+            res.push_back(this->List[i]);
+            similarity.push_back(temp);
         }
     }
-    return 0;
+    quickSortSimilarity(res,similarity, 0, res.size()-1);
+    return res;
 }
 
-bool RealLibraryDatabase::findBookByID(QString ID, Book& res){
+QVector<Book> RealLibraryDatabase::findBookByID(QString ID){
     int size=this->List.size();
-
+    QVector<Book> res;
     for(int i=0;i<size;i++){
         if (QString::compare(this->List[i].getID(),ID)==0){
-            res=this->List[i];
-            return 1;
+            res.push_back(this->List[i]);
         }
     }
-    return 0;
+    return res;
 }
 
 void RealLibraryDatabase::sortByID(){
@@ -124,8 +128,23 @@ void RealLibraryDatabase::saveDTB(){
 QVector<Book> RealLibraryDatabase::getListBook(){
     return this->List;
 }
-void RealLibraryDatabase::viewBorrowedBook(){
 
+QVector<Book> RealLibraryDatabase::viewBorrowedBook(){
+    QVector<Book> res;
+    for(auto i: this->List){
+        if (i.getNumOfOfBorrowedBooks() > 0 ){
+            res.push_back(i);
+        }
+    }
+    return res;
 };
 
-void RealLibraryDatabase::viewDamagedBook(){};
+QVector<Book> RealLibraryDatabase::viewDamagedBook(){
+    QVector<Book> res;
+    for(auto i: this->List){
+        if (i.getNumOfDamagedBooks() > 0 ){
+            res.push_back(i);
+        }
+    }
+    return res;
+};

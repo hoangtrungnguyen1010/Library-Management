@@ -21,7 +21,7 @@ public:
     void sortByName();
 
     QVector<Book*> findBookByName(QString name);
-    QVector<Book> findBookByID(QString id);
+    QVector<Book*> findBookByID(QString id);
 
     void addDamagedBook(QString id, int num);
     void addBook(QString id, QString name, QString author, QString publisher, QString tags, int num);   //add new kind of book

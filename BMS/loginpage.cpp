@@ -1,6 +1,7 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
 
+
 LoginPage_2::LoginPage_2(QWidget *parent) :
     QMainWindow(parent),
     login_ui(new Ui::LoginPage_2),

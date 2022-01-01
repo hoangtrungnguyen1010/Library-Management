@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "loginpage.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -16,7 +17,7 @@ MainWindow::~MainWindow()
 
 
 // CREATE AN VIEW LIST BOOK FRAME
-QFrame* MainWindow::createViewListFrame(Book book){
+QFrame* MainWindow::createViewListFrame(Book* book){
     QFrame* res=new QFrame;
     res->setLayout(new QHBoxLayout);
     res->setFixedHeight(100);
@@ -28,7 +29,7 @@ QFrame* MainWindow::createViewListFrame(Book book){
 
     // Book image
     QLabel* lab=new QLabel;
-    QString url=":/Images/Resource/Images/"+book.getID();
+    QString url=":/Images/Resource/Images/"+book->getID();
     QPixmap pix(url);
     lab->setPixmap(pix);
     lab->setScaledContents(true);
@@ -36,19 +37,19 @@ QFrame* MainWindow::createViewListFrame(Book book){
 
     // Book's name
     QLabel* name=new QLabel;
-    name->setText(book.getName());
+    name->setText(book->getName());
     name->setMinimumHeight(35);
     name->setStyleSheet("QLabel {font-size: 15pt;font-family: Freestyle Script}");
       name->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
       //Book's ID
       QLabel* id=new QLabel;
-      id->setText(book.getID());
+      id->setText(book->getID());
         id->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
       // Book's author
     QLabel* author=new QLabel;
-    author->setText(book.getAuthor());
+    author->setText(book->getAuthor());
     author->setStyleSheet("QLabel{font:7pt italic}");
      author->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
     QFrame* book_infor=new QFrame;
@@ -60,11 +61,11 @@ QFrame* MainWindow::createViewListFrame(Book book){
 
     // Amount and tag
     QLabel* amount=new QLabel;
-    amount->setText("Amount: "+ QString::number(book.getNumOfRemaingBooks()));
+    amount->setText("Amount: "+ QString::number(book->getNumOfRemaingBooks()));
     amount->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
     QLabel* tag=new QLabel;
-    tag->setText("#Tag: "+ book.getTag());
+    tag->setText("#Tag: "+ book->getTag());
     tag->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
     QFrame* amount_tag=new QFrame;
    amount_tag->setLayout(new QVBoxLayout);
@@ -114,7 +115,7 @@ QFrame* MainWindow::createViewListFrame(Book book){
 }
 
 //CREATE AN YOUR BOOK FRAME
-QFrame* MainWindow::createYourBookFrame(Book book,QString time_start,int time_remaining){
+QFrame* MainWindow::createYourBookFrame(Book* book,QString time_start,int time_remaining){
     QFrame* res=new QFrame;
     res->setLayout(new QHBoxLayout);
     res->setFixedHeight(100);
@@ -126,7 +127,7 @@ QFrame* MainWindow::createYourBookFrame(Book book,QString time_start,int time_re
 
     // Book image
     QLabel* lab=new QLabel;
-    QString url=":/Images/Resource/Images/"+book.getID();
+    QString url=":/Images/Resource/Images/"+book->getID();
     QPixmap pix(url);
     lab->setPixmap(pix);
     lab->setScaledContents(true);
@@ -134,7 +135,7 @@ QFrame* MainWindow::createYourBookFrame(Book book,QString time_start,int time_re
 
     // Book's name
     QLabel* name=new QLabel;
-    name->setText(book.getName());
+    name->setText(book->getName());
     name->setMinimumHeight(35);
     name->setStyleSheet("QLabel {font-size: 15pt;font-family: Freestyle Script}");
       name->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
@@ -142,13 +143,13 @@ QFrame* MainWindow::createYourBookFrame(Book book,QString time_start,int time_re
 
      //Book's ID
      QLabel* id=new QLabel;
-     id->setText(book.getID());
+     id->setText(book->getID());
      id->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
 
       // Book's author
     QLabel* author=new QLabel;
-    author->setText(book.getAuthor());
+    author->setText(book->getAuthor());
     author->setStyleSheet("QLabel{font:7pt italic}");
      author->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
     QFrame* book_infor=new QFrame;
@@ -214,7 +215,7 @@ QFrame* MainWindow::createYourBookFrame(Book book,QString time_start,int time_re
 }
 
 //CREATE AN CART FRAME
-QFrame* MainWindow::createCartFrame(Book book)
+QFrame* MainWindow::createCartFrame(Book* book)
 {
     QFrame* res=new QFrame;
     res->setLayout(new QHBoxLayout);
@@ -227,7 +228,7 @@ QFrame* MainWindow::createCartFrame(Book book)
 
     // Book image
     QLabel* lab=new QLabel;
-    QString url=":/Images/Resource/Images/"+book.getID();
+    QString url=":/Images/Resource/Images/"+book->getID();
     QPixmap pix(url);
     lab->setPixmap(pix);
     lab->setScaledContents(true);
@@ -235,19 +236,19 @@ QFrame* MainWindow::createCartFrame(Book book)
 
     // Book's name
     QLabel* name=new QLabel;
-    name->setText(book.getName());
+    name->setText(book->getName());
     name->setMinimumHeight(35);
     name->setStyleSheet("QLabel {font-size: 15pt;font-family: Freestyle Script}");
       name->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
       //Book's ID
       QLabel* id=new QLabel;
-      id->setText(book.getID());
+      id->setText(book->getID());
         id->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
       // Book's author
     QLabel* author=new QLabel;
-    author->setText(book.getAuthor());
+    author->setText(book->getAuthor());
     author->setStyleSheet("QLabel{font:7pt italic}");
      author->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
     QFrame* book_infor=new QFrame;
@@ -259,11 +260,11 @@ QFrame* MainWindow::createCartFrame(Book book)
 
     // Amount and tag
     QLabel* amount=new QLabel;
-    amount->setText("Amount: "+ QString::number(book.getQuanlity()));
+    amount->setText("Amount: "+ QString::number(book->getNumOfRemaingBooks()));
     amount->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
     QLabel* tag=new QLabel;
-    tag->setText("#Tag: "+ book.getTag());
+    tag->setText("#Tag: "+ book->getTag());
     tag->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
     QFrame* amount_tag=new QFrame;
    amount_tag->setLayout(new QVBoxLayout);
@@ -349,7 +350,7 @@ void MainWindow::on_view_btn_clicked()
     ui->frame->layout()->addWidget(head);
   for (auto book:proxy->getListBook())
   {
-      QFrame *a=createViewListFrame(book);
+      QFrame *a=createViewListFrame(&book);
       ui->frame->layout()->addWidget(a);
       ui->frame->layout()->setAlignment(a,Qt::AlignTop);
   }
@@ -369,15 +370,19 @@ void MainWindow::on_home_btn_clicked()
 void MainWindow::on_your_book_btn_clicked()
 {
    if(login_user){
+       qDebug()<<"sdjf";
        delete ui->frame_17->layout();
        ui->frame_17->setLayout(new QVBoxLayout);
-       QVector<Book> BorrowedList=login_user->getBorrowedBook();
+
+       QVector<Book*> BorrowedList=login_user->getBorrowedBook();
        QVector<QDateTime> StartedTime=login_user->getStartedTime();
+
        int size=BorrowedList.size();
+       qDebug()<<size;
        for (int i=0;i<size;i++){
-           QFrame* a=createYourBookFrame(BorrowedList[i],StartedTime[i].toString(),login_user->getTimeRemainingBook(BorrowedList[i]));
+           qDebug()<<"Adding widget: "<<BorrowedList[i]->getName();
+           QFrame* a=createYourBookFrame(BorrowedList[i],StartedTime[i].toString(),login_user->getTimeRemainingBook(*BorrowedList[i]));
            ui->frame_17->layout()->addWidget(a);
-           qDebug()<<"Adding widget: "<<BorrowedList[i].getName();
            ui->frame_17->layout()->setAlignment(a,Qt::AlignTop);
        }
        ui->frame_17->layout()->setAlignment(Qt::AlignTop);
@@ -396,7 +401,7 @@ void MainWindow::on_cart_btn_clicked()
     if(login_user){
         delete ui->frame_18->layout();
         ui->frame_18->setLayout(new QVBoxLayout);
-        QVector<Book> CartList=login_user->getInCartBook();
+        QVector<Book*> CartList=login_user->getInCartBook();
         int size=CartList.size();
         for (int i=0;i<size;i++){
             QFrame* a=createCartFrame(CartList[i]);
@@ -421,9 +426,9 @@ void MainWindow::on_lineEdit_3_editingFinished()
     QString line=ui->lineEdit_3->text();
     ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase;
     QVector<Book*> searchByNameRes=proxy->findBookByName(line);
-    QVector<Book> searchByIdRes=proxy->findBookByID(line);
+    QVector<Book*> searchByIdRes=proxy->findBookByID(line);
     for(auto name:searchByNameRes){
-        QFrame* a=createViewListFrame(*name);
+        QFrame* a=createViewListFrame(name);
         ui->frame_211->layout()->addWidget(a);
         ui->frame_211->layout()->setAlignment(a,Qt::AlignTop);
     }
@@ -455,27 +460,29 @@ void MainWindow::on_log_out_btn_clicked()
 }
 
 // ON EXTEND TIME
-void MainWindow::on_extend_btn_clicked(Book book)
+void MainWindow::on_extend_btn_clicked(Book* book)
 {
      if(QMessageBox::Yes==QMessageBox::question(this,"Extend time","Do you want to extend borrowed time ?")){
-         login_user->extendBorrowedTime(book);
+         login_user->extendBorrowedTime(*book);
      }
 }
 
 // ON BORROW BOOK BUTTON
-void MainWindow::on_borrow_btn_clicked(Book book){
+void MainWindow::on_borrow_btn_clicked(Book* book){
 
-    if(QMessageBox::Yes==QMessageBox::question(this,"Return book","Do you want to return this book?")){
+    if(QMessageBox::Yes==QMessageBox::question(this,"Borrow book","Do you want to return this book?")){
         if(login_user->borrowBook(book))
         { QMessageBox::information(this,"Borrow Book","This book has been borrowed successfully!");
             qDebug()<<login_user->getBorrowedBook().size();
         }
-
+        else{
+            QMessageBox::information(this,"Something's wrong","You Can't this book!");
+        }
     }
 
 }
 // ON RETURN BUTTON
-void MainWindow::on_add_to_cart_btn_clicked(Book book){
+void MainWindow::on_add_to_cart_btn_clicked(Book* book){
 
    login_user->addToCart(book);
      QMessageBox::information(this,"Cart","This book has been added to your cart successfully!");
@@ -498,7 +505,7 @@ void clearLayout(QLayout* layout, bool deleteWidgets = true)
 }
 
 //ON RETURN BUTTON BOOK
-void MainWindow::on_return_btn_clicked(Book book){
+void MainWindow::on_return_btn_clicked(Book* book){
      if(QMessageBox::Yes==QMessageBox::question(this,"Return book","Do you want to return this book?"))
      {
      clearLayout(ui->frame_17->layout());

@@ -1,21 +1,21 @@
 #include<User.h>
 
 User::User(){
-    QVector<Book> cart;
-    QVector<Book> borrowedBook;
+    QVector<Book*> cart;
+    QVector<Book*> borrowedBook;
     QVector<bool> checkExtended; //remaining time corespoding to each book
     QVector<QDateTime> timeWhenBorrowed;
     this->_cart=cart;
-    this->_borrowedBook=borrowedBook;
+    this->_borrowedBook = borrowedBook;
     this->_checkExtended=checkExtended;
     this->_timeWhenBorrowed=timeWhenBorrowed;
 };
 
-void User::addToCart(Book b){
+void User::addToCart(Book* b){
     this->_cart.push_back(b);
 }
 
-unsigned long long User::getTimeRemainingBook(Book book){
+int User::getTimeRemainingBook(Book book){
     int i = this->getPosBookInBorrowedBookStack(book);
     int timeRemaining = User::_BorrowingTime-this->_timeWhenBorrowed[i].daysTo(QDateTime::currentDateTime());
     if (_checkExtended[i]==1){
@@ -24,19 +24,31 @@ unsigned long long User::getTimeRemainingBook(Book book){
     return timeRemaining;
 }
 
-bool User::borrowBook(Book book){
-    if(book.getNumOfRemaingBooks()==0) return 0;
-    book.updateBorrowedBooks(1);
+bool User::borrowBook(Book* book){
+    if(book->getNumOfRemaingBooks()==0) return 0;
+
+    for(int i = 0; i < this->_borrowedBook.size();i++){
+        if (book->getID()==this->_borrowedBook[i]->getID()) return 0;
+    }
+
+    if(this->_borrowedBook.size()==User::numOfBooksCanBorrowAtTheSameTime) return 0;
+//    book->updateBorrowedBooks(1);
+
     this->_borrowedBook.push_back(book);
+
     QDateTime cd= QDateTime::currentDateTime();
+
+    for(auto i : this->_borrowedBook){
+        qDebug()<<i->getName();
+    }
     this->_timeWhenBorrowed.push_back(cd);
-    this->_checkExtended.push_back(1);
     return 1;
 }
 
-bool User::borrowBook(Book book, bool checkExtended, QString time){
-    if(book.getNumOfRemaingBooks()==0) return 0;
-    book.updateBorrowedBooks(1);
+
+bool User::borrowBook(Book* book, bool checkExtended, QString time){
+    if(book->getNumOfRemaingBooks()==0) return 0;
+    book->updateBorrowedBooks(1);
     this->_checkExtended.push_back(checkExtended);
     this->_borrowedBook.push_back(book);
 
@@ -46,26 +58,20 @@ bool User::borrowBook(Book book, bool checkExtended, QString time){
     return 1;
 }
 
-void User::returnBook(Book book){
-    book.updateBorrowedBooks(-1);
-    int pos=getPosBookInBorrowedBookStack(book);
+void User::returnBook(Book* book){
+    book->updateBorrowedBooks(-1);
+    int pos=getPosBookInBorrowedBookStack(*book);
     this->_borrowedBook.erase(this->_borrowedBook.begin()+pos);
     this->_timeWhenBorrowed.erase(this->_timeWhenBorrowed.begin()+pos);
-    this->_checkExtended.erase(this->_checkExtended.begin()+pos);
 }
 
-
-
-QVector<Book>User::viewBorrowedBook(){
-    return this->_borrowedBook;
-}
 QString User::BorrowedBookToString()
 {
     QString res;
     if(_borrowedBook.size()!=0){
         for(auto book:_borrowedBook)
         {
-            res+="- "+book.getName()+'\n';
+            res+="- "+book->getName()+'\n';
         }
         return res;
     }
@@ -74,8 +80,8 @@ QString User::BorrowedBookToString()
 QString User::ExpiredBookToString(){
    QString res="";
     for(auto book:_borrowedBook){
-        if(this->getTimeRemainingBook(book)<0){
-            res+="- "+ book.getName()+'\n';
+        if(this->getTimeRemainingBook(*book)<0){
+            res+="- "+ book->getName()+'\n';
         }
     }
     if(res!=""){
@@ -83,6 +89,12 @@ QString User::ExpiredBookToString(){
     }
     return "None";
 }
+
+
+QVector<Book*>User::viewBorrowedBook(){
+    return this->_borrowedBook;
+}
+
 void User::extendBorrowedTime(Book book){
    int pos=getPosBookInBorrowedBookStack(book);
    _checkExtended[pos]=1;
@@ -91,7 +103,7 @@ void User::extendBorrowedTime(Book book){
 int User::getPosBookInBorrowedBookStack(Book book){
     int size = this->_borrowedBook.size();
     for(int i=0; i<size;i++){
-        if(book.getID()==this->_borrowedBook[i].getID()){
+        if(book.getID()==this->_borrowedBook[i]->getID()){
             return i;
         }
     }
@@ -128,12 +140,12 @@ QString User::toStringUsingInfo(){
 
     int cartSize=this->_cart.size();
     for(int i=0;i<cartSize;i++){
-        out<<"|c,"<<_cart[i].getID();
+        out<<"|c,"<<_cart[i]->getID();
     }
 
     int borrowedBookSize=this->_borrowedBook.size();
     for(int i=0;i<borrowedBookSize;i++){
-        out<<"|b,"<<_borrowedBook[i].getID();
+        out<<"|b,"<<_borrowedBook[i]->getID();
         out<<"|"<<_checkExtended[i];
         out<<"|"<<_timeWhenBorrowed[i].toString("hh:mm:ss dd-MM-yyyy");
     }

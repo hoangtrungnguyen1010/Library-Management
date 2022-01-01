@@ -5,7 +5,7 @@ QVector<Book*> ProxyLibraryDatabase::findBookByName(QString name){
     return this->_wrappee->findBookByName(name);
 }
 
-QVector<Book> ProxyLibraryDatabase::findBookByID(QString id){
+QVector<Book*> ProxyLibraryDatabase::findBookByID(QString id){
     return this->_wrappee->findBookByID(id);
 }
 

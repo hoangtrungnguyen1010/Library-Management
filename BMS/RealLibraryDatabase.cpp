@@ -59,15 +59,25 @@ QVector<Book*> RealLibraryDatabase::findBookByName(QString name){
     return res;
 }
 
-QVector<Book> RealLibraryDatabase::findBookByID(QString ID){
+QVector<Book*> RealLibraryDatabase::findBookByID(QString ID){
     int size=this->List.size();
-       QVector<Book> res;
+       QVector<Book*> res;
        for(int i=0;i<size;i++){
            if (QString::compare(this->List[i].getID(),ID)==0){
-               res.push_back(this->List[i]);
+               res.push_back(&this->List[i]);
            }
        }
        return res;
+}
+
+Book* RealLibraryDatabase::getBookByID(QString ID){
+    int size=this->List.size();
+    for(int i=0;i<size;i++){
+        if (QString::compare(this->List[i].getID(),ID)==0){
+            return &this->List[i];
+        }
+    }
+    return NULL;
 }
 
 void RealLibraryDatabase::sortByID(){

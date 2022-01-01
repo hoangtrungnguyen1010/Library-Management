@@ -8,7 +8,7 @@
 #include"BookState.h"
 using namespace std;
 
-class Book : public BookState{
+class Book{
 private:
     QString _name;
     QString _ISBN;
@@ -19,12 +19,21 @@ private:
 public:
     QString getID();
     QString getName();
-    int getQuanlity();
+    int getQuantity();
     QString getPublisher();
     QString getAuthor();
     QString getTag();
 public:
     Book();
-    Book( QString ISBN, QString name, QString publisher, QString author, QString tag, int quality, int numOfBorrowedBooks, int numOfDamagedBooks );
+    Book( QString ISBN, QString name, QString publisher, QString author, QString tag, int quatity, int numOfBorrowedBooks, int numOfDamagedBooks );
+    int getNumOfRemaingBooks();
+    int getNumOfDamagedBooks();
+    int getNumOfOfBorrowedBooks();
+
+    void updateQuantiy(int num);
+    void updateBorrowedBooks(int num);
+    void updateDamagedBooks(int num);
+
+
     QString toString() const;
 };

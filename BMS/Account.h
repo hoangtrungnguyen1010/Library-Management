@@ -18,6 +18,11 @@ public:
     QString toString() const;
     bool checkIsUserName(QString name);
     bool checkIsPassword(QString pass);
+
+    QString showUsername();
+    QString showPass();
+
+    void editPass(QString newPass);
 };
 
 #endif // ACCOUNT_H

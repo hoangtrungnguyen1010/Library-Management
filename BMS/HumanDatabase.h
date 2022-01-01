@@ -14,7 +14,7 @@
 class HumanDatabase{
 private:
     static HumanDatabase* Instance;
-private:
+    public:
     QVector<User*> UserData;
     QVector<Admin> AdData;
     QString _fileName=":/Data/Resource/Data/UserData.txt";
@@ -24,7 +24,7 @@ public:
     static void init();
     bool addNewUser(QString id, QString name, bool gender, QString address, QString username, QString password, QString type);
     bool addNewAdmin(QString id, QString name, bool gender, QString address, QString username, QString password);
-    void loadDTB(RealLibraryDatabase Lib);
+    void loadDTB(RealLibraryDatabase* Lib);
     void printDTB(); //for debugging
     void saveDTB();
     User* findSavedUser(QString username, QString password);

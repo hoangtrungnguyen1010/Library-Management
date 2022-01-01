@@ -3,7 +3,9 @@
 
 
 
-void HumanDatabase::loadDTB(RealLibraryDatabase Lib){
+void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
+    qDebug()<<"loading human Database ...";
+
     QFile file(_fileName);
 
     if(!file.open(QIODevice::ReadOnly)){
@@ -39,33 +41,26 @@ void HumanDatabase::loadDTB(RealLibraryDatabase Lib){
             while(info[i][0]=='c'){
                 QString string=info[i];
                 QStringList templist=string.split(",");
-               QVector<Book> temp=Lib.findBookByID(templist[1]);
-
-//                if (Lib.findBookByID(templist[1], temp)){
-//                    user->addToCart(temp);
-
-//                }
-                for(auto book:temp){
-                    user->addToCart(book);
-                }
+                Book *temp= Lib->getBookByID(templist[1]);
+                user->addToCart(temp);
                 i++;
+                if (i>=info.size()) continue;
             }
-            if (i>=info.size()) continue;
-
             //Add books borrowed
             while( info[i][0]=='b'){
 
                 QString string=info[i];
                 QStringList templist=string.split(",");
-                QVector<Book> temp=Lib.findBookByID(templist[1]);
-               for(auto book:temp){
-                    QString checkExtended=info[++i];
-                    QString time=info[++i];
-                    qDebug()<<checkExtended;
-                    qDebug()<<time;
-                    user->borrowBook(book, checkExtended.toInt(), time);
-                     qDebug()<<user->getStartedTime()[0].toString();
-                }
+                Book* temp=Lib->getBookByID(templist[1]);
+
+                QString checkExtended=info[++i];
+                QString time=info[++i];
+                qDebug()<<checkExtended;
+                qDebug()<<time;
+                user->borrowBook(temp, checkExtended.toInt(), time);
+                qDebug()<<temp->getNumOfOfBorrowedBooks();
+                qDebug()<<user->getStartedTime()[0].toString();
+
                 i++;
                 if (i>=info.size()) break;
             }
@@ -75,11 +70,12 @@ void HumanDatabase::loadDTB(RealLibraryDatabase Lib){
     file.close();
 }
 
+
 HumanDatabase* HumanDatabase::getInstance()
 {
    if(Instance==nullptr){
         Instance=new HumanDatabase;
-        Instance->loadDTB(*RealLibraryDatabase::getInstance());
+        Instance->loadDTB(RealLibraryDatabase::getInstance());
      }
      return Instance;
 }

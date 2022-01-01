@@ -1,7 +1,16 @@
 #include"BookState.h"
+#include<QDebug>
 
 int BookState::getNumOfRemaingBooks(){
-    return this->_quantity- this->_numOfBorrowedBooks - this->_numOfDamagedBooks;
+    return this->_quantity - this->_numOfBorrowedBooks - this->_numOfDamagedBooks;
+}
+
+int BookState::getNumOfDamagedBooks(){
+    return this->_numOfDamagedBooks;
+}
+
+int BookState::getNumOfOfBorrowedBooks(){
+    return this->_numOfBorrowedBooks;
 }
 
 BookState::BookState(){
@@ -17,15 +26,15 @@ BookState::BookState(int quantity, int numOfBorrowedBooks, int numOfDamagedBooks
 }
 
 void BookState::updateQuantiy(int num){
-    this->_quantity++;
+    this->_quantity+= num ;
 }
 
 void BookState::updateBorrowedBooks(int num){
-    this->_numOfBorrowedBooks++;
+    this->_numOfBorrowedBooks+= num;
 }
 
 void BookState::updateDamagedBooks(int num){
-    this->_numOfDamagedBooks++;
+    this->_numOfDamagedBooks+= num;
 }
 
 QString BookState::toString() const{

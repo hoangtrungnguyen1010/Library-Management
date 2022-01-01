@@ -18,11 +18,7 @@ public:
     //initialize an object with quantity = 1, numOfBorrowedBooks = 0, numOfDamagedBooks =0;
     BookState();
     BookState(int quantity, int numOfBorrowedBooks, int numOfDamagedBooks);
-
     int getNumOfRemaingBooks();
-    int getNumOfDamagedBooks();
-    int getNumOfOfBorrowedBooks();
-
     void updateQuantiy(int num);
     void updateBorrowedBooks(int num);
     void updateDamagedBooks(int num);

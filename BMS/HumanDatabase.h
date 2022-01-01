@@ -27,7 +27,10 @@ public:
     void loadDTB(RealLibraryDatabase Lib);
     void printDTB(); //for debugging
     void saveDTB();
-    User* findSavedAccount(QString username, QString password);
+    User* findSavedUser(QString username, QString password);
+    Admin* findSavedAdmin(QString username, QString password);
+    bool checkExisted(QString username);
+    QVector<User*> getListUser();
     ~HumanDatabase();
 
 };

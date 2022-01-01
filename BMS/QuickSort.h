@@ -73,17 +73,18 @@ void quickSortName( QVector<Book>& a, int first, int last)
         quickSortName(a, index, last);
 }
 
-int partitionSimilarity(QVector<Book>& a, QVector<int> similarity, int first, int last)
+int partitionSimilarity(QVector<Book*>& a, QVector<int> similarity, int first, int last)
 {
     double pivot = similarity[(first + last) / 2];
     int i = first;
     int j = last;
-    Book tmp;
+    Book* tmp;
     while (i <= j)
     {
-        while (similarity[i] > pivot/*QString::compare(a[i].getID(), pivot)<0*/)
+        qDebug()<<i;
+        while (i < similarity.size() && similarity[i] > pivot/*QString::compare(a[i].getID(), pivot)<0*/)
             i++;
-        while (similarity[j] < pivot /*QString::compare(a[j].getID(), pivot)>0*/)
+        while (j >= 0 && similarity[j] < pivot /*QString::compare(a[j].getID(), pivot)>0*/)
             j--;
         if (i <= j) {
             tmp = a[i];
@@ -93,10 +94,11 @@ int partitionSimilarity(QVector<Book>& a, QVector<int> similarity, int first, in
             j--;
         }
     }
+    qDebug()<<i;
     return i;
 }
 
-void quickSortSimilarity( QVector<Book>& a,QVector<int> similarity, int first, int last)
+void quickSortSimilarity( QVector<Book*>& a,QVector<int> similarity, int first, int last)
 {
 
     int index = partitionSimilarity(a,similarity, first, last);

@@ -15,25 +15,24 @@ void User::addToCart(Book b){
     this->_cart.push_back(b);
 }
 
-int User::getTimeRemainingBook(Book book){
+unsigned long long User::getTimeRemainingBook(Book book){
     int i = this->getPosBookInBorrowedBookStack(book);
-    int timeRemaining = User::_BorrowingTime-this->_timeWhenBorrowed[i].secsTo(QDateTime::currentDateTime());
+    int timeRemaining = User::_BorrowingTime-this->_timeWhenBorrowed[i].daysTo(QDateTime::currentDateTime());
     if (_checkExtended[i]==1){
-        timeRemaining+=3600*24*User::_ExtendedBorrowingTime;
+        timeRemaining+=User::_ExtendedBorrowingTime;
     }
-    return timeRemaining%(3600*24);
+    return timeRemaining;
 }
 
 bool User::borrowBook(Book book){
     if(book.getNumOfRemaingBooks()==0) return 0;
-    if(this->_borrowedBook.size()==User::numOfBooksCanBorrowAtTheSameTime) return 0;
     book.updateBorrowedBooks(1);
     this->_borrowedBook.push_back(book);
     QDateTime cd= QDateTime::currentDateTime();
     this->_timeWhenBorrowed.push_back(cd);
+    this->_checkExtended.push_back(1);
     return 1;
 }
-
 
 bool User::borrowBook(Book book, bool checkExtended, QString time){
     if(book.getNumOfRemaingBooks()==0) return 0;
@@ -52,6 +51,7 @@ void User::returnBook(Book book){
     int pos=getPosBookInBorrowedBookStack(book);
     this->_borrowedBook.erase(this->_borrowedBook.begin()+pos);
     this->_timeWhenBorrowed.erase(this->_timeWhenBorrowed.begin()+pos);
+    this->_checkExtended.erase(this->_checkExtended.begin()+pos);
 }
 
 
@@ -59,7 +59,30 @@ void User::returnBook(Book book){
 QVector<Book>User::viewBorrowedBook(){
     return this->_borrowedBook;
 }
-
+QString User::BorrowedBookToString()
+{
+    QString res;
+    if(_borrowedBook.size()!=0){
+        for(auto book:_borrowedBook)
+        {
+            res+="- "+book.getName()+'\n';
+        }
+        return res;
+    }
+    else return "None";
+}
+QString User::ExpiredBookToString(){
+   QString res="";
+    for(auto book:_borrowedBook){
+        if(this->getTimeRemainingBook(book)<0){
+            res+="- "+ book.getName()+'\n';
+        }
+    }
+    if(res!=""){
+        return res;
+    }
+    return "None";
+}
 void User::extendBorrowedTime(Book book){
    int pos=getPosBookInBorrowedBookStack(book);
    _checkExtended[pos]=1;

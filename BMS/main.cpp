@@ -7,27 +7,21 @@
 #include"RealLibraryDatabase.h"
 #include "mainwindow.h"
 #include "loginpage.h"
-
-
+#include <QFile>
+#include <QIODevice>
 User* login_user;
+Admin* login_admin;
 HumanDatabase* HumanDatabase::Instance=nullptr;
 RealLibraryDatabase* RealLibraryDatabase::Instance=nullptr;
 
 
 int main(int argc, char *argv[])
 {
-
     RealLibraryDatabase* Lib=RealLibraryDatabase::getInstance();
     HumanDatabase* Human=HumanDatabase::getInstance();
-    QApplication a(argc, argv);
-    LoginPage_2 b;
-    b.show();
-    return a.exec();
-    //debugging for searching
-//    QVector<Book> res;
-//    res = Lib->findBookByName("science");
-
-//    for(auto i : res){
-//        qDebug()<<i.getName();
-//    }
+//    QApplication a(argc, argv);
+//    LoginPage_2 b;
+//    MainWindow m;
+//    b.show();
+//    return a.exec();
 }

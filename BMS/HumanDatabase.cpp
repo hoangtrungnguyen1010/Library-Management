@@ -161,18 +161,36 @@ HumanDatabase::~HumanDatabase(){
     }
 }
 
- User* HumanDatabase::findSavedAccount(QString username, QString password)
+ User* HumanDatabase::findSavedUser(QString username, QString password)
  {
      for(auto user:this->UserData){
          if(user->checkIsUsername(username)&&user->checkIsPassword(password)){
              return user;
          }
      }
-//     for(auto ad:this->AdData)
-//     {
-//         if(ad.checkIsUsername(username)&&ad.checkIsPassword(password)){
-//             return new Admin(ad);
-//         }
-//     }
      return nullptr;
  }
+
+ Admin* HumanDatabase::findSavedAdmin(QString username, QString password){
+     for(auto admin:this->AdData){
+         if(admin.checkIsUsername(username)&&admin.checkIsPassword(password)){
+             return new Admin(admin);
+         }
+     }
+     return nullptr;
+ }
+
+QVector<User*> HumanDatabase::getListUser()
+{
+    return this->UserData;
+}
+
+ bool HumanDatabase::checkExisted(QString username){
+     for (auto user:this->UserData){
+         if (user->checkIsUsername(username)){
+             return true;
+         }
+     }
+     return false;
+ }
+

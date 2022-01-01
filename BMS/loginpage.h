@@ -6,6 +6,7 @@
 #include <mainwindow.h>
 #include "HumanDatabase.h"
 extern User* login_user;
+extern Admin* login_admin;
 
 namespace Ui {
 class LoginPage_2;

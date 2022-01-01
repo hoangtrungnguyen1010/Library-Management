@@ -12,9 +12,12 @@
 #include <QLabel>
 #include <QLayout>
 #include <QSignalMapper>
+#include <QTableWidget>
+#include <QHeaderView>
 #include "Book.h"
 #include "LibraryDatabase.h"
 #include "RealLibraryDatabase.h"
+#include "ProxyLibraryDataBase.h"
 #include "Person.h"
 #include "User.h"
 
@@ -46,10 +49,10 @@ private slots:
 
 
 
-    void on_add_to_cart_btn_clicked();
+    void on_add_to_cart_btn_clicked(Book book);
     void on_borrow_btn_clicked(Book book);
-    void on_return_btn_clicked();
-    void on_extend_btn_clicked();
+    void on_return_btn_clicked(Book book);
+    void on_extend_btn_clicked(Book book);
 
 
 
@@ -61,7 +64,16 @@ private slots:
 
     void on_edit_profile_btn_clicked();
 
+    void on_save_btn_clicked();
+
+
+
+    void on_user_btn_clicked();
+
+    void on_ViewMoreBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
+
 #endif // MAINWINDOW_H

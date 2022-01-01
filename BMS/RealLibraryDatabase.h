@@ -22,7 +22,7 @@ public:
 
     void uploadBook();
 
-    QVector<Book> findBookByName(QString name);
+    QVector<Book*> findBookByName(QString name);
     QVector<Book> findBookByID(QString id);
 
     int getBookPos(QString id);
@@ -37,7 +37,6 @@ public:
     QString toString() const;
 
     QVector<Book> getListBook();
-
     QVector<Book> viewBorrowedBook();
     QVector<Book> viewDamagedBook();
 

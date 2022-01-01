@@ -1,7 +1,6 @@
 #include"RealLibraryDatabase.h"
 #include"QuickSort.h"
-#include"SearchHelper.h"
-
+#include "SearchHelper.h"
 void RealLibraryDatabase::uploadBook() {
     QFile fin(_fileName);
     fin.open(QIODevice::ReadOnly);
@@ -39,31 +38,36 @@ QString RealLibraryDatabase::toString() const{
     return out.readAll();
 }
 
-QVector<Book> RealLibraryDatabase::findBookByName(QString name){
+QVector<Book*> RealLibraryDatabase::findBookByName(QString name){
 
     int size=this->List.size();
     QVector<int> similarity;
-    QVector<Book> res;
+    QVector<Book*> res;
     for(int i=0;i<size;i++){
         double temp = similarityBetweenTwoString(name, this->List[i].getName());
         if (temp > 0) {
-            res.push_back(this->List[i]);
+            res.push_back(&this->List[i]);
             similarity.push_back(temp);
+            qDebug()<<List[i].getName();
         }
     }
-    quickSortSimilarity(res,similarity, 0, res.size()-1);
+    qDebug()<<res.size();
+
+    if (!res.empty()) quickSortSimilarity(res,similarity, 0, res.size()-1);
+    qDebug()<<"TRue";
+
     return res;
 }
 
 QVector<Book> RealLibraryDatabase::findBookByID(QString ID){
     int size=this->List.size();
-    QVector<Book> res;
-    for(int i=0;i<size;i++){
-        if (QString::compare(this->List[i].getID(),ID)==0){
-            res.push_back(this->List[i]);
-        }
-    }
-    return res;
+       QVector<Book> res;
+       for(int i=0;i<size;i++){
+           if (QString::compare(this->List[i].getID(),ID)==0){
+               res.push_back(this->List[i]);
+           }
+       }
+       return res;
 }
 
 void RealLibraryDatabase::sortByID(){
@@ -128,23 +132,12 @@ void RealLibraryDatabase::saveDTB(){
 QVector<Book> RealLibraryDatabase::getListBook(){
     return this->List;
 }
-
 QVector<Book> RealLibraryDatabase::viewBorrowedBook(){
-    QVector<Book> res;
-    for(auto i: this->List){
-        if (i.getNumOfOfBorrowedBooks() > 0 ){
-            res.push_back(i);
-        }
-    }
-    return res;
+  QVector<Book> res;
+  return res;
 };
 
 QVector<Book> RealLibraryDatabase::viewDamagedBook(){
     QVector<Book> res;
-    for(auto i: this->List){
-        if (i.getNumOfDamagedBooks() > 0 ){
-            res.push_back(i);
-        }
-    }
     return res;
 };

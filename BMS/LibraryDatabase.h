@@ -14,7 +14,7 @@ public:
     virtual void sortByID() =0;
     virtual void sortByName()=0;
 
-    virtual QVector<Book> findBookByName(QString name)=0;
+    virtual QVector<Book*> findBookByName(QString name)=0;
     virtual QVector<Book> findBookByID(QString id)=0;
 
     virtual void addDamagedBook(QString id, int num)=0;
@@ -24,6 +24,7 @@ public:
     virtual void deleteBook(QString id)=0; //delete all
     virtual void deleteBook(QString id, int num)=0;
 
+    virtual QVector<Book> getListBook()=0;
     virtual QVector<Book> viewBorrowedBook()=0;
     virtual QVector<Book> viewDamagedBook()=0;
 

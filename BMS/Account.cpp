@@ -29,3 +29,13 @@ bool Account::checkIsPassword(QString pass)
 {
     return this->_password==pass;
 }
+QString Account::showUsername(){
+    return _username;
+}
+QString Account::showPass(){
+    return _password;
+}
+
+void Account::editPass(QString newPass){
+    this->_password=newPass;
+}

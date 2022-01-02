@@ -569,3 +569,74 @@ void MainWindow::on_ViewMoreBtn_clicked()
     MainWindow::on_view_btn_clicked();
 }
 
+void MainWindow::on_add_book_btn_clicked()
+{
+    QString title, id, author, publisher, tag;
+    int quantity;
+    title=ui->addTitle->text();
+    id=ui->addISBN->text();
+    author=ui->addAuthor->text();
+    publisher=ui->addPublisher->text();
+    tag=ui->addTag->text();
+    quantity=ui->addQuantity->text().toInt();
+    qDebug()<<title<<id<<author<<publisher<<tag<<quantity;
+    ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase ;
+    bool check = false; // true: already have this book
+    for (auto book:proxy->getListBook()){
+        if (QString::compare(book.getID(), id)==0){
+            check = true;
+        }
+    }
+    if (check){
+        proxy->addBook(id, quantity);
+    }
+    else{
+        proxy->addBook(id, title, author, publisher, tag, quantity);
+    }
+    QMessageBox::information(this, "Notification", "Add book successfully!");
+}
+
+
+void MainWindow::on_delete_book_btn_clicked()
+{
+    QString title, id;
+    title=ui->deleteTitle->text();
+    id=ui->deleteISBN->text();
+    qDebug()<<title<<id;
+    ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase ;
+    bool check = false; // true: Library has this book.
+    for (auto book:proxy->getListBook()){
+        if (QString::compare(book.getID(), id)==0 && QString::compare(book.getName(), title)==0){
+            check = true;
+        }
+    }
+    if (!check) {
+        QMessageBox::information(this, "Notification", "Our library does not have this book!");
+        return;
+    }
+    if (ui->deleteAll->isChecked()){
+        proxy->deleteBook(id);
+        QString notif = QString("Successfully delete all of books \n with title \"%1\" and ISBN: %2").arg(title).arg(id);
+        QMessageBox::information(this, "Notification", notif);
+    }
+    else if (ui->deleteNumber->isChecked()){
+        int quantity;
+        quantity = ui->numberDelete->text().toInt();
+        proxy->deleteBook(id, quantity);
+        QString notif = QString("Successfully delete %1 book(s) \n with title \"%2\" and ISBN: %3").arg(quantity).arg(title).arg(id);
+        QMessageBox::information(this, "Notification", notif);
+    }
+}
+
+
+void MainWindow::on_cancel_add_book_btn_clicked()
+{
+    ui->MainFrame->setCurrentWidget(ui->MainFramePage1);
+}
+
+
+void MainWindow::on_cancel_delete_book_btn_clicked()
+{
+    ui->MainFrame->setCurrentWidget(ui->MainFramePage1);
+}
+

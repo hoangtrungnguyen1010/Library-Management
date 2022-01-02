@@ -72,6 +72,14 @@ private slots:
 
     void on_ViewMoreBtn_clicked();
 
+    void on_add_book_btn_clicked();
+
+    void on_delete_book_btn_clicked();
+
+    void on_cancel_add_book_btn_clicked();
+
+    void on_cancel_delete_book_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

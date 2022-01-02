@@ -36,11 +36,10 @@ QString Person::toString(){
 bool Person::checkIsUsername(QString username){
     return this->_acc.checkIsUserName(username);
 }
-
-bool Person::checkIsPassword(QString password){
-    return this->_acc.checkIsPassword(password);
+bool Person::checkIsPassword(QString pass)
+{
+    return this->_acc.checkIsPassword(pass);
 }
-
 
 bool Person::checkIsID(QString id){
     return this->_id == id;
@@ -58,10 +57,19 @@ QString Person:: showGender(){
 QString Person:: showAddress(){
     return this->_address;
 }
+QString Person::showID(){
+    return _id;
+}
 QString Person::showType(){
     return this->_type;
 }
 
+QString Person::showUsername(){
+    return _acc.showUsername();
+}
+QString Person::showPass(){
+    return _acc.showPass();
+}
 void Person::editID(QString newID){
     this->_id=newID;
 }
@@ -72,4 +80,11 @@ void Person::editName(QString newName){
 
 void Person::editGender(bool Gender){
     this->_gender=Gender;
+}
+void Person::editAddress(QString newAddress){
+    this->_address=newAddress;
+}
+
+void Person::editPass(QString newPass){
+    _acc.editPass(newPass);
 }

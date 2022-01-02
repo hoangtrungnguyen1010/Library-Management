@@ -11,14 +11,17 @@
 #include <QPixmap>
 #include <QLabel>
 #include <QLayout>
+#include <QSignalMapper>
+#include <QTableWidget>
+#include <QHeaderView>
 #include "Book.h"
 #include "LibraryDatabase.h"
 #include "RealLibraryDatabase.h"
-#include"User.h"
+#include "ProxyLibraryDataBase.h"
 #include "Person.h"
-#include "Button.h"
+#include "User.h"
 
-extern Person p;
+extern User* login_user;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,22 +32,48 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, User* user=nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 public:
-    QFrame* createViewListFrame(Book book);
+    QFrame* createViewListFrame(Book* book);
+    QFrame* createYourBookFrame(Book* book,QString time_start,int time_remaining);
+    QFrame* createCartFrame(Book* book);
 private slots:
 
 
     void on_view_btn_clicked();
-
     void on_home_btn_clicked();
-    void on_add_to_cart_btn_clicked();
+    void on_your_book_btn_clicked();
+    void on_cart_btn_clicked();
+
+
+
+    void on_add_to_cart_btn_clicked(Book* book);
+    void on_borrow_btn_clicked(Book* book);
+    void on_return_btn_clicked(Book* book);
+    void on_extend_btn_clicked(Book* book);
+
+
+
+
+
+    void on_lineEdit_3_editingFinished();
+
+    void on_log_out_btn_clicked();
+
+    void on_edit_profile_btn_clicked();
+
+    void on_save_btn_clicked();
+
+
+
+    void on_user_btn_clicked();
+
+    void on_ViewMoreBtn_clicked();
 
 private:
-    User* _user;
     Ui::MainWindow *ui;
-    AddToCartBtn* add_to_cart_btn;
 };
+
 #endif // MAINWINDOW_H

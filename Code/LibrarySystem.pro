@@ -13,7 +13,6 @@ SOURCES += \
     Admin.cpp \
     Book.cpp \
     BookState.cpp \
-    Button.cpp \
     HumanDatabase.cpp \
     LibraryDatabase.cpp \
     Person.cpp \
@@ -30,13 +29,13 @@ HEADERS += \
     Admin.h \
     Book.h \
     BookState.h \
-    Button.h \
     HumanDatabase.h \
     LibraryDatabase.h \
     Person.h \
     ProxyLibraryDataBase.h \
     QuickSort.h \
     RealLibraryDatabase.h \
+    SearchHelper.h \
     User.h \
     VipUser.h \
     loginpage.h \

@@ -1,47 +1,54 @@
 #include"ProxyLibraryDatabase.h"
 
 
-bool ProxyLibraryDatabase::findBookByName(QString name, Book &res){
-    this->_libdata->findBookByName(name, res);
-    return 0;
+QVector<Book*> ProxyLibraryDatabase::findBookByName(QString name){
+    return this->_wrappee->findBookByName(name);
 }
 
-bool ProxyLibraryDatabase::findBookByID(QString ID, Book& res){
-    this->_libdata->findBookByID(ID, res);
-    return 0;
+QVector<Book*> ProxyLibraryDatabase::findBookByID(QString id){
+    return this->_wrappee->findBookByID(id);
 }
 
 void ProxyLibraryDatabase::sortByID(){
-    this->_libdata->sortByID();
+    this->_wrappee->sortByID();
 }
 
 void ProxyLibraryDatabase::sortByName(){
-    this->_libdata->sortByName();
+    this->_wrappee->sortByName();
 }
 
-
 void ProxyLibraryDatabase::addDamagedBook(QString id, int num){
-    if(this->_type == 1) this->_libdata->addDamagedBook(id, num);
+    if(this->check()) this->_wrappee->addDamagedBook(id, num);
 }
 
 void ProxyLibraryDatabase::addBook(QString id, QString name, QString author, QString publisher, QString tags, int num){
-    if(this->_type == 1) this->_libdata->addBook(id, name, author, publisher, tags, num);
+    if(this->check()) this->_wrappee->addBook(id, name, author, publisher, tags, num);
 }   //add new kind of book
 
 void ProxyLibraryDatabase::addBook(QString id, int num){
-    if(this->_type == 1) this->_libdata->addBook(id, num);
+    if(this->check()) this->_wrappee->addBook(id, num);
 }
 
 void ProxyLibraryDatabase::deleteBook(QString id){
-    if(this->_type == 1) this->_libdata->deleteBook(id);
+    if(this->check()) this->_wrappee->deleteBook(id);
 }
 
 void ProxyLibraryDatabase::deleteBook(QString id, int num){
-    if(this->_type == 1) this->_libdata->deleteBook(id, num);
+    if(this->check()) this->_wrappee->deleteBook(id, num);
 }
 
-void ProxyLibraryDatabase::viewBorrowedBook(){
-
+QVector<Book*> ProxyLibraryDatabase::getListBook()
+{
+    return this->_wrappee->getListBook();
+}
+QVector<Book*> ProxyLibraryDatabase::viewBorrowedBook(){
+    QVector<Book*> res;
+    if(this->check()) return this->_wrappee->viewBorrowedBook();
+    else return res;
 };
 
-void ProxyLibraryDatabase::viewDamagedBook(){};
+QVector<Book*>ProxyLibraryDatabase::viewDamagedBook(){
+    QVector<Book*> res;
+    if(this->check()) return this->_wrappee->viewBorrowedBook();
+    else return res;
+};

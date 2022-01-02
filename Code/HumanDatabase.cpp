@@ -1,6 +1,11 @@
 #include<HumanDatabase.h>
 
+
+
+
 void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
+    qDebug()<<"loading human Database ...";
+
     QFile file(_fileName);
 
     if(!file.open(QIODevice::ReadOnly)){
@@ -36,25 +41,26 @@ void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
             while(info[i][0]=='c'){
                 QString string=info[i];
                 QStringList templist=string.split(",");
-                Book temp;
-
-                if (Lib->findBookByID(templist[1], temp)){
-                    user->addToCart(temp);
-
-                }
+                Book *temp= Lib->getBookByID(templist[1]);
+                user->addToCart(temp);
                 i++;
+                if (i>=info.size()) continue;
             }
-            if (i>=info.size()) continue;
-
             //Add books borrowed
             while( info[i][0]=='b'){
 
                 QString string=info[i];
                 QStringList templist=string.split(",");
-                Book temp;
-                if (Lib->findBookByID(templist[1], temp)){
-                    user->borrowBook(temp, info[++i].toInt(), info[++i]);
-                }
+                Book* temp=Lib->getBookByID(templist[1]);
+
+                QString checkExtended=info[++i];
+                QString time=info[++i];
+                qDebug()<<checkExtended;
+                qDebug()<<time;
+                user->borrowBook(temp, checkExtended.toInt(), time);
+                qDebug()<<temp->getNumOfOfBorrowedBooks();
+                qDebug()<<user->getStartedTime()[0].toString();
+
                 i++;
                 if (i>=info.size()) break;
             }
@@ -64,6 +70,15 @@ void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
     file.close();
 }
 
+
+HumanDatabase* HumanDatabase::getInstance()
+{
+   if(Instance==nullptr){
+        Instance=new HumanDatabase;
+        Instance->loadDTB(RealLibraryDatabase::getInstance());
+     }
+     return Instance;
+}
 void HumanDatabase::printDTB(){
     int AdSize;
     AdSize=this->AdData.size();
@@ -134,22 +149,44 @@ bool HumanDatabase::addNewAdmin(QString id, QString name, bool gender, QString a
     return 1;
 }
 
-User* HumanDatabase::getUser(QString username, QString password){
-    int size= this->UserData.size();
-    for (int i=0;i<size;i++){
-        if (UserData[i]->checkIsUsername(username) && UserData[i]->checkIsPassword(password) ){
-            return UserData[i];
-        }
-    }
-    return NULL;
-}
-
-
 HumanDatabase::~HumanDatabase(){
-    this->saveDTB();
     int size= this->UserData.size();
 
     for(int i=0;i<size;i++){
         delete this->UserData[i];
     }
 }
+
+ User* HumanDatabase::findSavedUser(QString username, QString password)
+ {
+     for(auto user:this->UserData){
+         if(user->checkIsUsername(username)&&user->checkIsPassword(password)){
+             return user;
+         }
+     }
+     return nullptr;
+ }
+
+ Admin* HumanDatabase::findSavedAdmin(QString username, QString password){
+     for(auto admin:this->AdData){
+         if(admin.checkIsUsername(username)&&admin.checkIsPassword(password)){
+             return new Admin(admin);
+         }
+     }
+     return nullptr;
+ }
+
+QVector<User*> HumanDatabase::getListUser()
+{
+    return this->UserData;
+}
+
+ bool HumanDatabase::checkExisted(QString username){
+     for (auto user:this->UserData){
+         if (user->checkIsUsername(username)){
+             return true;
+         }
+     }
+     return false;
+ }
+

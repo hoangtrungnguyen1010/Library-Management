@@ -25,7 +25,17 @@ QString Account::toString() const{
 bool Account::checkIsUserName(QString name){
     return this->_username==name;
 }
+bool Account::checkIsPassword(QString pass)
+{
+    return this->_password==pass;
+}
+QString Account::showUsername(){
+    return _username;
+}
+QString Account::showPass(){
+    return _password;
+}
 
-bool Account::checkIsPassword(QString password){
-    return this->_password==password;
+void Account::editPass(QString newPass){
+    this->_password=newPass;
 }

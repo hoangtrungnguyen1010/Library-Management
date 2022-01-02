@@ -7,34 +7,37 @@
 #include"RealLibraryDatabase.h"
 #include "mainwindow.h"
 #include "loginpage.h"
-Person p;
-RealLibraryDatabase* RealLibraryDatabase:: _LibDTB;
-HumanDatabase* HumanDatabase:: _HumanDTB;
+#include <QFile>
+#include <QIODevice>
+
+User* login_user=nullptr;
+Admin* login_admin=nullptr;
+
+
+HumanDatabase* HumanDatabase::Instance=nullptr;
+RealLibraryDatabase* RealLibraryDatabase::Instance=nullptr;
+
 
 int main(int argc, char *argv[])
 {
-    RealLibraryDatabase* Lib= RealLibraryDatabase::GetInstance();
-    HumanDatabase* Human = HumanDatabase::GetInstance();
-    qDebug()<<Human->addNewUser("20120609", "sdfsd", 1, "wefsdf", "sdfsdf", "sdfsdf", "Vip User");
-
-    Lib->sortByID();
+    RealLibraryDatabase* Lib=RealLibraryDatabase::getInstance();
+    HumanDatabase* Human=HumanDatabase::getInstance();
     QApplication a(argc, argv);
-    LoginPage_2 b(nullptr, Human);
+    LoginPage_2 b;
+    MainWindow m;
+
+
     b.show();
-   //    QDialog b;
-   //    b.show();
+
        return a.exec();
+//        login_user=Human->UserData[3];
+//        login_user->borrowBook(&Lib->getListBook()[4]);
+//        login_user->borrowBook(&Lib->getListBook()[5]);
+//        login_user->borrowBook(&Lib->getListBook()[0]);
 
-//    qDebug()<<Lib.viewListBook();
-//    qDebug()<<"-------------------------sorted---------------------------------------";
+//        login_user->borrowBook(&Lib->getListBook()[1]);
 
-//    Lib.sortByName();
-//    qDebug()<<"-------------------------sorted---------------------------------------";
+//    delete Lib;
+//    delete Human;
 
-//    qDebug()<<Lib.viewListBook();
-
-
-//   QDateTime dateTime(QDateTime::fromString("15:56:44 20-12-2021", "hh:mm:ss dd-MM-yyyy"));
-//   QString sDatetime = dateTime.toString("hh:mm:ss dd-MM-yyyy");
-//   qDebug()<<"hh:mm:ss dd-MM-yyyy";
 }

@@ -23,23 +23,28 @@ private:
     Account _acc;
 public:
     Person();
+    virtual ~Person(){};
     Person(QString id, QString name, bool gender, QString address, QString username, QString password);
     QString toString();
-    QString showID();
+
 
     bool checkIsUsername(QString username);
-    bool checkIsPassword(QString password);
-
+    bool checkIsPassword(QString pass);
     bool checkIsID(QString id);
 
+    QString showID();
     QString showName();
     QString showGender();
     QString showAddress();
     QString showType();
+    QString showUsername();
+    QString showPass();
 
     void editID(QString newID);
     void editName(QString newName);
     void editGender(bool Gender);
+    void editAddress(QString newAddress);
+    void editPass(QString newPass);
 };
 
 #endif // PERSON_H

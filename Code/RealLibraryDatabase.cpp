@@ -1,6 +1,6 @@
 #include"RealLibraryDatabase.h"
 #include"QuickSort.h"
-
+#include "SearchHelper.h"
 void RealLibraryDatabase::uploadBook() {
     QFile fin(_fileName);
     fin.open(QIODevice::ReadOnly);
@@ -18,6 +18,15 @@ void RealLibraryDatabase::uploadBook() {
 
 }
 
+RealLibraryDatabase* RealLibraryDatabase::getInstance()
+{
+     if(Instance==nullptr){
+         Instance=new RealLibraryDatabase;
+         Instance->uploadBook();
+     }
+     return Instance;
+}
+
 QString RealLibraryDatabase::toString() const{
     QString buffer="";
     QTextStream out(&buffer,QIODevice::ReadWrite);
@@ -29,28 +38,46 @@ QString RealLibraryDatabase::toString() const{
     return out.readAll();
 }
 
-bool RealLibraryDatabase::findBookByName(QString name, Book &res){
-    int size=this->List.size();
+QVector<Book*> RealLibraryDatabase::findBookByName(QString name){
 
+    int size=this->List.size();
+    QVector<int> similarity;
+    QVector<Book*> res;
     for(int i=0;i<size;i++){
-        if (QString::compare(this->List[i].getName(),name)==0){
-            res=this->List[i];
-            return 1;
+        double temp = similarityBetweenTwoString(name, this->List[i].getName());
+        if (temp > 0) {
+            res.push_back(&this->List[i]);
+            similarity.push_back(temp);
+            qDebug()<<List[i].getName();
         }
     }
-    return 0;
+    qDebug()<<res.size();
+
+    if (!res.empty()) quickSortSimilarity(res,similarity, 0, res.size()-1);
+    qDebug()<<"TRue";
+
+    return res;
 }
 
-bool RealLibraryDatabase::findBookByID(QString ID, Book& res){
+QVector<Book*> RealLibraryDatabase::findBookByID(QString ID){
     int size=this->List.size();
+       QVector<Book*> res;
+       for(int i=0;i<size;i++){
+           if (QString::compare(this->List[i].getID(),ID)==0){
+               res.push_back(&this->List[i]);
+           }
+       }
+       return res;
+}
 
+Book* RealLibraryDatabase::getBookByID(QString ID){
+    int size=this->List.size();
     for(int i=0;i<size;i++){
         if (QString::compare(this->List[i].getID(),ID)==0){
-            res=this->List[i];
-            return 1;
+            return &this->List[i];
         }
     }
-    return 0;
+    return NULL;
 }
 
 void RealLibraryDatabase::sortByID(){
@@ -112,11 +139,20 @@ void RealLibraryDatabase::saveDTB(){
         }
     }
 }
-QVector<Book> RealLibraryDatabase::getListBook(){
-    return this->List;
-}
-void RealLibraryDatabase::viewBorrowedBook(){
+QVector<Book*> RealLibraryDatabase::getListBook(){
+    QVector<Book*> res;
+    for(auto book:this->List){
+        res.push_back(new Book(book));
+    }
+    return res;
 
+}
+QVector<Book*> RealLibraryDatabase::viewBorrowedBook(){
+  QVector<Book*> res;
+  return res;
 };
 
-void RealLibraryDatabase::viewDamagedBook(){};
+QVector<Book*> RealLibraryDatabase::viewDamagedBook(){
+    QVector<Book*> res;
+    return res;
+};

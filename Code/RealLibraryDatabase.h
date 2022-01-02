@@ -10,34 +10,23 @@
 #include"LibraryDatabase.h"
 
 class RealLibraryDatabase : public LibraryDatabase{
-protected:
-    static RealLibraryDatabase* _LibDTB;
+private: static RealLibraryDatabase* Instance;
+public:
+    static RealLibraryDatabase* getInstance();
 private:
     QString _fileName = ":/Data/Resource/Data/BookData.txt" ;
     QVector<Book> List;
 public:
-    RealLibraryDatabase(){};
-    RealLibraryDatabase(const RealLibraryDatabase &other) = delete;
-    void operator=(const RealLibraryDatabase &) = delete;
-    static RealLibraryDatabase *GetInstance(){
-        if ( !_LibDTB){
-            _LibDTB= new RealLibraryDatabase();
-        }
-        _LibDTB->uploadBook();
-        return _LibDTB;
-    }
-    ~RealLibraryDatabase(){
-        _LibDTB->saveDTB();
-    }
     void sortByID();
     void sortByName();
 
     void uploadBook();
 
-    bool findBookByName(QString name, Book& res);
-    bool findBookByID(QString id, Book& res);
+    QVector<Book*> findBookByName(QString name);
+    QVector<Book*> findBookByID(QString id);
 
     int getBookPos(QString id);
+    Book* getBookByID(QString ID);
 
     void addDamagedBook(QString id, int num);
     void addBook(QString id, QString name, QString author, QString publisher, QString tags, int num);   //add new kind of book
@@ -48,9 +37,9 @@ public:
 
     QString toString() const;
 
-    QVector<Book> getListBook();
-    void viewBorrowedBook();
-    void viewDamagedBook();
+    QVector<Book*> getListBook();
+    QVector<Book*> viewBorrowedBook();
+    QVector<Book*> viewDamagedBook();
 
     void saveDTB();
 

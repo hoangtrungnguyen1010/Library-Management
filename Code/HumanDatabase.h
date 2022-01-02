@@ -12,32 +12,26 @@
 #include"RealLibraryDatabase.h"
 
 class HumanDatabase{
-protected:
-    static HumanDatabase* _HumanDTB;
 private:
+    static HumanDatabase* Instance;
+    public:
     QVector<User*> UserData;
     QVector<Admin> AdData;
     QString _fileName=":/Data/Resource/Data/UserData.txt";
 public:
-    HumanDatabase(){};
-    HumanDatabase(const HumanDatabase  &other) = delete;
-    void operator=(const HumanDatabase &) = delete;
-    static HumanDatabase *GetInstance(){
-        if (!_HumanDTB){
-            _HumanDTB= new HumanDatabase();
-        }
-        RealLibraryDatabase* lib = RealLibraryDatabase::GetInstance();
-        _HumanDTB->loadDTB(lib);
-        return _HumanDTB;
-    }
+    static HumanDatabase* getInstance();
+public:
+    static void init();
     bool addNewUser(QString id, QString name, bool gender, QString address, QString username, QString password, QString type);
     bool addNewAdmin(QString id, QString name, bool gender, QString address, QString username, QString password);
     void loadDTB(RealLibraryDatabase* Lib);
     void printDTB(); //for debugging
     void saveDTB();
-    User* getUser(QString username, QString password);
+    User* findSavedUser(QString username, QString password);
+    Admin* findSavedAdmin(QString username, QString password);
+    bool checkExisted(QString username);
+    QVector<User*> getListUser();
     ~HumanDatabase();
-
 
 };
 

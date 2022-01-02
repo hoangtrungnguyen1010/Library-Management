@@ -56,8 +56,9 @@ private slots:
     void on_extend_btn_clicked(Book* book);
     void go_to_add_book_page();
     void go_to_delete_page();
-
-
+    void on_sort_by_name_btn_clicked();
+    void on_sort_by_id_btn_clicked();
+    void on_check_borrowed_damaged_book_clicked();
 
 
 
@@ -83,8 +84,9 @@ private slots:
 
     void on_cancel_delete_book_btn_clicked();
 
+    void on_tableWidget_cellEntered(int row, int column);
+
 private:
     Ui::MainWindow *ui;
 };
-
 #endif // MAINWINDOW_H

@@ -43,14 +43,8 @@ QVector<Book> ProxyLibraryDatabase::getListBook()
 {
     return this->_wrappee->getListBook();
 }
-QVector<Book> ProxyLibraryDatabase::viewBorrowedBook(){
+QVector<Book> ProxyLibraryDatabase::viewBorrowedAndDamagedBook(){
     QVector<Book> res;
-    if(this->check()) return this->_wrappee->viewBorrowedBook();
-    else return res;
-};
-
-QVector<Book>ProxyLibraryDatabase::viewDamagedBook(){
-    QVector<Book> res;
-    if(this->check()) return this->_wrappee->viewDamagedBook();
+    if(this->check()) return this->_wrappee->viewBorrowedAndDamagedBook();
     else return res;
 };

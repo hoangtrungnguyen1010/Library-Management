@@ -35,8 +35,7 @@ public:
     void deleteBook(QString id, int num);
 
     QVector<Book> getListBook();
-    QVector<Book> viewBorrowedBook();
-    QVector<Book> viewDamagedBook();
+    QVector<Book> viewBorrowedAndDamagedBook();
 
 };
 

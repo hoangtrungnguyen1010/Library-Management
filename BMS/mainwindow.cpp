@@ -14,6 +14,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// FUNCTION CLEARLY LAYOUT
+void clearLayout(QLayout* layout, bool deleteWidgets = true)
+{
+    while (QLayoutItem* item = layout->takeAt(0))
+    {
+        if (deleteWidgets)
+        {
+            if (QWidget* widget = item->widget())
+                widget->deleteLater();
+        }
+        if (QLayout* childLayout = item->layout())
+            clearLayout(childLayout, deleteWidgets);
+        delete item;
+    }
+}
 
 
 // CREATE AN VIEW LIST BOOK FRAME
@@ -318,36 +333,72 @@ QFrame* MainWindow::createCartFrame(Book* book)
 // ON VIEW BUTTON CLICKED
 void MainWindow::on_view_btn_clicked()
 {
-   delete ui->frame->layout();
-    ui->frame->setLayout(new QVBoxLayout);
 
+
+//    clearLayout(ui->frame->layout());
+    qDeleteAll(ui->frame->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
+     delete ui->frame->layout();
+    ui->frame->setLayout(new QVBoxLayout);
 
     ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase ;
     // Head
     QFrame* head=new QFrame;
-        QGridLayout *layout=new QGridLayout;
+        QHBoxLayout *HLayout1=new QHBoxLayout;
         //Add book to library button
         QPushButton* add=new QPushButton;
-         QPixmap add_img(":/OrangeIcons/Resource/Orange/file-plus.svg");
+         QPixmap add_img(":/WhiteIcons/Resource/White/file-plus.svg");
          connect(add,&QPushButton::clicked,this,&MainWindow::go_to_add_book_page);
          add->setIcon(add_img);
          add->setText("Add book");
          // Delete book to library button
          QPushButton* del=new QPushButton;
-         QPixmap del_img(":/OrangeIcons/Resource/Orange/delete.svg");
+         QPixmap del_img(":/WhiteIcons/Resource/White/delete.svg");
          del->setIcon(del_img);
          del->setText("Delete book");
           connect(del,&QPushButton::clicked,this,&MainWindow::go_to_delete_page);
          // Check borrowed and damaged book
+
          QPushButton* check=new QPushButton;
-         QPixmap check_img(":/OrangeIcons/Resource/Orange/check-square.svg");
+         QPixmap check_img(":/WhiteIcons/Resource/White/check-square.svg");
          check->setIcon(check_img);
          check->setText("Check borrowed/damaged book");
-         layout->addWidget(add,0,0);
-         layout->addWidget(del,0,1);
-         layout->addWidget(check,0,2);
+         connect(check,&QPushButton::clicked,this,&MainWindow::on_check_borrowed_damaged_book_clicked);
+
+         // Sort by name and id button
+         QPushButton* sortByName_btn=new QPushButton;
+         QPixmap sort_img(":/WhiteIcons/Resource/White/arrow-down.svg");
+         sortByName_btn->setIcon(sort_img);
+         sortByName_btn->setText("Sort By Name");
+          connect(sortByName_btn,&QPushButton::clicked,this,&MainWindow::on_sort_by_name_btn_clicked);
+
+         QPushButton* sortByID_btn=new QPushButton;
+         sortByID_btn->setIcon(sort_img);
+         sortByID_btn->setText("Sort By ID");
+         connect(sortByID_btn,&QPushButton::clicked,this,&MainWindow::on_sort_by_id_btn_clicked);
+
+         HLayout1->addWidget(add);
+         HLayout1->addWidget(del);
+         HLayout1->addWidget(check);
+
+         QHBoxLayout* HLayout2= new QHBoxLayout;
+         HLayout2->addWidget(sortByName_btn);
+         HLayout2->addWidget(sortByID_btn);
+
+         QVBoxLayout* layout=new QVBoxLayout;
+         layout->addLayout(HLayout1);
+         layout->addLayout(HLayout2);
          head->setLayout(layout);
-         head->setStyleSheet("QPushButton{font: 15pt bold;border-radius: 10px;border: 2px solid red;background-color:#F5F5F5 }");
+         // CSS for button
+         QString cs1="QPushButton {"
+                        "background-color: orange;"
+                        "color: rgb(0, 0, 0);"
+                         "border-radius: 10px;"
+                         "border: 2px solid red;"
+                      "}"
+                      "QPushButton:hover {"
+                          "background-color: red;"
+                      "}";
+         head->setStyleSheet(cs1);
 
     ui->frame->layout()->addWidget(head);
   for (auto book:proxy->getListBook())
@@ -387,7 +438,7 @@ void MainWindow::on_your_book_btn_clicked()
            ui->frame_17->layout()->addWidget(a);
            ui->frame_17->layout()->setAlignment(a,Qt::AlignTop);
        }
-       ui->frame_17->layout()->setAlignment(Qt::AlignTop);
+       ui->frame_17->layout()->setAlignment(Qt::AlignCenter);
 
        ui->MainFrame->setCurrentWidget(ui->YourBook);
    }
@@ -410,7 +461,7 @@ void MainWindow::on_cart_btn_clicked()
             ui->frame_18->layout()->addWidget(a);
             ui->frame_18->layout()->setAlignment(a,Qt::AlignTop);
         }
-        ui->frame_18->layout()->setAlignment(Qt::AlignTop);
+        ui->frame_18->layout()->setAlignment(Qt::AlignCenter);
         ui->MainFrame->setCurrentWidget(ui->Cart);
     }
     else{
@@ -490,21 +541,6 @@ void MainWindow::on_add_to_cart_btn_clicked(Book* book){
      QMessageBox::information(this,"Cart","This book has been added to your cart successfully!");
 }
 
-// FUNCTION CLEARLY LAYOUT
-void clearLayout(QLayout* layout, bool deleteWidgets = true)
-{
-    while (QLayoutItem* item = layout->takeAt(0))
-    {
-        if (deleteWidgets)
-        {
-            if (QWidget* widget = item->widget())
-                widget->deleteLater();
-        }
-        if (QLayout* childLayout = item->layout())
-            clearLayout(childLayout, deleteWidgets);
-        delete item;
-    }
-}
 
 //ON RETURN BUTTON BOOK
 void MainWindow::on_return_btn_clicked(Book* book){
@@ -581,6 +617,46 @@ void MainWindow::go_to_add_book_page()
 void MainWindow::go_to_delete_page()
 {
     ui->MainFrame->setCurrentWidget(ui->Delete);
+}
+
+void MainWindow::on_sort_by_name_btn_clicked()
+{
+    ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase;
+    proxy->sortByName();
+    MainWindow::on_view_btn_clicked();
+}
+void MainWindow::on_sort_by_id_btn_clicked()
+{
+    ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase;
+    proxy->sortByID();
+    MainWindow::on_view_btn_clicked();
+}
+
+void MainWindow::on_check_borrowed_damaged_book_clicked()
+{
+
+    if(login_user){
+        QMessageBox::information(this,"Notification","Only admin can use it!");
+        return;
+    }
+     ProxyLibraryDatabase* proxy;
+     proxy=new ProxyLibraryDatabase(1);
+     QHeaderView *header = ui->book_table->horizontalHeader();
+     ui->book_table->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+     header->setSectionResizeMode(QHeaderView::Stretch);
+     QVector<Book> list=proxy->viewBorrowedAndDamagedBook();
+     int rowCount=list.size();
+     ui->book_table->setRowCount(rowCount);
+     for(int i=0;i<rowCount;i++)
+      {
+              ui->book_table->setItem(i,0,new QTableWidgetItem(list[i].getID()));
+              ui->book_table->setItem(i,1,new QTableWidgetItem(list[i].getName()));
+                ui->book_table->setItem(i,2,new QTableWidgetItem(QString::number(list[i].getQuantity())));
+                ui->book_table->setItem(i,3,new QTableWidgetItem(QString::number(list[i].getNumOfOfBorrowedBooks())));
+                 ui->book_table->setItem(i,4,new QTableWidgetItem(QString::number(list[i].getNumOfDamagedBooks())));
+      }
+        ui->MainFrame->setCurrentWidget(ui->BookInfor);
+
 }
 
 void MainWindow::on_add_book_btn_clicked()
@@ -669,5 +745,11 @@ void MainWindow::on_cancel_add_book_btn_clicked()
 void MainWindow::on_cancel_delete_book_btn_clicked()
 {
     ui->MainFrame->setCurrentWidget(ui->MainFramePage1);
+}
+
+
+void MainWindow::on_tableWidget_cellEntered(int row, int column)
+{
+
 }
 

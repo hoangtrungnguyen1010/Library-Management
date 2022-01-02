@@ -38,8 +38,7 @@ public:
     QString toString() const;
 
     QVector<Book> getListBook();
-    QVector<Book> viewBorrowedBook();
-    QVector<Book> viewDamagedBook();
+    QVector<Book> viewBorrowedAndDamagedBook();
 
     void saveDTB();
 

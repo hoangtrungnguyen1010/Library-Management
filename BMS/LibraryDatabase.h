@@ -25,8 +25,7 @@ public:
     virtual void deleteBook(QString id, int num)=0;
 
     virtual QVector<Book> getListBook()=0;
-    virtual QVector<Book> viewBorrowedBook()=0;
-    virtual QVector<Book> viewDamagedBook()=0;
+    virtual QVector<Book> viewBorrowedAndDamagedBook()=0;
 
 };
 

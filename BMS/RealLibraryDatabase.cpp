@@ -144,12 +144,11 @@ void RealLibraryDatabase::saveDTB(){
 QVector<Book> RealLibraryDatabase::getListBook(){
     return this->List;
 }
-QVector<Book> RealLibraryDatabase::viewBorrowedBook(){
+QVector<Book> RealLibraryDatabase::viewBorrowedAndDamagedBook(){
   QVector<Book> res;
+  for(auto book:List){
+      if(book.getNumOfDamagedBooks()!=0||book.getNumOfOfBorrowedBooks()!=0)
+          res.push_back(book);
+  }
   return res;
-};
-
-QVector<Book> RealLibraryDatabase::viewDamagedBook(){
-    QVector<Book> res;
-    return res;
 };

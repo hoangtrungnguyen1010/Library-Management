@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>716</width>
-    <height>663</height>
+    <width>795</width>
+    <height>733</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -71,6 +71,7 @@
              <property name="font">
               <font>
                <pointsize>20</pointsize>
+               <weight>75</weight>
                <italic>false</italic>
                <bold>true</bold>
               </font>
@@ -113,6 +114,7 @@
              <property name="font">
               <font>
                <pointsize>16</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -192,7 +194,7 @@ border: 2px solid #9B0000;
                 </property>
                 <property name="font">
                  <font>
-                  <pointsize>10</pointsize>
+                  <pointsize>13</pointsize>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -252,7 +254,7 @@ border: 2px solid #9B0000;
                <widget class="QLineEdit" name="lineEdit_2">
                 <property name="font">
                  <font>
-                  <pointsize>10</pointsize>
+                  <pointsize>13</pointsize>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -279,6 +281,12 @@ border: none</string>
                 <property name="text">
                  <string>User</string>
                 </property>
+                <property name="iconSize">
+                 <size>
+                  <width>35</width>
+                  <height>35</height>
+                 </size>
+                </property>
                </widget>
               </item>
               <item>
@@ -301,6 +309,12 @@ border: none</string>
                <widget class="QRadioButton" name="loginAdmin">
                 <property name="text">
                  <string>Admin</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>35</width>
+                  <height>35</height>
+                 </size>
                 </property>
                </widget>
               </item>
@@ -471,6 +485,7 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>18</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -500,6 +515,7 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>20</pointsize>
+               <weight>75</weight>
                <italic>false</italic>
                <bold>true</bold>
               </font>
@@ -832,6 +848,7 @@ border: none</string>
                 <property name="font">
                  <font>
                   <pointsize>10</pointsize>
+                  <weight>50</weight>
                   <bold>false</bold>
                  </font>
                 </property>
@@ -1105,6 +1122,7 @@ border: none</string>
              <property name="font">
               <font>
                <pointsize>15</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
               </font>
              </property>
@@ -1143,6 +1161,7 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>15</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
               </font>
              </property>
@@ -1257,6 +1276,7 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>20</pointsize>
+               <weight>75</weight>
                <italic>false</italic>
                <bold>true</bold>
               </font>
@@ -1274,6 +1294,7 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>18</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -1343,6 +1364,7 @@ cursor: pointer;
               <property name="font">
                <font>
                 <pointsize>13</pointsize>
+                <weight>75</weight>
                 <italic>false</italic>
                 <bold>true</bold>
                </font>
@@ -1756,6 +1778,7 @@ border: none</string>
              <property name="font">
               <font>
                <pointsize>15</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
               </font>
              </property>
@@ -1794,6 +1817,7 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>15</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
               </font>
              </property>

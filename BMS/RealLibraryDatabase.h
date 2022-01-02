@@ -29,8 +29,8 @@ public:
     Book* getBookByID(QString ID);
 
     void addDamagedBook(QString id, int num);
-    void addBook(QString id, QString name, QString author, QString publisher, QString tags, int num);   //add new kind of book
-    void addBook(QString id, int num);
+    bool addBook(QString id, QString name, QString author, QString publisher, QString tags, int num);   //add new kind of book
+    bool addBook(QString id, int num);
 
     void deleteBook(QString id); //delete all
     void deleteBook(QString id, int num);

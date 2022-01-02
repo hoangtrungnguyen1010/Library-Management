@@ -46,6 +46,7 @@ private slots:
     void on_home_btn_clicked();
     void on_your_book_btn_clicked();
     void on_cart_btn_clicked();
+     void on_user_btn_clicked();
 
 
 
@@ -53,6 +54,8 @@ private slots:
     void on_borrow_btn_clicked(Book* book);
     void on_return_btn_clicked(Book* book);
     void on_extend_btn_clicked(Book* book);
+    void go_to_add_book_page();
+    void go_to_delete_page();
 
 
 
@@ -68,7 +71,7 @@ private slots:
 
 
 
-    void on_user_btn_clicked();
+
 
     void on_ViewMoreBtn_clicked();
 

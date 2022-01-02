@@ -105,14 +105,16 @@ void RealLibraryDatabase::addDamagedBook(QString id, int num){
     this->List[pos].updateDamagedBooks(num);
 }
 
-void RealLibraryDatabase::addBook(QString id, QString name, QString author, QString publisher, QString tags, int num){
+bool RealLibraryDatabase::addBook(QString id, QString name, QString author, QString publisher, QString tags, int num){
     Book temp(id, name, author, publisher, tags, num,0,0);
     this->List.push_back(temp);
+    return true;
 }   //add new kind of book
 
-void RealLibraryDatabase::addBook(QString id, int num){
+bool RealLibraryDatabase::addBook(QString id, int num){
     int pos = getBookPos(id);
     this->List[pos].updateQuantiy(1);
+    return true;
 }
 
 void RealLibraryDatabase::deleteBook(QString id){

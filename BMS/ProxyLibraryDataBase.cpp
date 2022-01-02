@@ -21,12 +21,14 @@ void ProxyLibraryDatabase::addDamagedBook(QString id, int num){
     if(this->check()) this->_wrappee->addDamagedBook(id, num);
 }
 
-void ProxyLibraryDatabase::addBook(QString id, QString name, QString author, QString publisher, QString tags, int num){
+bool ProxyLibraryDatabase::addBook(QString id, QString name, QString author, QString publisher, QString tags, int num){
     if(this->check()) this->_wrappee->addBook(id, name, author, publisher, tags, num);
+    else return false;
 }   //add new kind of book
 
-void ProxyLibraryDatabase::addBook(QString id, int num){
+bool ProxyLibraryDatabase::addBook(QString id, int num){
     if(this->check()) this->_wrappee->addBook(id, num);
+    else return false;
 }
 
 void ProxyLibraryDatabase::deleteBook(QString id){

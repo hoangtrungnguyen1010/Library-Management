@@ -9,6 +9,10 @@ public:
     ProxyLibraryDatabase(){
         _wrappee=RealLibraryDatabase::getInstance();
     }
+    ProxyLibraryDatabase(bool type){
+        _type=type;
+         _wrappee=RealLibraryDatabase::getInstance();
+    }
     ~ProxyLibraryDatabase(){
         delete _wrappee;
     }
@@ -24,8 +28,8 @@ public:
     QVector<Book*> findBookByID(QString id);
 
     void addDamagedBook(QString id, int num);
-    void addBook(QString id, QString name, QString author, QString publisher, QString tags, int num);   //add new kind of book
-    void addBook(QString id, int num);
+    bool addBook(QString id, QString name, QString author, QString publisher, QString tags, int num);   //add new kind of book
+    bool addBook(QString id, int num);
 
     void deleteBook(QString id); //delete all
     void deleteBook(QString id, int num);

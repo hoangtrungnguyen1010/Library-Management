@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>796</width>
-    <height>670</height>
+    <width>798</width>
+    <height>722</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -90,7 +90,9 @@ background-color: rgb(239, 249, 254);</string>
             </property>
             <property name="font">
              <font>
+              <family>Freestyle Script</family>
               <pointsize>20</pointsize>
+              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
@@ -305,7 +307,9 @@ background-color: transparent;
                  <widget class="QLabel" name="label_11">
                   <property name="font">
                    <font>
+                    <family>MS Shell Dlg 2</family>
                     <pointsize>15</pointsize>
+                    <weight>75</weight>
                     <italic>false</italic>
                     <bold>true</bold>
                    </font>
@@ -478,7 +482,7 @@ background-color: white;
 </string>
             </property>
             <property name="currentIndex">
-             <number>7</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="MainFramePage1">
              <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -535,6 +539,7 @@ background-color: white;
                          <property name="font">
                           <font>
                            <pointsize>12</pointsize>
+                           <weight>75</weight>
                            <italic>false</italic>
                            <bold>true</bold>
                            <strikeout>false</strikeout>
@@ -727,6 +732,7 @@ background-color: red;
                               <widget class="QLabel" name="label_2">
                                <property name="font">
                                 <font>
+                                 <weight>75</weight>
                                  <bold>true</bold>
                                 </font>
                                </property>
@@ -776,13 +782,14 @@ background-color: red;
                               <widget class="QLabel" name="label_20">
                                <property name="font">
                                 <font>
+                                 <weight>50</weight>
                                  <italic>true</italic>
                                  <bold>false</bold>
                                  <underline>true</underline>
                                 </font>
                                </property>
                                <property name="text">
-                                <string>Ngtuyen Nhat Anh</string>
+                                <string>Nguyen Nhat Anh</string>
                                </property>
                               </widget>
                              </item>
@@ -924,6 +931,7 @@ background-color: red;
                               <widget class="QLabel" name="label_5">
                                <property name="font">
                                 <font>
+                                 <weight>75</weight>
                                  <bold>true</bold>
                                 </font>
                                </property>
@@ -1285,6 +1293,7 @@ background-color: #DE834D;
                    <property name="font">
                     <font>
                      <pointsize>9</pointsize>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -1498,8 +1507,8 @@ background: none;
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>598</width>
-                   <height>563</height>
+                   <width>595</width>
+                   <height>610</height>
                   </rect>
                  </property>
                  <property name="styleSheet">
@@ -1601,6 +1610,7 @@ background-color: white;
                       <property name="font">
                        <font>
                         <pointsize>15</pointsize>
+                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -2192,8 +2202,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>584</width>
-                   <height>1018</height>
+                   <width>581</width>
+                   <height>1022</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_25">
@@ -2320,8 +2330,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>584</width>
-                   <height>1018</height>
+                   <width>64</width>
+                   <height>1022</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_26">
@@ -2454,8 +2464,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>584</width>
-                   <height>1018</height>
+                   <width>64</width>
+                   <height>1022</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -2515,6 +2525,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                    <property name="font">
                     <font>
                      <pointsize>15</pointsize>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -2654,6 +2665,7 @@ background: none;
                     <property name="font">
                      <font>
                       <pointsize>10</pointsize>
+                      <weight>75</weight>
                       <bold>true</bold>
                      </font>
                     </property>
@@ -2672,6 +2684,7 @@ background: none;
                     <property name="font">
                      <font>
                       <pointsize>10</pointsize>
+                      <weight>75</weight>
                       <bold>true</bold>
                      </font>
                     </property>
@@ -2683,6 +2696,7 @@ background: none;
                     <property name="font">
                      <font>
                       <pointsize>10</pointsize>
+                      <weight>75</weight>
                       <bold>true</bold>
                      </font>
                     </property>
@@ -2694,6 +2708,7 @@ background: none;
                     <property name="font">
                      <font>
                       <pointsize>10</pointsize>
+                      <weight>75</weight>
                       <bold>true</bold>
                      </font>
                     </property>
@@ -2705,6 +2720,7 @@ background: none;
                     <property name="font">
                      <font>
                       <pointsize>10</pointsize>
+                      <weight>75</weight>
                       <bold>true</bold>
                      </font>
                     </property>
@@ -2716,6 +2732,7 @@ background: none;
                     <property name="font">
                      <font>
                       <pointsize>10</pointsize>
+                      <weight>75</weight>
                       <bold>true</bold>
                      </font>
                     </property>
@@ -2727,7 +2744,7 @@ background: none;
               </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="page">
+            <widget class="QWidget" name="Add">
              <layout class="QVBoxLayout" name="verticalLayout_37">
               <item>
                <widget class="QFrame" name="frame_21">
@@ -2742,13 +2759,14 @@ background: none;
                   <rect>
                    <x>30</x>
                    <y>10</y>
-                   <width>131</width>
+                   <width>181</width>
                    <height>61</height>
                   </rect>
                  </property>
                  <property name="font">
                   <font>
                    <pointsize>18</pointsize>
+                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -3277,6 +3295,7 @@ background: none;
                    <property name="font">
                     <font>
                      <pointsize>15</pointsize>
+                     <weight>50</weight>
                      <bold>false</bold>
                     </font>
                    </property>
@@ -3315,6 +3334,7 @@ cursor: pointer;
                    <property name="font">
                     <font>
                      <pointsize>15</pointsize>
+                     <weight>50</weight>
                      <bold>false</bold>
                     </font>
                    </property>
@@ -3341,7 +3361,7 @@ cursor: pointer;
               </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="page_2">
+            <widget class="QWidget" name="Delete">
              <layout class="QVBoxLayout" name="verticalLayout_43">
               <item>
                <widget class="QFrame" name="frame_33">
@@ -3356,13 +3376,14 @@ cursor: pointer;
                   <rect>
                    <x>20</x>
                    <y>20</y>
-                   <width>151</width>
+                   <width>191</width>
                    <height>41</height>
                   </rect>
                  </property>
                  <property name="font">
                   <font>
                    <pointsize>18</pointsize>
+                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -3557,6 +3578,7 @@ cursor: pointer;
                       <property name="font">
                        <font>
                         <pointsize>12</pointsize>
+                        <weight>50</weight>
                         <bold>false</bold>
                        </font>
                       </property>
@@ -3712,6 +3734,7 @@ cursor: pointer;
                    <property name="font">
                     <font>
                      <pointsize>15</pointsize>
+                     <weight>50</weight>
                      <bold>false</bold>
                     </font>
                    </property>
@@ -3750,6 +3773,7 @@ cursor: pointer;
                    <property name="font">
                     <font>
                      <pointsize>15</pointsize>
+                     <weight>50</weight>
                      <bold>false</bold>
                     </font>
                    </property>

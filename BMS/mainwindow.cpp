@@ -329,6 +329,7 @@ void MainWindow::on_view_btn_clicked()
         //Add book to library button
         QPushButton* add=new QPushButton;
          QPixmap add_img(":/OrangeIcons/Resource/Orange/file-plus.svg");
+         connect(add,&QPushButton::clicked,this,&MainWindow::go_to_add_book_page);
          add->setIcon(add_img);
          add->setText("Add book");
          // Delete book to library button
@@ -336,6 +337,7 @@ void MainWindow::on_view_btn_clicked()
          QPixmap del_img(":/OrangeIcons/Resource/Orange/delete.svg");
          del->setIcon(del_img);
          del->setText("Delete book");
+          connect(del,&QPushButton::clicked,this,&MainWindow::go_to_delete_page);
          // Check borrowed and damaged book
          QPushButton* check=new QPushButton;
          QPixmap check_img(":/OrangeIcons/Resource/Orange/check-square.svg");
@@ -506,7 +508,7 @@ void clearLayout(QLayout* layout, bool deleteWidgets = true)
 
 //ON RETURN BUTTON BOOK
 void MainWindow::on_return_btn_clicked(Book* book){
-     if(QMessageBox::Yes==QMessageBox::question(this,"Return book","Do you want to return this book?"))
+     if(QMessageBox::Yes==QMessageBox::question(this,"Borrow book","Do you want to borrow this book?"))
      {
      clearLayout(ui->frame_17->layout());
      qDeleteAll(ui->frame_17->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
@@ -544,23 +546,27 @@ void MainWindow::on_save_btn_clicked()
 
 void MainWindow::on_user_btn_clicked()
 {
-    QHeaderView *header = ui->tableWidget->horizontalHeader();
-    ui->tableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    header->setSectionResizeMode(QHeaderView::Stretch);
-    HumanDatabase* humandtb=HumanDatabase::getInstance();
-    QVector<User*> userData=humandtb->getListUser();
-    int rowCount=userData.size();
-    ui->tableWidget->setRowCount(rowCount);
-    for(int i=0;i<rowCount;i++)
-    {
-        ui->tableWidget->setItem(i,0,new QTableWidgetItem(userData[i]->showName()));
-        ui->tableWidget->setItem(i,1,new QTableWidgetItem(userData[i]->showID()));
-        ui->tableWidget->setItem(i,2,new QTableWidgetItem(userData[i]->showGender()));
-        ui->tableWidget->setItem(i,3,new QTableWidgetItem(userData[i]->showAddress()));
-         ui->tableWidget->setItem(i,4,new QTableWidgetItem(userData[i]->BorrowedBookToString()));
-          ui->tableWidget->setItem(i,5,new QTableWidgetItem(userData[i]->ExpiredBookToString()));
+    if(login_user)
+        QMessageBox::information(this,"Notification","Only admin can view user list!");
+    else{
+        QHeaderView *header = ui->tableWidget->horizontalHeader();
+        ui->tableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+        header->setSectionResizeMode(QHeaderView::Stretch);
+        HumanDatabase* humandtb=HumanDatabase::getInstance();
+        QVector<User*> userData=humandtb->getListUser();
+        int rowCount=userData.size();
+        ui->tableWidget->setRowCount(rowCount);
+        for(int i=0;i<rowCount;i++)
+        {
+            ui->tableWidget->setItem(i,0,new QTableWidgetItem(userData[i]->showName()));
+            ui->tableWidget->setItem(i,1,new QTableWidgetItem(userData[i]->showID()));
+            ui->tableWidget->setItem(i,2,new QTableWidgetItem(userData[i]->showGender()));
+            ui->tableWidget->setItem(i,3,new QTableWidgetItem(userData[i]->showAddress()));
+             ui->tableWidget->setItem(i,4,new QTableWidgetItem(userData[i]->BorrowedBookToString()));
+              ui->tableWidget->setItem(i,5,new QTableWidgetItem(userData[i]->ExpiredBookToString()));
+        }
+        ui->MainFrame->setCurrentWidget(ui->User);
     }
-    ui->MainFrame->setCurrentWidget(ui->User);
 }
 
 
@@ -568,9 +574,18 @@ void MainWindow::on_ViewMoreBtn_clicked()
 {
     MainWindow::on_view_btn_clicked();
 }
+void MainWindow::go_to_add_book_page()
+{
+    ui->MainFrame->setCurrentWidget(ui->Add);
+}
+void MainWindow::go_to_delete_page()
+{
+    ui->MainFrame->setCurrentWidget(ui->Delete);
+}
 
 void MainWindow::on_add_book_btn_clicked()
 {
+    ui->MainFrame->setCurrentWidget(ui->Add);
     QString title, id, author, publisher, tag;
     int quantity;
     title=ui->addTitle->text();
@@ -580,30 +595,42 @@ void MainWindow::on_add_book_btn_clicked()
     tag=ui->addTag->text();
     quantity=ui->addQuantity->text().toInt();
     qDebug()<<title<<id<<author<<publisher<<tag<<quantity;
-    ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase ;
+    ProxyLibraryDatabase* proxy;
+    if(login_user){
+       proxy =new ProxyLibraryDatabase(0);
+    }
+    else if(login_admin)
+        proxy=new ProxyLibraryDatabase(1) ;
     bool check = false; // true: already have this book
     for (auto book:proxy->getListBook()){
         if (QString::compare(book.getID(), id)==0){
             check = true;
         }
     }
-    if (check){
-        proxy->addBook(id, quantity);
+    if (check&&proxy->addBook(id,quantity)){
+        QMessageBox::information(this, "Notification", "Add book successfully!");
     }
-    else{
-        proxy->addBook(id, title, author, publisher, tag, quantity);
+    else if(proxy->addBook(id, title, author, publisher, tag, quantity)){
+        QMessageBox::information(this, "Notification", "Add book successfully!");
     }
-    QMessageBox::information(this, "Notification", "Add book successfully!");
+    else
+        QMessageBox::information(this, "Notification", "Only admin can add book!");
 }
 
 
 void MainWindow::on_delete_book_btn_clicked()
 {
+    ui->MainFrame->setCurrentWidget(ui->Delete);
     QString title, id;
     title=ui->deleteTitle->text();
     id=ui->deleteISBN->text();
     qDebug()<<title<<id;
-    ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase ;
+    ProxyLibraryDatabase* proxy;
+    if(login_user){
+       proxy =new ProxyLibraryDatabase(0);
+    }
+    else if(login_admin)
+        proxy=new ProxyLibraryDatabase(1) ;
     bool check = false; // true: Library has this book.
     for (auto book:proxy->getListBook()){
         if (QString::compare(book.getID(), id)==0 && QString::compare(book.getName(), title)==0){
@@ -614,6 +641,7 @@ void MainWindow::on_delete_book_btn_clicked()
         QMessageBox::information(this, "Notification", "Our library does not have this book!");
         return;
     }
+
     if (ui->deleteAll->isChecked()){
         proxy->deleteBook(id);
         QString notif = QString("Successfully delete all of books \n with title \"%1\" and ISBN: %2").arg(title).arg(id);

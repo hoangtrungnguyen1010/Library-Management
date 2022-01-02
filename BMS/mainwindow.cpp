@@ -626,6 +626,9 @@ void MainWindow::on_delete_book_btn_clicked()
         QString notif = QString("Successfully delete %1 book(s) \n with title \"%2\" and ISBN: %3").arg(quantity).arg(title).arg(id);
         QMessageBox::information(this, "Notification", notif);
     }
+    else {
+        QMessageBox::information(this, "Notification", "Please choose the number of books you want to delete!");
+    }
 }
 
 

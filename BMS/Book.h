@@ -19,7 +19,6 @@ private:
 public:
     QString getID();
     QString getName();
-    int getQuantity();
     QString getPublisher();
     QString getAuthor();
     QString getTag();

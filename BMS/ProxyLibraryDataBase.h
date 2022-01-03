@@ -24,8 +24,8 @@ public:
     void sortByID();
     void sortByName();
 
-    QVector<Book*> findBookByName(QString name);
-    QVector<Book*> findBookByID(QString id);
+    QVector<Book> findBookByName(QString name);
+    QVector<Book> findBookByID(QString id);
 
     void addDamagedBook(QString id, int num);
     bool addBook(QString id, QString name, QString author, QString publisher, QString tags, int num);   //add new kind of book
@@ -36,6 +36,9 @@ public:
 
     QVector<Book> getListBook();
     QVector<Book> viewBorrowedAndDamagedBook();
+
+    bool  updateQuantity(QString ID,int num);
+    bool updateDamaged(QString ID,int num);
 
 };
 

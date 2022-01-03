@@ -7,10 +7,6 @@ QString Book:: getID(){
 QString Book:: getName(){
     return this->_name;
 }
-int Book::getQuantity()
-{
-    return this->state.getNumOfRemaingBooks();
-}
 QString Book::getPublisher()
 {
     return this->_publisher;
@@ -41,6 +37,7 @@ Book::Book(QString ISBN,QString name,  QString publisher, QString author, QStrin
 }
 
 int Book::getNumOfRemaingBooks(){
+     qDebug()<<this->state.getNumOfRemaingBooks();
     return this->state.getNumOfRemaingBooks();
 }
 
@@ -54,6 +51,7 @@ int Book::getNumOfOfBorrowedBooks(){
 
 void Book::updateQuantiy(int num){
     this->state.updateQuantiy(num);
+    qDebug()<<this->getNumOfRemaingBooks();
 }
 void Book::updateBorrowedBooks(int num){
     this->state.updateBorrowedBooks(num);

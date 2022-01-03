@@ -20,8 +20,10 @@
 #include "ProxyLibraryDataBase.h"
 #include "Person.h"
 #include "User.h"
+#include "Admin.h"
 
 extern User* login_user;
+extern Admin* login_admin;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,9 +38,9 @@ public:
     ~MainWindow();
 
 public:
-    QFrame* createViewListFrame(Book* book);
-    QFrame* createYourBookFrame(Book* book,QString time_start,int time_remaining);
-    QFrame* createCartFrame(Book* book);
+    QFrame* createViewListFrame(Book book);
+    QFrame* createYourBookFrame(Book book,QString time_start,int time_remaining);
+    QFrame* createCartFrame(Book book);
 private slots:
 
 
@@ -50,10 +52,11 @@ private slots:
 
 
 
-    void on_add_to_cart_btn_clicked(Book* book);
-    void on_borrow_btn_clicked(Book* book);
-    void on_return_btn_clicked(Book* book);
-    void on_extend_btn_clicked(Book* book);
+    void on_add_to_cart_btn_clicked(Book book);
+    void on_borrow_btn_clicked(Book book);
+    void on_return_btn_clicked(Book book);
+    void on_extend_btn_clicked(Book book);
+    void on_delete_btn_cart_clicked(Book book);
     void go_to_add_book_page();
     void go_to_delete_page();
     void on_sort_by_name_btn_clicked();
@@ -84,7 +87,18 @@ private slots:
 
     void on_cancel_delete_book_btn_clicked();
 
-    void on_tableWidget_cellEntered(int row, int column);
+//    void on_book_table_cellEntered(int row, int column);
+
+
+
+
+
+//    void on_book_table_cellChanged(int row, int column);
+
+//    void on_book_table_destroyed();
+
+
+    void on_book_saved_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;

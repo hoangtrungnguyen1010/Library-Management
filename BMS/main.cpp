@@ -9,11 +9,9 @@
 #include "loginpage.h"
 #include <QFile>
 #include <QIODevice>
-
-User* login_user=nullptr;
-Admin* login_admin=nullptr;
-
-
+#include <QDir>
+User* login_user;
+Admin* login_admin;
 HumanDatabase* HumanDatabase::Instance=nullptr;
 RealLibraryDatabase* RealLibraryDatabase::Instance=nullptr;
 
@@ -25,19 +23,9 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     LoginPage_2 b;
     MainWindow m;
-
-
     b.show();
-
-       return a.exec();
-//        login_user=Human->UserData[3];
-//        login_user->borrowBook(&Lib->getListBook()[4]);
-//        login_user->borrowBook(&Lib->getListBook()[5]);
-//        login_user->borrowBook(&Lib->getListBook()[0]);
-
-//        login_user->borrowBook(&Lib->getListBook()[1]);
-
-//    delete Lib;
-//    delete Human;
+    delete login_user;
+    delete login_admin;
+    return a.exec();
 
 }

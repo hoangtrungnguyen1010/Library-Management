@@ -11,7 +11,7 @@ using namespace std;
 
 class BookState{
 private:
-    int _quantity=0;
+    int _availQuantity=0;
     int _numOfBorrowedBooks=0;
     int _numOfDamagedBooks=0;
 public:

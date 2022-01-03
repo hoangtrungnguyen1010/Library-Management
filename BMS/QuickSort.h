@@ -73,12 +73,12 @@ void quickSortName( QVector<Book>& a, int first, int last)
         quickSortName(a, index, last);
 }
 
-int partitionSimilarity(QVector<Book*>& a, QVector<int> similarity, int first, int last)
+int partitionSimilarity(QVector<Book>& a, QVector<int> similarity, int first, int last)
 {
     double pivot = similarity[(first + last) / 2];
     int i = first;
     int j = last;
-    Book* tmp;
+    Book tmp;
     while (i <= j)
     {
         qDebug()<<i;
@@ -98,7 +98,7 @@ int partitionSimilarity(QVector<Book*>& a, QVector<int> similarity, int first, i
     return i;
 }
 
-void quickSortSimilarity( QVector<Book*>& a,QVector<int> similarity, int first, int last)
+void quickSortSimilarity( QVector<Book>& a,QVector<int> similarity, int first, int last)
 {
 
     int index = partitionSimilarity(a,similarity, first, last);

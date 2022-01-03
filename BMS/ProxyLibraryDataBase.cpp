@@ -1,11 +1,11 @@
 #include"ProxyLibraryDatabase.h"
 
 
-QVector<Book*> ProxyLibraryDatabase::findBookByName(QString name){
+QVector<Book> ProxyLibraryDatabase::findBookByName(QString name){
     return this->_wrappee->findBookByName(name);
 }
 
-QVector<Book*> ProxyLibraryDatabase::findBookByID(QString id){
+QVector<Book> ProxyLibraryDatabase::findBookByID(QString id){
     return this->_wrappee->findBookByID(id);
 }
 
@@ -22,12 +22,12 @@ void ProxyLibraryDatabase::addDamagedBook(QString id, int num){
 }
 
 bool ProxyLibraryDatabase::addBook(QString id, QString name, QString author, QString publisher, QString tags, int num){
-    if(this->check()) this->_wrappee->addBook(id, name, author, publisher, tags, num);
+    if(this->check()) return this->_wrappee->addBook(id, name, author, publisher, tags, num);
     else return false;
 }   //add new kind of book
 
 bool ProxyLibraryDatabase::addBook(QString id, int num){
-    if(this->check()) this->_wrappee->addBook(id, num);
+    if(this->check()) return this->_wrappee->addBook(id, num);
     else return false;
 }
 
@@ -48,3 +48,16 @@ QVector<Book> ProxyLibraryDatabase::viewBorrowedAndDamagedBook(){
     if(this->check()) return this->_wrappee->viewBorrowedAndDamagedBook();
     else return res;
 };
+
+bool ProxyLibraryDatabase::updateQuantity(QString ID,int num)
+  {
+      if(this->check()) return this->_wrappee->updateQuantity(ID,num);
+      return false;
+  }
+
+bool ProxyLibraryDatabase::updateDamaged(QString ID, int num)
+  {
+      if(this->check()) return this->_wrappee->updateDamaged(ID,num);
+      return false;
+  }
+

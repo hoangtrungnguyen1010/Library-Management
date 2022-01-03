@@ -2,7 +2,7 @@
 #include<QDebug>
 
 int BookState::getNumOfRemaingBooks(){
-    return this->_quantity - this->_numOfBorrowedBooks - this->_numOfDamagedBooks;
+    return this->_availQuantity;
 }
 
 int BookState::getNumOfDamagedBooks(){
@@ -14,23 +14,25 @@ int BookState::getNumOfOfBorrowedBooks(){
 }
 
 BookState::BookState(){
-    this->_quantity=1;
+    this->_availQuantity=1;
     this->_numOfBorrowedBooks=0;
     this->_numOfDamagedBooks=0;
 }
 
 BookState::BookState(int quantity, int numOfBorrowedBooks, int numOfDamagedBooks){
-    this->_quantity=quantity;
+    this->_availQuantity=quantity;
     this->_numOfBorrowedBooks=numOfBorrowedBooks;
     this->_numOfDamagedBooks=numOfDamagedBooks;
 }
 
 void BookState::updateQuantiy(int num){
-    this->_quantity+= num ;
+    if(num>=0)
+    this->_availQuantity= num ;
 }
 
 void BookState::updateBorrowedBooks(int num){
-    this->_numOfBorrowedBooks+= num;
+    if(num>=0)
+    this->_numOfBorrowedBooks= num;
 }
 
 void BookState::updateDamagedBooks(int num){
@@ -40,7 +42,7 @@ void BookState::updateDamagedBooks(int num){
 QString BookState::toString() const{
     QString buffer="";
     QTextStream out(&buffer,QIODevice::ReadWrite);
-    out<<"|"<<QString::number(this->_quantity);
+    out<<"|"<<QString::number(this->_availQuantity);
     out<<"|"<<QString::number(this->_numOfDamagedBooks);
 
     QString res=out.readAll();

@@ -22,8 +22,8 @@ public:
 
     void uploadBook();
 
-    QVector<Book*> findBookByName(QString name);
-    QVector<Book*> findBookByID(QString id);
+    QVector<Book> findBookByName(QString name);
+    QVector<Book> findBookByID(QString id);
 
     int getBookPos(QString id);
     Book* getBookByID(QString ID);
@@ -39,6 +39,8 @@ public:
 
     QVector<Book> getListBook();
     QVector<Book> viewBorrowedAndDamagedBook();
+    bool  updateQuantity(QString ID,int num);
+    bool updateDamaged(QString ID,int num);
 
     void saveDTB();
 

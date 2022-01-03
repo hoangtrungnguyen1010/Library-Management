@@ -1,6 +1,7 @@
 #include"RealLibraryDatabase.h"
 #include"QuickSort.h"
 #include "SearchHelper.h"
+
 void RealLibraryDatabase::uploadBook() {
     QFile fin(_fileName);
     fin.open(QIODevice::ReadOnly);
@@ -38,15 +39,15 @@ QString RealLibraryDatabase::toString() const{
     return out.readAll();
 }
 
-QVector<Book*> RealLibraryDatabase::findBookByName(QString name){
+QVector<Book> RealLibraryDatabase::findBookByName(QString name){
 
     int size=this->List.size();
     QVector<int> similarity;
-    QVector<Book*> res;
+    QVector<Book> res;
     for(int i=0;i<size;i++){
         double temp = similarityBetweenTwoString(name, this->List[i].getName());
         if (temp > 0) {
-            res.push_back(&this->List[i]);
+            res.push_back(this->List[i]);
             similarity.push_back(temp);
             qDebug()<<List[i].getName();
         }
@@ -59,12 +60,12 @@ QVector<Book*> RealLibraryDatabase::findBookByName(QString name){
     return res;
 }
 
-QVector<Book*> RealLibraryDatabase::findBookByID(QString ID){
+QVector<Book> RealLibraryDatabase::findBookByID(QString ID){
     int size=this->List.size();
-       QVector<Book*> res;
+       QVector<Book> res;
        for(int i=0;i<size;i++){
            if (QString::compare(this->List[i].getID(),ID)==0){
-               res.push_back(&this->List[i]);
+               res.push_back(this->List[i]);
            }
        }
        return res;
@@ -93,7 +94,7 @@ void RealLibraryDatabase::sortByName(){
 int RealLibraryDatabase::getBookPos(QString id){
     int size=this->List.size();
     for(int i=0;i<size;i++){
-        if (QString::compare(this->List[i].getName(),id)==0){
+        if (QString::compare(this->List[i].getID(),id)==0){
             return i;
         }
     }
@@ -113,7 +114,7 @@ bool RealLibraryDatabase::addBook(QString id, QString name, QString author, QStr
 
 bool RealLibraryDatabase::addBook(QString id, int num){
     int pos = getBookPos(id);
-    this->List[pos].updateQuantiy(1);
+    this->List[pos].updateQuantiy(List[pos].getNumOfRemaingBooks() + num);
     return true;
 }
 
@@ -124,10 +125,12 @@ void RealLibraryDatabase::deleteBook(QString id){
 
 void RealLibraryDatabase::deleteBook(QString id, int num){
     int pos=getBookPos(id);
-    this->List[pos].updateQuantiy(-num);
-    if(this->List[pos].getNumOfRemaingBooks()<0){
+    if(this->List[pos].getNumOfRemaingBooks() - num <= 0){
         this->List.erase(this->List.begin()+pos);
+        return;
     }
+    this->List[pos].updateQuantiy(List[pos].getNumOfRemaingBooks()-num);
+
 }
 
 void RealLibraryDatabase::saveDTB(){
@@ -142,7 +145,10 @@ void RealLibraryDatabase::saveDTB(){
     }
 }
 QVector<Book> RealLibraryDatabase::getListBook(){
+   qDebug()<<List[0].getID();
+   qDebug()<<List[0].getNumOfRemaingBooks();
     return this->List;
+
 }
 QVector<Book> RealLibraryDatabase::viewBorrowedAndDamagedBook(){
   QVector<Book> res;
@@ -152,3 +158,29 @@ QVector<Book> RealLibraryDatabase::viewBorrowedAndDamagedBook(){
   }
   return res;
 };
+
+
+ bool RealLibraryDatabase::updateQuantity(QString ID,int num)
+ {
+     int size=List.size();
+     for(int i=0;i<size;i++){
+         if(QString::compare(List[i].getID(),ID)==0){
+             List[i].updateQuantiy(num);
+             qDebug()<<List[i].getNumOfRemaingBooks();
+             return true;
+         }
+     }
+     return false;
+ }
+
+ bool RealLibraryDatabase::updateDamaged(QString ID, int num)
+ {
+     for(auto book:List){
+         if(QString::compare(book.getID(),ID)==0){
+             book.updateDamagedBooks(num);
+             qDebug()<<book.getNumOfRemaingBooks();
+             return true;
+         }
+     }
+     return false;
+ }

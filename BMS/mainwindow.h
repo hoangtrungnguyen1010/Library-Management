@@ -100,6 +100,8 @@ private slots:
 
     void on_book_saved_clicked(bool checked);
 
+    void on_add_directory_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -1,7 +1,6 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
 
-
 LoginPage_2::LoginPage_2(QWidget *parent) :
     QMainWindow(parent),
     login_ui(new Ui::LoginPage_2),
@@ -16,6 +15,7 @@ LoginPage_2::~LoginPage_2()
     delete login_ui;
 }
 
+// LOGIN
 void LoginPage_2::on_pushButton_clicked()
 {
     QString user,pass;
@@ -73,7 +73,7 @@ void LoginPage_2::on_pushButton_5_clicked()
     login_ui->stackedWidget_2->setCurrentIndex(0);
 }
 
-
+// REGISTER
 void LoginPage_2::on_pushButton_4_clicked()
 {
     QString name,id,address,username,pass,retypepass;
@@ -138,21 +138,21 @@ void LoginPage_2::on_pushButton_7_clicked()
     login_ui->stackedWidget_2->setCurrentIndex(0);
 }
 
-
+// FORGOT PASSWORD
 void LoginPage_2::on_pushButton_6_clicked()
 {
-    QString name,username,id,address;
-    bool gender;
+    QString name,gender,username,id,address;
+//    QString gender;
     name=login_ui->fullName_2->text();
 //    gender=login_ui->gender_2->text();
     id=login_ui->id_2->text();
     address=login_ui->address_2->text();
     username=login_ui->username_2->text();
     if (login_ui->maleCheck_2->isChecked()){
-        gender = false;
+        gender = "Male";
     }
     else if (login_ui->femaleCheck_2->isChecked()){
-        gender = true;
+        gender = "Female";
     }
     else{
         QMessageBox::information(this, "Notification", "Please check your gender!");
@@ -160,26 +160,21 @@ void LoginPage_2::on_pushButton_6_clicked()
     }
     qDebug()<<name<<gender<<username<<id<<address;
     HumanDatabase* humanDtb=HumanDatabase::getInstance();
-
-    QFile file("D:/Data/Resource/Data/UserData.txt");
-    file.open(QIODevice::ReadOnly);
-    QTextStream out(&file);
-    int f=0;
-    while(!out.atEnd()){
-       QString saved_account=out.readLine();
-       QStringList info = saved_account.split("|");
-       if(QString::compare(id,info[0])==0 && QString::compare(name,info[1])==0 &&
-               QString::compare(address,info[3])==0 && QString::compare(username,info[4])==0){
-           QString notif = QString("Your password is %1").arg(info[5]);
-           QMessageBox::information(this,"Notification", notif);
-           f=1;
-           break;
-       }
+    bool flag = false;
+    for (auto user:humanDtb->UserData){
+        if (QString::compare(id, user->showID())==0 && QString::compare(name, user->showName())==0 &&
+            QString::compare(address, user->showAddress())==0 && QString::compare(username, user->showUsername())==0 &&
+                QString::compare(gender, user->showGender())==0){
+               QString notif = QString("Your password is %1").arg(user->showPass());
+               QMessageBox::information(this,"Notification", notif);
+               flag = true;
+               break;
+        }
     }
-    file.close();
-    if (f==0){
+    if (!flag){
         QMessageBox::information(this,"Notification", "Wrong information. Try again!");
     }
+
 }
 
 

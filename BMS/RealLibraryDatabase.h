@@ -6,15 +6,17 @@
 #include<sstream>
 #include<fstream>
 #include <QVector>
+#include <QDir>
 //#include"QuickSort.h"
 #include"LibraryDatabase.h"
+extern const QDir CURRENT_PATH;
 
 class RealLibraryDatabase : public LibraryDatabase{
 private: static RealLibraryDatabase* Instance;
 public:
     static RealLibraryDatabase* getInstance();
 private:
-    QString _fileName = ":/Data/Resource/Data/BookData.txt" ;
+    QString _fileName = CURRENT_PATH.relativeFilePath("debug/Resource/Data/BookData.txt") ;
     QVector<Book> List;
 public:
     void sortByID();

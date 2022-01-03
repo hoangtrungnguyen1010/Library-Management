@@ -6,18 +6,19 @@
 #include <QDebug>
 #include<QDateTime>
 #include <QTextStream>
+#include <QDir>
 #include"Admin.h"
 #include"User.h"
 #include"VipUser.h"
 #include"RealLibraryDatabase.h"
-
+extern const QDir CURRENT_PATH;
 class HumanDatabase{
 private:
     static HumanDatabase* Instance;
     public:
     QVector<User*> UserData;
     QVector<Admin> AdData;
-    QString _fileName=":/Data/Resource/Data/UserData.txt";
+    QString _fileName = CURRENT_PATH.relativeFilePath("debug/Resource/Data/UserData.txt");
 public:
     static HumanDatabase* getInstance();
 public:

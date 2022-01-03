@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "loginpage.h"
+#include <QFileDialog>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -44,7 +46,9 @@ QFrame* MainWindow::createViewListFrame(Book book){
 
     // Book image
     QLabel* lab=new QLabel;
-    QString url=":/Images/Resource/Images/"+book.getID();
+    QDir dir = QDir::currentPath();
+    QString url = dir.relativeFilePath("debug/Resource/Images/"+book.getID());
+//    QString url=":/Images/Resource/Images/"+book.getID();
     QPixmap pix(url);
     lab->setPixmap(pix);
     lab->setScaledContents(true);
@@ -722,6 +726,15 @@ void MainWindow::on_add_book_btn_clicked()
         QMessageBox::information(this, "Notification", "Add book successfully!");
     }
     else if(!check&&proxy->addBook(id, title, author, publisher, tag, quantity)){
+        QDir dir = QDir::currentPath();
+        QString path_res = dir.relativeFilePath("debug/Resource/Images/"+id); // path cua anh ket qua
+        QString name = ui->addDirectory->text();
+        QStringList path = name.split("/");
+        QString gotName = path[path.size()-1];
+        QString path_prev = dir.relativeFilePath("debug/Resource/Images/"+gotName);
+        if (QString::compare(path_res, path_prev)!=0){
+            QFile::copy(path_prev, path_res);
+        }
         QMessageBox::information(this, "Notification", "Add book successfully!");
     }
     else
@@ -810,4 +823,32 @@ void MainWindow::on_book_saved_clicked(bool checked)
     QMessageBox::information(this,"Notification","Update information successfully!");
     MainWindow::on_check_borrowed_damaged_book_clicked();
 }
+
+
+// ADD DIRECTORY OF BOOK'S COVER
+void MainWindow::on_add_directory_btn_clicked()
+{
+    QString filter = "All File (*.*) ;; Image File (*.jpg;*.png)";
+    QString fileName = QFileDialog::getOpenFileName(this, "Add book's cover", QDir::homePath(), filter); // path cua file anh
+    ui->addDirectory->setText(fileName);
+    QStringList path = fileName.split("/");
+    QString name = path[path.size()-1];
+    QDir dir = QDir::currentPath();
+    QString ImgPath = dir.relativeFilePath("debug/Resource/Images/"+name); // path hien tai project
+    if (QFile::exists(ImgPath))
+    {
+        QFile::remove(ImgPath);
+    }
+
+    if (QFile::copy(fileName, ImgPath))
+        QMessageBox::information(this, "Notification", "Add book's cover successfully!");
+}
+
+
+
+
+
+
+
+
 

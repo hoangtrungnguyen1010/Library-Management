@@ -71,7 +71,6 @@
              <property name="font">
               <font>
                <pointsize>20</pointsize>
-               <weight>75</weight>
                <italic>false</italic>
                <bold>true</bold>
               </font>
@@ -114,7 +113,6 @@
              <property name="font">
               <font>
                <pointsize>16</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -405,7 +403,7 @@ cursor: pointer;
                  <string notr="true">color:  #9B0000</string>
                 </property>
                 <property name="text">
-                 <string>Forget your passoword?</string>
+                 <string>Forgot your passoword?</string>
                 </property>
                </widget>
               </item>
@@ -485,7 +483,6 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>18</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -515,7 +512,6 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>20</pointsize>
-               <weight>75</weight>
                <italic>false</italic>
                <bold>true</bold>
               </font>
@@ -848,7 +844,6 @@ border: none</string>
                 <property name="font">
                  <font>
                   <pointsize>10</pointsize>
-                  <weight>50</weight>
                   <bold>false</bold>
                  </font>
                 </property>
@@ -1122,7 +1117,6 @@ border: none</string>
              <property name="font">
               <font>
                <pointsize>15</pointsize>
-               <weight>50</weight>
                <bold>false</bold>
               </font>
              </property>
@@ -1161,7 +1155,6 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>15</pointsize>
-               <weight>50</weight>
                <bold>false</bold>
               </font>
              </property>
@@ -1276,7 +1269,6 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>20</pointsize>
-               <weight>75</weight>
                <italic>false</italic>
                <bold>true</bold>
               </font>
@@ -1294,7 +1286,6 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>18</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -1364,7 +1355,6 @@ cursor: pointer;
               <property name="font">
                <font>
                 <pointsize>13</pointsize>
-                <weight>75</weight>
                 <italic>false</italic>
                 <bold>true</bold>
                </font>
@@ -1778,7 +1768,6 @@ border: none</string>
              <property name="font">
               <font>
                <pointsize>15</pointsize>
-               <weight>50</weight>
                <bold>false</bold>
               </font>
              </property>
@@ -1817,7 +1806,6 @@ cursor: pointer;
              <property name="font">
               <font>
                <pointsize>15</pointsize>
-               <weight>50</weight>
                <bold>false</bold>
               </font>
              </property>

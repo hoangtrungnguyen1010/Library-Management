@@ -35,34 +35,40 @@ void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
             }
 
             int i=7;
-            if (i>=info.size()) continue;
-
-            //Add books in the cart
-            while(info[i][0]=='c'){
-                QString string=info[i];
-                QStringList templist=string.split(",");
-                Book *temp= Lib->getBookByID(templist[1]);
-                user->addToCart(*temp);
-                i++;
-                if (i>=info.size()) continue;
+            bool flag = false;
+            if (i>=info.size()) {
+                flag = true;
+//                continue;
             }
-            //Add books borrowed
-            while( info[i][0]=='b'){
+            if (!flag){
+                //Add books in the cart
+                while(info[i][0]=='c'){
+                    QString string=info[i];
+                    QStringList templist=string.split(",");
+                    Book *temp= Lib->getBookByID(templist[1]);
+                    user->addToCart(*temp);
+                    i++;
+                    if (i>=info.size()) continue;
+                }
+                //Add books borrowed
+                while( info[i][0]=='b'){
 
-                QString string=info[i];
-                QStringList templist=string.split(",");
-                Book* temp=Lib->getBookByID(templist[1]);
+                    QString string=info[i];
+                    QStringList templist=string.split(",");
+                    Book* temp=Lib->getBookByID(templist[1]);
 
-                QString checkExtended=info[++i];
-                QString time=info[++i];
-                qDebug()<<checkExtended;
-                qDebug()<<time;
-                user->borrowBook(*temp, checkExtended.toInt(), time);
-                qDebug()<<temp->getNumOfOfBorrowedBooks();
-                qDebug()<<user->getStartedTime()[0].toString();
+                    QString checkExtended=info[++i];
+                    QString time=info[++i];
+                    qDebug()<<checkExtended;
+                    qDebug()<<time;
+                    user->borrowBook(*temp, checkExtended.toInt(), time);
+                    qDebug()<<temp->getNumOfOfBorrowedBooks();
+                    qDebug()<<user->getStartedTime()[0].toString();
 
-                i++;
-                if (i>=info.size()) break;
+                    i++;
+                    if (i>=info.size()) break;
+                }
+
             }
             this->UserData.push_back(user);
        }

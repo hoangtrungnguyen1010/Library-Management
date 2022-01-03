@@ -14,6 +14,7 @@ User* login_user;
 Admin* login_admin;
 HumanDatabase* HumanDatabase::Instance=nullptr;
 RealLibraryDatabase* RealLibraryDatabase::Instance=nullptr;
+const QDir CURRENT_PATH = QDir::currentPath();
 
 
 int main(int argc, char *argv[])

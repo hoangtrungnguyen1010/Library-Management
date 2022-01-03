@@ -22,12 +22,12 @@ void ProxyLibraryDatabase::addDamagedBook(QString id, int num){
 }
 
 bool ProxyLibraryDatabase::addBook(QString id, QString name, QString author, QString publisher, QString tags, int num){
-    if(this->check()) return this->_wrappee->addBook(id, name, author, publisher, tags, num);
+    if(this->check()) this->_wrappee->addBook(id, name, author, publisher, tags, num);
     else return false;
 }   //add new kind of book
 
 bool ProxyLibraryDatabase::addBook(QString id, int num){
-    if(this->check()) return this->_wrappee->addBook(id, num);
+    if(this->check()) this->_wrappee->addBook(id, num);
     else return false;
 }
 
@@ -48,6 +48,16 @@ QVector<Book> ProxyLibraryDatabase::viewBorrowedAndDamagedBook(){
     if(this->check()) return this->_wrappee->viewBorrowedAndDamagedBook();
     else return res;
 };
+
+int ProxyLibraryDatabase::getQuantity(QString ID)
+{
+    return _wrappee->getQuantity(ID);
+}
+
+int ProxyLibraryDatabase::getDamaged(QString ID)
+{
+    return _wrappee->getDamaged(ID);
+}
 
 bool ProxyLibraryDatabase::updateQuantity(QString ID,int num)
   {

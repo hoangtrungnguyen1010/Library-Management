@@ -27,8 +27,12 @@ public:
     virtual QVector<Book> getListBook()=0;
     virtual QVector<Book> viewBorrowedAndDamagedBook()=0;
 
+    virtual int getQuantity(QString ID)=0;
+    virtual int getDamaged(QString ID)=0;
+
     virtual bool updateQuantity(QString ID,int num)=0;
      virtual bool updateDamaged(QString ID,int num)=0;
+
 
 };
 

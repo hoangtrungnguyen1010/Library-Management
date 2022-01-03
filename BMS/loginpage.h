@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QMainWindow>
 #include <mainwindow.h>
+#include <QtGui/QIcon>
 #include "HumanDatabase.h"
 extern User* login_user;
 extern Admin* login_admin;
@@ -34,6 +35,10 @@ private slots:
 
        void on_pushButton_6_clicked();
 
+private:
+    QCloseEvent* event;
+public:
+    void closeEvent(QCloseEvent* event);
 private:
     Ui::LoginPage_2 *login_ui;
     MainWindow *ui;

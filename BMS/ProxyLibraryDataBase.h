@@ -37,6 +37,9 @@ public:
     QVector<Book> getListBook();
     QVector<Book> viewBorrowedAndDamagedBook();
 
+    int getQuantity(QString ID);
+    int getDamaged(QString ID);
+
     bool  updateQuantity(QString ID,int num);
     bool updateDamaged(QString ID,int num);
 

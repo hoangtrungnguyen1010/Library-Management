@@ -9,12 +9,12 @@
 #include "loginpage.h"
 #include <QFile>
 #include <QIODevice>
-#include <QDir>
+#include <QCloseEvent>
 User* login_user;
 Admin* login_admin;
+const QDir CURRENT_PATH=QDir::currentPath();
 HumanDatabase* HumanDatabase::Instance=nullptr;
 RealLibraryDatabase* RealLibraryDatabase::Instance=nullptr;
-const QDir CURRENT_PATH = QDir::currentPath();
 
 
 int main(int argc, char *argv[])
@@ -27,6 +27,11 @@ int main(int argc, char *argv[])
     b.show();
     delete login_user;
     delete login_admin;
+    if(a.quitOnLastWindowClosed()){
+        qDebug()<<"Close";
+        Lib->saveDTB();
+        Human->saveDTB();
+    }
     return a.exec();
 
 }

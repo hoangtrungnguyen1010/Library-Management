@@ -70,9 +70,7 @@ QString Person::showUsername(){
 QString Person::showPass(){
     return _acc.showPass();
 }
-void Person::editID(QString newID){
-    this->_id=newID;
-}
+
 
 void Person::editName(QString newName){
     this->_name=newName;
@@ -87,4 +85,5 @@ void Person::editAddress(QString newAddress){
 
 void Person::editPass(QString newPass){
     _acc.editPass(newPass);
+    qDebug()<<_acc.showPass();
 }

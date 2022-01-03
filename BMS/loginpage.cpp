@@ -15,7 +15,6 @@ LoginPage_2::~LoginPage_2()
     delete login_ui;
 }
 
-// LOGIN
 void LoginPage_2::on_pushButton_clicked()
 {
     QString user,pass;
@@ -54,6 +53,8 @@ void LoginPage_2::on_pushButton_clicked()
         if(login_admin!=nullptr){
           hide();
           ui=new MainWindow(this);
+          QIcon icon(":/Images/Resource/Images/icon.png");
+          ui->setWindowIcon(icon);
           ui->show();
         }
         else{
@@ -73,7 +74,7 @@ void LoginPage_2::on_pushButton_5_clicked()
     login_ui->stackedWidget_2->setCurrentIndex(0);
 }
 
-// REGISTER
+
 void LoginPage_2::on_pushButton_4_clicked()
 {
     QString name,id,address,username,pass,retypepass;
@@ -115,6 +116,7 @@ void LoginPage_2::on_pushButton_4_clicked()
                 humanDtb->addNewUser(id, name, gender, address, username, pass, "Vip User");
                 humanDtb->saveDTB();
                 QMessageBox::information(this,"Notification", "Register successfully!");
+                login_ui->stackedWidget_2->setCurrentWidget(login_ui->stackedWidget_2Page1);
             }
             else {
                 QMessageBox::information(this, "Notification", "Please check type of account!");
@@ -138,11 +140,11 @@ void LoginPage_2::on_pushButton_7_clicked()
     login_ui->stackedWidget_2->setCurrentIndex(0);
 }
 
-// FORGOT PASSWORD
+
 void LoginPage_2::on_pushButton_6_clicked()
 {
-    QString name,gender,username,id,address;
-//    QString gender;
+    QString name,username,id,address;
+    QString gender;
     name=login_ui->fullName_2->text();
 //    gender=login_ui->gender_2->text();
     id=login_ui->id_2->text();
@@ -163,18 +165,34 @@ void LoginPage_2::on_pushButton_6_clicked()
     bool flag = false;
     for (auto user:humanDtb->UserData){
         if (QString::compare(id, user->showID())==0 && QString::compare(name, user->showName())==0 &&
-            QString::compare(address, user->showAddress())==0 && QString::compare(username, user->showUsername())==0 &&
-                QString::compare(gender, user->showGender())==0){
+            QString::compare(address, user->showAddress())==0 && QString::compare(username, user->showUsername())==0&&QString::compare(gender, user->showGender())==0)
+        {
                QString notif = QString("Your password is %1").arg(user->showPass());
                QMessageBox::information(this,"Notification", notif);
                flag = true;
                break;
         }
-    }
     if (!flag){
         QMessageBox::information(this,"Notification", "Wrong information. Try again!");
     }
-
+}
 }
 
+ void LoginPage_2::closeEvent(QCloseEvent* event)
+ {
+     QMessageBox::StandardButton answer = QMessageBox::question(
+                     this,
+                     tr("Close the Window"),
+                     tr("Do you want to close the window?"),
+                     QMessageBox::Yes | QMessageBox::No);
+
+         if(answer == QMessageBox::Yes){
+             HumanDatabase::getInstance()->saveDTB();
+             RealLibraryDatabase::getInstance()->sortByID();
+             RealLibraryDatabase::getInstance()->saveDTB();
+             event->accept();
+         }
+         else
+             event->ignore();
+ }
 

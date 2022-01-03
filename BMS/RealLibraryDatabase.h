@@ -10,13 +10,12 @@
 //#include"QuickSort.h"
 #include"LibraryDatabase.h"
 extern const QDir CURRENT_PATH;
-
 class RealLibraryDatabase : public LibraryDatabase{
 private: static RealLibraryDatabase* Instance;
 public:
     static RealLibraryDatabase* getInstance();
 private:
-    QString _fileName = CURRENT_PATH.relativeFilePath("debug/Resource/Data/BookData.txt") ;
+    QString _fileName = CURRENT_PATH.relativeFilePath("debug/Resource/Data/BookData.txt");
     QVector<Book> List;
 public:
     void sortByID();
@@ -41,6 +40,10 @@ public:
 
     QVector<Book> getListBook();
     QVector<Book> viewBorrowedAndDamagedBook();
+
+    int getQuantity(QString ID);
+    int getDamaged(QString ID);
+
     bool  updateQuantity(QString ID,int num);
     bool updateDamaged(QString ID,int num);
 

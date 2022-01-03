@@ -38,4 +38,5 @@ QString Account::showPass(){
 
 void Account::editPass(QString newPass){
     this->_password=newPass;
+   qDebug()<<_password;
 }

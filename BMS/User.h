@@ -34,8 +34,8 @@ public:
     bool borrowBook(Book book, bool checkExtended, QString time);        //use to upload database.
 
 
-    virtual int getTimeRemainingBook(Book book); //return secs
-    virtual void extendBorrowedTime(Book book);
+    virtual int getTimeRemainingBook(Book book); //return days
+    virtual bool extendBorrowedTime(Book book);
     //return sec
 
     void returnBook(Book book);
@@ -52,15 +52,9 @@ public:
     QString toStringPersonalInfo(); // for Vip User overriding toString()
     QString toStringUsingInfo();    // for Vip User overriding toString()
 
-    QVector<Book> getBorrowedBook(){
-        return _borrowedBook;
-    }
-    QVector<Book> getInCartBook(){
-        return _cart;
-    }
-    QVector<QDateTime> getStartedTime(){
-        return _timeWhenBorrowed;
-    }
+    QVector<Book> getBorrowedBook(){ return _borrowedBook;}
+    QVector<Book> getInCartBook(){return _cart;}
+    QVector<QDateTime> getStartedTime(){return _timeWhenBorrowed;}
 };
 
 #endif // USER_H

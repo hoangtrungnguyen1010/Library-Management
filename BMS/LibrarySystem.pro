@@ -2,7 +2,7 @@ QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++11 debug
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -42,6 +42,7 @@ HEADERS += \
     mainwindow.h
 
 FORMS += \
+    loginpage.ui \
     loginpage.ui \
     mainwindow.ui
 

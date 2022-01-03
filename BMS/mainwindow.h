@@ -14,6 +14,9 @@
 #include <QSignalMapper>
 #include <QTableWidget>
 #include <QHeaderView>
+#include <QDir>
+#include <QFileDialog>
+#include <QCloseEvent>
 #include "Book.h"
 #include "LibraryDatabase.h"
 #include "RealLibraryDatabase.h"
@@ -21,7 +24,7 @@
 #include "Person.h"
 #include "User.h"
 #include "Admin.h"
-
+extern const QDir CURRENT_PATH;
 extern User* login_user;
 extern Admin* login_admin;
 
@@ -85,24 +88,19 @@ private slots:
 
     void on_cancel_add_book_btn_clicked();
 
-    void on_cancel_delete_book_btn_clicked();
-
-//    void on_book_table_cellEntered(int row, int column);
-
-
-
-
-
-//    void on_book_table_cellChanged(int row, int column);
-
-//    void on_book_table_destroyed();
-
-
-    void on_book_saved_clicked(bool checked);
-
     void on_add_directory_btn_clicked();
 
+    void on_cancel_delete_book_btn_clicked();
+
+
+    void on_book_saved_clicked();
+
+private:
+    QCloseEvent* event;
+public:
+    void closeEvent(QCloseEvent* event);
 private:
     Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H

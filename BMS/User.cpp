@@ -32,7 +32,6 @@ bool User::borrowBook(Book book){
     }
 
     if(this->_borrowedBook.size()==User::numOfBooksCanBorrowAtTheSameTime) return 0;
-//    book->updateBorrowedBooks(1);
 
     this->_borrowedBook.push_back(book);
 
@@ -41,7 +40,11 @@ bool User::borrowBook(Book book){
     this->_timeWhenBorrowed.push_back(cd);
     this->_checkExtended.push_back(0);
     ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase;
-    proxy->updateQuantity(book.getID(),book.getNumOfRemaingBooks()-1);
+    int remain_cur=proxy->getQuantity(book.getID());
+    proxy->updateQuantity(book.getID(),remain_cur-1);
+    int posInCart=this->getPosBookInCartBookStack(book);
+    if(posInCart>=0)
+        _cart[posInCart].updateQuantiy(remain_cur-1);
     return 1;
 }
 
@@ -60,13 +63,15 @@ bool User::borrowBook(Book book, bool checkExtended, QString time){
 
 void User::returnBook(Book book){
     int pos=getPosBookInBorrowedBookStack(book);
-    qDebug()<<book.getNumOfRemaingBooks();
     this->_borrowedBook.erase(this->_borrowedBook.begin()+pos);
     this->_timeWhenBorrowed.erase(this->_timeWhenBorrowed.begin()+pos);
     this->_checkExtended.erase(this->_checkExtended.begin()+pos);
-    qDebug()<<book.getNumOfRemaingBooks();
     ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase;
-    proxy->updateQuantity(book.getID(),book.getNumOfRemaingBooks()+1);
+     int remain_cur=proxy->getQuantity(book.getID());
+    proxy->updateQuantity(book.getID(),remain_cur+1);
+    int posInCart=this->getPosBookInCartBookStack(book);
+    if(posInCart>=0)
+        _cart[posInCart].updateQuantiy(remain_cur+1);
 }
 
 void User::deleteCartBook(Book book)
@@ -105,9 +110,13 @@ QVector<Book>User::viewBorrowedBook(){
     return this->_borrowedBook;
 }
 
-void User::extendBorrowedTime(Book book){
+bool User::extendBorrowedTime(Book book){
    int pos=getPosBookInBorrowedBookStack(book);
+   if(_checkExtended[pos]==0){
    _checkExtended[pos]=1;
+   return true;
+   }
+   else return false;
 }
 
 int User::getPosBookInBorrowedBookStack(Book book){

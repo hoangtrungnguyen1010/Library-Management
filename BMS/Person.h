@@ -40,7 +40,6 @@ public:
     QString showUsername();
     QString showPass();
 
-    void editID(QString newID);
     void editName(QString newName);
     void editGender(bool Gender);
     void editAddress(QString newAddress);

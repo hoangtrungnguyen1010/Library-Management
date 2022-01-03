@@ -114,7 +114,7 @@ bool RealLibraryDatabase::addBook(QString id, QString name, QString author, QStr
 
 bool RealLibraryDatabase::addBook(QString id, int num){
     int pos = getBookPos(id);
-    this->List[pos].updateQuantiy(List[pos].getNumOfRemaingBooks() + num);
+    this->List[pos].updateQuantiy(List[pos].getNumOfRemaingBooks()+num);
     return true;
 }
 
@@ -125,12 +125,10 @@ void RealLibraryDatabase::deleteBook(QString id){
 
 void RealLibraryDatabase::deleteBook(QString id, int num){
     int pos=getBookPos(id);
-    if(this->List[pos].getNumOfRemaingBooks() - num <= 0){
-        this->List.erase(this->List.begin()+pos);
-        return;
-    }
     this->List[pos].updateQuantiy(List[pos].getNumOfRemaingBooks()-num);
-
+    if(this->List[pos].getNumOfRemaingBooks()<0){
+        this->List.erase(this->List.begin()+pos);
+    }
 }
 
 void RealLibraryDatabase::saveDTB(){
@@ -159,7 +157,22 @@ QVector<Book> RealLibraryDatabase::viewBorrowedAndDamagedBook(){
   return res;
 };
 
+int  RealLibraryDatabase::getQuantity(QString ID){
+    for(auto book:List){
+        if(book.getID()==ID)
+            return book.getNumOfRemaingBooks();
+    }
+    return -1;
+}
+int getDamaged(QString ID);
 
+int RealLibraryDatabase::getDamaged(QString ID){
+    for(auto book:List){
+        if(book.getID()==ID)
+            return book.getNumOfDamagedBooks();
+    }
+    return -1;
+}
  bool RealLibraryDatabase::updateQuantity(QString ID,int num)
  {
      int size=List.size();

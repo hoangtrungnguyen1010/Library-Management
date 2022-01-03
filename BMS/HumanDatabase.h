@@ -18,9 +18,10 @@ private:
     public:
     QVector<User*> UserData;
     QVector<Admin> AdData;
-    QString _fileName = CURRENT_PATH.relativeFilePath("debug/Resource/Data/UserData.txt");
+    QString _fileName=CURRENT_PATH.relativeFilePath("debug/Resource/Data/UserData.txt");
 public:
     static HumanDatabase* getInstance();
+     ~HumanDatabase();
 public:
     static void init();
     bool addNewUser(QString id, QString name, bool gender, QString address, QString username, QString password, QString type);
@@ -32,7 +33,11 @@ public:
     Admin* findSavedAdmin(QString username, QString password);
     bool checkExisted(QString username);
     QVector<User*> getListUser();
-    ~HumanDatabase();
+
+    void editName(QString ID,QString newName);
+    void editGender(QString ID,bool Gender);
+    void editAddress(QString ID,QString newAddress);
+    void editPass(QString ID,QString newPass);
 
 };
 

@@ -5,6 +5,7 @@
 #include<QString>
 #include<QTextStream>
 #include <QIODevice>
+#include <QDebug>
 
 using namespace std;
 class Account{

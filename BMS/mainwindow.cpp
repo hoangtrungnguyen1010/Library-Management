@@ -1,8 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "loginpage.h"
-#include <QFileDialog>
-#include <QDir>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -46,9 +45,7 @@ QFrame* MainWindow::createViewListFrame(Book book){
 
     // Book image
     QLabel* lab=new QLabel;
-    QDir dir = QDir::currentPath();
-    QString url = dir.relativeFilePath("debug/Resource/Images/"+book.getID());
-//    QString url=":/Images/Resource/Images/"+book.getID();
+    QString url = CURRENT_PATH.relativeFilePath("debug/Resource/Images/"+book.getID());
     QPixmap pix(url);
     lab->setPixmap(pix);
     lab->setScaledContents(true);
@@ -58,7 +55,7 @@ QFrame* MainWindow::createViewListFrame(Book book){
     QLabel* name=new QLabel;
     name->setText(book.getName());
     name->setMinimumHeight(35);
-    name->setStyleSheet("QLabel {font-size: 15pt;font-family: Freestyle Script}");
+    name->setStyleSheet("QLabel {font-size: 10pt;font-family: Agate Type}");
       name->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
       //Book's ID
@@ -95,7 +92,7 @@ QFrame* MainWindow::createViewListFrame(Book book){
 
   QPushButton* add_to_cart_btn=new QPushButton;
    connect(add_to_cart_btn,&QPushButton::clicked,this,[book,this]{on_add_to_cart_btn_clicked(book);});
-    QPixmap icon_img(":/WhiteIcons/Resource/White/shopping-cart.svg");
+    QPixmap icon_img("debug/Resource/White/shopping-cart.svg");
        add_to_cart_btn->setIcon(icon_img);
       add_to_cart_btn->setText("Add To Cart");
       add_to_cart_btn->setMaximumWidth(100);
@@ -146,7 +143,7 @@ QFrame* MainWindow::createYourBookFrame(Book book,QString time_start,int time_re
 
     // Book image
     QLabel* lab=new QLabel;
-    QString url=":/Images/Resource/Images/"+book.getID();
+    QString url=CURRENT_PATH.relativeFilePath("debug/Resource/Images/"+book.getID());
     QPixmap pix(url);
     lab->setPixmap(pix);
     lab->setScaledContents(true);
@@ -247,7 +244,7 @@ QFrame* MainWindow::createCartFrame(Book book)
 
     // Book image
     QLabel* lab=new QLabel;
-    QString url=":/Images/Resource/Images/"+book.getID();
+    QString url = CURRENT_PATH.relativeFilePath("debug/Resource/Images/"+book.getID());
     QPixmap pix(url);
     lab->setPixmap(pix);
     lab->setScaledContents(true);
@@ -438,10 +435,9 @@ void MainWindow::on_your_book_btn_clicked()
        int size=BorrowedList.size();
        qDebug()<<size;
        for (int i=0;i<size;i++){
-           qDebug()<<"Adding widget: "<<BorrowedList[i].getName();
            QFrame* a=createYourBookFrame(BorrowedList[i],StartedTime[i].toString(),login_user->getTimeRemainingBook(BorrowedList[i]));
            ui->frame_17->layout()->addWidget(a);
-           ui->frame_17->layout()->setAlignment(a,Qt::AlignTop);
+           ui->frame_17->layout()->setAlignment(a,Qt::AlignCenter);
        }
        ui->frame_17->layout()->setAlignment(Qt::AlignTop);
 
@@ -465,7 +461,7 @@ void MainWindow::on_cart_btn_clicked()
         for (int i=0;i<size;i++){
             QFrame* a=createCartFrame(CartList[i]);
             ui->frame_18->layout()->addWidget(a);
-            ui->frame_18->layout()->setAlignment(a,Qt::AlignTop);
+            ui->frame_18->layout()->setAlignment(a,Qt::AlignCenter);
         }
         ui->frame_18->layout()->setAlignment(Qt::AlignTop);
         ui->MainFrame->setCurrentWidget(ui->Cart);
@@ -505,48 +501,59 @@ void MainWindow::on_log_out_btn_clicked()
 {
     if(QMessageBox::Yes==QMessageBox::question(this,"Log out","Do you want to log out ?")){
         if(login_user){
-            delete login_user;
-            login_user=nullptr;
+           login_user=nullptr;
         }
-        else if(login_admin){
-            delete login_admin;
+        else if(login_admin)
             login_admin=nullptr;
         }
         hide();
         LoginPage_2* login_ui=new LoginPage_2(this);
         login_ui->show();
-    }
 }
 
 // ON EXTEND TIME
 void MainWindow::on_extend_btn_clicked(Book book)
 {
      if(QMessageBox::Yes==QMessageBox::question(this,"Extend time","Do you want to extend borrowed time ?")){
-         login_user->extendBorrowedTime(book);
+         if(login_user->extendBorrowedTime(book))
+         {
+             QMessageBox::information(this,"Notification","Successfully extended time!");
+             MainWindow::on_your_book_btn_clicked();
+         }
+         else{
+             QMessageBox::information(this,"Notification","You already extended one time before!");
+         }
      }
 }
 
 // ON BORROW BOOK BUTTON
 void MainWindow::on_borrow_btn_clicked(Book book){
-
+    if(login_user){
     if(QMessageBox::Yes==QMessageBox::question(this,"Borrow book","Do you want to borrow this book?")){
         if(login_user->borrowBook(book))
         { QMessageBox::information(this,"Borrow Book","This book has been borrowed successfully!");
-            qDebug()<<login_user->getBorrowedBook().size();
         }
         else{
-            QMessageBox::information(this,"Something's wrong","You Can't borrow this book!");
+            QMessageBox::information(this,"Something's wrong","You can't borrow this book!");
         }
+    }
+    }
+    else {
+         QMessageBox::information(this,"Something's wrong","You are not user!");
     }
 
 }
 // ON RETURN BUTTON
 void MainWindow::on_add_to_cart_btn_clicked(Book book){
+    if(login_user){
+        login_user->addToCart(book);
+          QMessageBox::information(this,"Cart","This book has been added to your cart successfully!");
+    }
+    else{
+         QMessageBox::information(this,"Something's wrong","You are not user!");
+    }
 
-   login_user->addToCart(book);
-     QMessageBox::information(this,"Cart","This book has been added to your cart successfully!");
 }
-
 
 //ON RETURN BUTTON BOOK
 void MainWindow::on_return_btn_clicked(Book book){
@@ -558,6 +565,7 @@ void MainWindow::on_return_btn_clicked(Book book){
             MainWindow::on_your_book_btn_clicked();
      }
 }
+
 // ON DELETE FROM CART
  void MainWindow::on_delete_btn_cart_clicked(Book book)
  {
@@ -570,55 +578,69 @@ void MainWindow::on_return_btn_clicked(Book book){
             MainWindow::on_cart_btn_clicked();
      }
  }
+
 // ON EDIT PROFILE BUTTON
 void MainWindow::on_edit_profile_btn_clicked()
 {
-    if (login_user){
-            ui->name_edit->setText(login_user->showName());
-            ui->id->setText((login_user->showID()));
-            ui->address_edit->setText(login_user->showAddress());
-           if(login_user->showGender()=="Male")
+    if(login_user){
+        ui->name_edit->setText(login_user->showName());
+        ui->id->setText((login_user->showID()));
+        ui->address_edit->setText(login_user->showAddress());
+        if(login_user->showGender()=="Male")
             ui->male_rad_btn->setChecked(true);
-           else ui->female_rad_btn->setChecked(true);
-           ui->username_edit->setText(login_user->showUsername());
-           ui->pass_edit->setText(login_user->showPass());
-            ui->MainFrame->setCurrentWidget(ui->editProfile);
-        }
-        if (login_admin){
-            ui->name_edit->setText(login_admin->showName());
-            ui->id->setText((login_admin->showID()));
-            ui->address_edit->setText(login_admin->showAddress());
-           if(login_admin->showGender()=="Male")
+        else ui->female_rad_btn->setChecked(true);
+        ui->username_lab->setText(login_user->showUsername());
+        ui->pass_edit->setText(login_user->showPass());
+        ui->MainFrame->setCurrentWidget(ui->editProfile);
+    }
+    else{
+        ui->name_edit->setText(login_admin->showName());
+        ui->id->setText((login_admin->showID()));
+        ui->address_edit->setText(login_admin->showAddress());
+        if(login_admin->showGender()=="Male")
             ui->male_rad_btn->setChecked(true);
-           else ui->female_rad_btn->setChecked(true);
-           ui->username_edit->setText(login_admin->showUsername());
-           ui->pass_edit->setText(login_admin->showPass());
-            ui->MainFrame->setCurrentWidget(ui->editProfile);
-        }
+        else ui->female_rad_btn->setChecked(true);
+        ui->username_lab->setText(login_admin->showUsername());
+        ui->pass_edit->setText(login_admin->showPass());
+        ui->MainFrame->setCurrentWidget(ui->editProfile);
+    }
 }
 
-// ON SAVE BUTTON
+// ON SAVE INFORMATION BUTTON
 void MainWindow::on_save_btn_clicked()
 {
+    HumanDatabase* humanDtb=HumanDatabase::getInstance();
     if (login_user){
-            if(QMessageBox::Yes==QMessageBox::question(this,"Save information","Do you want to save information ?")){
-                 login_user->editName(ui->name_edit->text());
-                 login_user->editAddress(ui->address_edit->text());
-                 login_user->editGender(ui->male_rad_btn->isChecked());
-                 MainWindow::on_edit_profile_btn_clicked();
+                if(QMessageBox::Yes==QMessageBox::question(this,"Save information","Do you want to save information ?")){
+                     login_user->editName(ui->name_edit->text());
+                     login_user->editAddress(ui->address_edit->text());
+                     login_user->editGender(ui->female_rad_btn->isChecked());
+                     login_user->editPass(ui->pass_edit->text());
+                     humanDtb->editName(login_user->showID(),ui->name_edit->text());
+                     humanDtb->editAddress(login_user->showID(),ui->address_edit->text());
+                     humanDtb->editGender(login_user->showID(),ui->female_rad_btn->isChecked());
+                     humanDtb->editPass(login_user->showID(),ui->pass_edit->text());
+                     qDebug()<<humanDtb->getListUser()[3]->showPass();
+                     MainWindow::on_edit_profile_btn_clicked();
+                }
             }
-        }
-        else {
-            if(QMessageBox::Yes==QMessageBox::question(this,"Save information","Do you want to save information ?")){
-                 login_admin->editName(ui->name_edit->text());
-                 login_admin->editAddress(ui->address_edit->text());
-                 login_admin->editGender(ui->male_rad_btn->isChecked());
-                 MainWindow::on_edit_profile_btn_clicked();
+            else {
+                if(QMessageBox::Yes==QMessageBox::question(this,"Save information","Do you want to save information ?")){
+                    login_admin->editName(ui->name_edit->text());
+                    login_admin->editAddress(ui->address_edit->text());
+                    qDebug()<<login_admin->showAddress();
+                    login_admin->editGender(ui->female_rad_btn->isChecked());
+                    login_admin->editPass(ui->pass_edit->text());
+                    humanDtb->editName(login_admin->showID(),ui->name_edit->text());
+                    humanDtb->editAddress(login_admin->showID(),ui->address_edit->text());
+                    humanDtb->editGender(login_admin->showID(),ui->female_rad_btn->isChecked());
+                    humanDtb->editPass(login_admin->showID(),ui->pass_edit->text());
+                    MainWindow::on_edit_profile_btn_clicked();
+                }
             }
-        }
-
 }
 
+// ON VIEW USER'S INFORMATION BUTTON
 void MainWindow::on_user_btn_clicked()
 {
     if(login_user)
@@ -644,26 +666,33 @@ void MainWindow::on_user_btn_clicked()
     }
 }
 
-
+// ON VIEW MORE BUTTON
 void MainWindow::on_ViewMoreBtn_clicked()
 {
     MainWindow::on_view_btn_clicked();
 }
+
+// ON GO TO ADD BOOK PAGE
 void MainWindow::go_to_add_book_page()
 {
     ui->MainFrame->setCurrentWidget(ui->Add);
 }
+
+// ON GO TO DELETE PAGE
 void MainWindow::go_to_delete_page()
 {
     ui->MainFrame->setCurrentWidget(ui->Delete);
 }
 
+// ON SORT BY NAME BUTTON
 void MainWindow::on_sort_by_name_btn_clicked()
 {
     ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase;
     proxy->sortByName();
     MainWindow::on_view_btn_clicked();
 }
+
+// ON SORT BY ID BUTTON
 void MainWindow::on_sort_by_id_btn_clicked()
 {
     ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase;
@@ -671,6 +700,7 @@ void MainWindow::on_sort_by_id_btn_clicked()
     MainWindow::on_view_btn_clicked();
 }
 
+// ON CHECK BORROWED AND DAMAGED BOOK
 void MainWindow::on_check_borrowed_damaged_book_clicked()
 {
 
@@ -690,14 +720,32 @@ void MainWindow::on_check_borrowed_damaged_book_clicked()
       {
               ui->book_table->setItem(i,0,new QTableWidgetItem(list[i].getID()));
               ui->book_table->setItem(i,1,new QTableWidgetItem(list[i].getName()));
-                ui->book_table->setItem(i,2,new QTableWidgetItem(QString::number(list[i].getNumOfRemaingBooks())));
-                ui->book_table->setItem(i,3,new QTableWidgetItem(QString::number(list[i].getNumOfOfBorrowedBooks())));
-                 ui->book_table->setItem(i,4,new QTableWidgetItem(QString::number(list[i].getNumOfDamagedBooks())));
+              ui->book_table->setItem(i,2,new QTableWidgetItem(QString::number(list[i].getNumOfRemaingBooks())));
+              ui->book_table->setItem(i,3,new QTableWidgetItem(QString::number(list[i].getNumOfOfBorrowedBooks())));
+              ui->book_table->setItem(i,4,new QTableWidgetItem(QString::number(list[i].getNumOfDamagedBooks())));
       }
         ui->MainFrame->setCurrentWidget(ui->BookInfor);
 
 }
+// ADD DIRECTORY OF BOOK'S COVER
+void MainWindow::on_add_directory_btn_clicked()
+{
+    QString filter = "All File (*.*) ;; Image File (*.jpg;*.png)";
+    QString fileName = QFileDialog::getOpenFileName(this, "Add book's cover", QDir::homePath(), filter); // path cua file anh
+    ui->addDirectory->setText(fileName);
+    QStringList path = fileName.split("/");
+    QString name = path[path.size()-1];
+    QDir dir = QDir::currentPath();
+    QString ImgPath = dir.relativeFilePath("debug/Resource/Images/"+name); // path hien tai project
+    if (QFile::exists(ImgPath))
+    {
+        QFile::remove(ImgPath);
+    }
 
+    if (QFile::copy(fileName, ImgPath))
+        QMessageBox::information(this, "Notification", "Add book's cover successfully!");
+}
+// ON ADD BUTTON IN ADD BOOK PAGE
 void MainWindow::on_add_book_btn_clicked()
 {
     ui->MainFrame->setCurrentWidget(ui->Add);
@@ -714,7 +762,7 @@ void MainWindow::on_add_book_btn_clicked()
     if(login_user){
        proxy =new ProxyLibraryDatabase(0);
     }
-    else if(login_admin)
+    else
         proxy=new ProxyLibraryDatabase(1) ;
     bool check = false; // true: already have this book
     for (auto book:proxy->getListBook()){
@@ -741,6 +789,7 @@ void MainWindow::on_add_book_btn_clicked()
         QMessageBox::information(this, "Notification", "Only admin can add book!");
 }
 
+// ON DELETE BUTTON IN DELETE BOOK PAGE
 void MainWindow::on_delete_book_btn_clicked()
 {
     ui->MainFrame->setCurrentWidget(ui->Delete);
@@ -752,12 +801,16 @@ void MainWindow::on_delete_book_btn_clicked()
     if(login_user){
        proxy =new ProxyLibraryDatabase(0);
     }
-    else if(login_admin)
+    else
         proxy=new ProxyLibraryDatabase(1) ;
     bool check = false; // true: Library has this book.
     for (auto book:proxy->getListBook()){
-        if (QString::compare(book.getID(), id)==0 && QString::compare(book.getName(), title)==0){
+        qDebug()<<book.getID();
+         qDebug()<<book.getName();
+        if (book.getID()==id && book.getName()==title)
+        {
             check = true;
+            break;
         }
     }
     if (!check) {
@@ -766,7 +819,7 @@ void MainWindow::on_delete_book_btn_clicked()
     }
 
     if (ui->deleteAll->isChecked()){
-        proxy->deleteBook(id);
+        proxy->deleteBook(id,proxy->getQuantity(id));
         QString notif = QString("Successfully delete all of books \n with title \"%1\" and ISBN: %2").arg(title).arg(id);
         QMessageBox::information(this, "Notification", notif);
     }
@@ -782,30 +835,20 @@ void MainWindow::on_delete_book_btn_clicked()
     }
 }
 
-
+// ON CANCEL BUTTON IN ADD BOOK PAGE
 void MainWindow::on_cancel_add_book_btn_clicked()
 {
     ui->MainFrame->setCurrentWidget(ui->MainFramePage1);
 }
 
-
+// ON CANCEL BUTTON IN DELETE BOOK PAGE
 void MainWindow::on_cancel_delete_book_btn_clicked()
 {
     ui->MainFrame->setCurrentWidget(ui->MainFramePage1);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-void MainWindow::on_book_saved_clicked(bool checked)
+// ON SAVE BOOK INFORMATION BUTTON
+void MainWindow::on_book_saved_clicked()
 {
     ProxyLibraryDatabase* proxy=new ProxyLibraryDatabase(1);
     RealLibraryDatabase* lib=RealLibraryDatabase::getInstance();
@@ -813,9 +856,9 @@ void MainWindow::on_book_saved_clicked(bool checked)
     for(int i=0;i<rowCount;i++){
         QString ID=proxy->getListBook()[i].getID();
         qDebug()<<ID;
-        int quantity_num=ui->book_table->item(i,2)->text().toInt();
+        int quatity_num=ui->book_table->item(i,2)->text().toInt();
         int damaged_num=ui->book_table->item(i,4)->text().toInt();
-        lib->updateQuantity(ID,quantity_num);
+        lib->updateQuantity(ID,quatity_num);
         qDebug()<<(lib->getListBook())[i].getID();
         qDebug()<<lib->getListBook()[i].getNumOfRemaingBooks();
         proxy->updateDamaged(ID,damaged_num);
@@ -824,31 +867,23 @@ void MainWindow::on_book_saved_clicked(bool checked)
     MainWindow::on_check_borrowed_damaged_book_clicked();
 }
 
-
-// ADD DIRECTORY OF BOOK'S COVER
-void MainWindow::on_add_directory_btn_clicked()
+void MainWindow::closeEvent(QCloseEvent *event)
 {
-    QString filter = "All File (*.*) ;; Image File (*.jpg;*.png)";
-    QString fileName = QFileDialog::getOpenFileName(this, "Add book's cover", QDir::homePath(), filter); // path cua file anh
-    ui->addDirectory->setText(fileName);
-    QStringList path = fileName.split("/");
-    QString name = path[path.size()-1];
-    QDir dir = QDir::currentPath();
-    QString ImgPath = dir.relativeFilePath("debug/Resource/Images/"+name); // path hien tai project
-    if (QFile::exists(ImgPath))
-    {
-        QFile::remove(ImgPath);
-    }
+    QMessageBox::StandardButton answer = QMessageBox::question(
+                    this,
+                    tr("Close the Window"),
+                    tr("Do you want to close the window?"),
+                    QMessageBox::Yes | QMessageBox::No);
 
-    if (QFile::copy(fileName, ImgPath))
-        QMessageBox::information(this, "Notification", "Add book's cover successfully!");
+        if(answer == QMessageBox::Yes){
+            HumanDatabase::getInstance()->saveDTB();
+            RealLibraryDatabase::getInstance()->sortByID();
+            RealLibraryDatabase::getInstance()->saveDTB();
+            event->accept();
+        }
+        else
+            event->ignore();
 }
-
-
-
-
-
-
 
 
 

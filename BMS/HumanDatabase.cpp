@@ -33,42 +33,38 @@ void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
             else {
                 user = new VipUser(info[0],info[1],info[2].toInt(),info[3],info[4], info[5]);
             }
-
+            bool flag=false;
             int i=7;
-            bool flag = false;
-            if (i>=info.size()) {
-                flag = true;
-//                continue;
+            if (i>=info.size()) flag=true;
+            if(!flag)
+             {
+            //Add books in the cart
+            while(info[i][0]=='c'){
+                QString string=info[i];
+                QStringList templist=string.split(",");
+                Book *temp= Lib->getBookByID(templist[1]);
+                user->addToCart(*temp);
+                i++;
+                if (i>=info.size()) continue;
             }
-            if (!flag){
-                //Add books in the cart
-                while(info[i][0]=='c'){
-                    QString string=info[i];
-                    QStringList templist=string.split(",");
-                    Book *temp= Lib->getBookByID(templist[1]);
-                    user->addToCart(*temp);
-                    i++;
-                    if (i>=info.size()) continue;
-                }
-                //Add books borrowed
-                while( info[i][0]=='b'){
+            //Add books borrowed
+            while( info[i][0]=='b'){
 
-                    QString string=info[i];
-                    QStringList templist=string.split(",");
-                    Book* temp=Lib->getBookByID(templist[1]);
+                QString string=info[i];
+                QStringList templist=string.split(",");
+                Book* temp=Lib->getBookByID(templist[1]);
 
-                    QString checkExtended=info[++i];
-                    QString time=info[++i];
-                    qDebug()<<checkExtended;
-                    qDebug()<<time;
-                    user->borrowBook(*temp, checkExtended.toInt(), time);
-                    qDebug()<<temp->getNumOfOfBorrowedBooks();
-                    qDebug()<<user->getStartedTime()[0].toString();
+                QString checkExtended=info[++i];
+                QString time=info[++i];
+                qDebug()<<checkExtended;
+                qDebug()<<time;
+                user->borrowBook(*temp, checkExtended.toInt(), time);
+                qDebug()<<temp->getNumOfOfBorrowedBooks();
+                qDebug()<<user->getStartedTime()[0].toString();
 
-                    i++;
-                    if (i>=info.size()) break;
-                }
-
+                i++;
+                if (i>=info.size()) break;
+            }
             }
             this->UserData.push_back(user);
        }
@@ -196,3 +192,75 @@ QVector<User*> HumanDatabase::getListUser()
      return false;
  }
 
+
+void HumanDatabase::editName(QString ID,QString newName)
+{
+    for(auto person:UserData)
+    {
+        if(person->showID()==ID){
+            person->editName(newName);
+            return;
+        }
+    }
+    for(auto person:AdData)
+    {
+        if(person.showID()==ID){
+            person.editName(newName);
+            return;
+        }
+    }
+}
+void HumanDatabase::editGender(QString ID,bool Gender)
+{
+    for(auto person:UserData)
+    {
+        if(person->showID()==ID){
+            person->editGender(Gender);
+            return;
+        }
+    }
+    for(auto person:AdData)
+    {
+        if(person.showID()==ID){
+            person.editGender(Gender);
+            return;
+        }
+    }
+}
+void HumanDatabase::editAddress(QString ID,QString newAddress)
+{
+    for(auto person:UserData)
+    {
+        if(person->showID()==ID){
+            person->editAddress(newAddress);
+            return;
+        }
+    }
+    for(auto person:AdData)
+    {
+        if(person.showID()==ID){
+            person.editAddress(newAddress);
+            return;
+        }
+    }
+}
+void HumanDatabase::editPass(QString ID,QString newPass)
+{
+    int user_size=UserData.size();
+    for(int i=0;i<user_size;i++)
+    {
+        if(UserData[i]->showID()==ID){
+            UserData[i]->editPass(newPass);
+             qDebug()<<UserData[3]->showPass();
+            return;
+        }
+    }
+
+    for(auto person:AdData)
+    {
+        if(person.showID()==ID){
+            person.editPass(newPass);
+            return;
+        }
+    }
+}

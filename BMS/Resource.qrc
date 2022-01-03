@@ -603,6 +603,10 @@
         <file>Resource/Images/RM003.jpg</file>
         <file>Resource/Images/TB003.jpg</file>
         <file>Resource/Images/TH003.jpg</file>
+        <file>Resource/Images/hoangtrung.png</file>
+        <file>Resource/Images/huutrong.jpg</file>
+        <file>Resource/Images/baotin.jpg</file>
+        <file>Resource/Images/icon.png</file>
     </qresource>
     <qresource prefix="/Data">
         <file>Resource/Data/account.txt</file>

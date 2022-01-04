@@ -1,5 +1,0 @@
-20120607|hoangtrung|Nguyen Hoang Trung|Female|Quang Binh|Admin 
-20120099|huynhhuong|Tran Huynh Huong|Female|Long An|Vip User
-20120128|camlai|Nguyen Thi Cam Lai|Female|Lam Dong|User
-20120523|vana|Nguyen Van A|Male|Ha Noi|User
-20120614|vanb|Nguyen Van B|Male|Ha Nam|User

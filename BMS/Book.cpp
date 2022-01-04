@@ -46,12 +46,12 @@ int Book::getNumOfDamagedBooks(){
 }
 
 int Book::getNumOfOfBorrowedBooks(){
+    qDebug()<<this->state.getNumOfOfBorrowedBooks();
     return this->state.getNumOfOfBorrowedBooks();
 }
 
 void Book::updateQuantiy(int num){
     this->state.updateQuantiy(num);
-    qDebug()<<this->getNumOfRemaingBooks();
 }
 void Book::updateBorrowedBooks(int num){
     this->state.updateBorrowedBooks(num);

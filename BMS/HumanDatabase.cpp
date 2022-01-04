@@ -59,7 +59,9 @@ void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
                 qDebug()<<checkExtended;
                 qDebug()<<time;
                 user->borrowBook(*temp, checkExtended.toInt(), time);
-                qDebug()<<temp->getNumOfOfBorrowedBooks();
+                Lib->updateBorrowed(temp->getID(),Lib->getBorrowed(temp->getID())+1);
+
+                qDebug()<<Lib->getBorrowed(temp->getID());
                 qDebug()<<user->getStartedTime()[0].toString();
 
                 i++;

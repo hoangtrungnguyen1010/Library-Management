@@ -10,6 +10,7 @@ int BookState::getNumOfDamagedBooks(){
 }
 
 int BookState::getNumOfOfBorrowedBooks(){
+    qDebug()<<this->_numOfBorrowedBooks;
     return this->_numOfBorrowedBooks;
 }
 
@@ -36,7 +37,8 @@ void BookState::updateBorrowedBooks(int num){
 }
 
 void BookState::updateDamagedBooks(int num){
-    this->_numOfDamagedBooks+= num;
+     if(num>=0)
+    this->_numOfDamagedBooks= num;
 }
 
 QString BookState::toString() const{

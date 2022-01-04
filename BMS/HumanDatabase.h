@@ -18,7 +18,7 @@ private:
     public:
     QVector<User*> UserData;
     QVector<Admin> AdData;
-    QString _fileName=CURRENT_PATH.relativeFilePath("debug/Resource/Data/UserData.txt");
+    QString _fileName=CURRENT_PATH.relativeFilePath("Resource/Data/UserData.txt");
 public:
     static HumanDatabase* getInstance();
      ~HumanDatabase();

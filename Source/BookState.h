@@ -18,6 +18,7 @@ public:
     //initialize an object with quantity = 1, numOfBorrowedBooks = 0, numOfDamagedBooks =0;
     BookState();
     BookState(int quantity, int numOfBorrowedBooks, int numOfDamagedBooks);
+    ~BookState(){};
 
     int getNumOfRemaingBooks();
     int getNumOfDamagedBooks();

@@ -15,13 +15,14 @@ extern const QDir CURRENT_PATH;
 class HumanDatabase{
 private:
     static HumanDatabase* Instance;
-    public:
+    private:
     QVector<User*> UserData;
     QVector<Admin> AdData;
     QString _fileName=CURRENT_PATH.relativeFilePath("Resource/Data/UserData.txt");
 public:
     static HumanDatabase* getInstance();
      ~HumanDatabase();
+
 public:
     static void init();
     bool addNewUser(QString id, QString name, bool gender, QString address, QString username, QString password, QString type);

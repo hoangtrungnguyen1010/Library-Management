@@ -1,8 +1,15 @@
 #include"Admin.h"
 
-Admin::Admin(QString id, QString name, bool gender, QString address, QString account, QString password):Person(id,name, gender,address,account,password){
+Admin::Admin():Person(){
+    this->_type="Admin";
+}
+
+
+Admin::Admin(QString id, QString name, bool gender, QString address, QString account, QString password):Person(id,name, gender,address,account,password,"Admin"){
 
 }
+
+Admin::~Admin(){};
 
 QString Admin::toString(){
     QString buffer="";
@@ -12,19 +19,3 @@ QString Admin::toString(){
     QString res=out.readAll();
     return res;
 }
-
-//void Admin::viewBorrowedBook(){
-
-//}
-
-//void Admin::viewDamagedBook(){
-
-//}
-
-//void Admin::addBook(Book addedBook, int num){
-
-//}
-
-//void Admin::deleteBook(Book delBook, int num){
-
-//}

@@ -9,9 +9,11 @@ class Admin: public Person{
 private:
 
 public:
-    Admin(){};
+    Admin();
     Admin(QString id, QString name, bool gender, QString address, QString account, QString password);
+    ~Admin();
 
+public:
     QString toString();
 };
 

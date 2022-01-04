@@ -26,39 +26,41 @@ Book::Book(){
     _tag = "unknown";
 }
 
+Book::~Book(){
+    delete state;
+}
 Book::Book(QString ISBN,QString name,  QString publisher, QString author, QString tag, int quatity, int numOfBorrowedBooks, int numOfDamagedBooks ) {
     _name = name;
     _ISBN = ISBN;
     _publisher = publisher;
     _author = author;
     _tag = tag;
-    BookState temp(quatity, numOfBorrowedBooks, numOfDamagedBooks);
+    BookState* temp= new BookState(quatity, numOfBorrowedBooks, numOfDamagedBooks);
     state = temp;
 }
 
 int Book::getNumOfRemaingBooks(){
-     qDebug()<<this->state.getNumOfRemaingBooks();
-    return this->state.getNumOfRemaingBooks();
+    return this->state->getNumOfRemaingBooks();
 }
 
 int Book::getNumOfDamagedBooks(){
-    return this->state.getNumOfDamagedBooks();
+    return this->state->getNumOfDamagedBooks();
 }
 
 int Book::getNumOfOfBorrowedBooks(){
-    qDebug()<<this->state.getNumOfOfBorrowedBooks();
-    return this->state.getNumOfOfBorrowedBooks();
+    qDebug()<<this->state->getNumOfOfBorrowedBooks();
+    return this->state->getNumOfOfBorrowedBooks();
 }
 
 void Book::updateQuantiy(int num){
-    this->state.updateQuantiy(num);
+    this->state->updateQuantiy(num);
 }
 void Book::updateBorrowedBooks(int num){
-    this->state.updateBorrowedBooks(num);
+    this->state->updateBorrowedBooks(num);
 
 }
 void Book::updateDamagedBooks(int num){
-    this->state.updateDamagedBooks(num);
+    this->state->updateDamagedBooks(num);
 }
 
 QString Book::toString() const{
@@ -70,7 +72,7 @@ QString Book::toString() const{
     out<< "|" << this->_author;
     out << "|" << this->_publisher;
     out << "|" << this->_tag ;
-    out<<this->state.toString();
+    out<<this->state->toString();
 
     QString res=out.readAll();
     return res;

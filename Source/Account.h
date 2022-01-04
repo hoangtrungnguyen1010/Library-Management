@@ -15,6 +15,9 @@ private:
 public:
     Account();
     Account(QString username, QString password);
+    ~Account(){};
+
+public:
     void changePassWord(QString newPassWord);
     QString toString() const;
     bool checkIsUserName(QString name);

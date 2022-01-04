@@ -15,7 +15,7 @@ private:
     QString _publisher;
     QString _author;
     QString _tag;
-    BookState state;
+    BookState* state;
 public:
     QString getID();
     QString getName();
@@ -25,6 +25,9 @@ public:
 public:
     Book();
     Book( QString ISBN, QString name, QString publisher, QString author, QString tag, int quatity, int numOfBorrowedBooks, int numOfDamagedBooks );
+    ~Book();
+
+public:
     int getNumOfRemaingBooks();
     int getNumOfDamagedBooks();
     int getNumOfOfBorrowedBooks();

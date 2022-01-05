@@ -37,6 +37,7 @@ void LoginPage_2::on_pushButton_clicked()
         login_admin=nullptr;
         HumanDatabase* humanDtb=HumanDatabase::getInstance();
         login_user = humanDtb->findSavedUser(user,pass);
+        qDebug()<<login_user->showType();
         if(login_user!=nullptr){
           hide();
           ui=new MainWindow(this);
@@ -163,7 +164,7 @@ void LoginPage_2::on_pushButton_6_clicked()
     qDebug()<<name<<gender<<username<<id<<address;
     HumanDatabase* humanDtb=HumanDatabase::getInstance();
     bool flag = false;
-    for (auto user:humanDtb->UserData){
+    for (auto user:humanDtb->getListUser()){
         if (QString::compare(id, user->showID())==0 && QString::compare(name, user->showName())==0 &&
             QString::compare(address, user->showAddress())==0 && QString::compare(username, user->showUsername())==0&&QString::compare(gender, user->showGender())==0)
         {
@@ -172,10 +173,10 @@ void LoginPage_2::on_pushButton_6_clicked()
                flag = true;
                break;
         }
+    }
     if (!flag){
         QMessageBox::information(this,"Notification", "Wrong information. Try again!");
     }
-}
 }
 
  void LoginPage_2::closeEvent(QCloseEvent* event)

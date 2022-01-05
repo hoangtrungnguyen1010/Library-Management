@@ -10,6 +10,7 @@ extern User* login_user;
 extern Admin* login_admin;
 
 namespace Ui {
+
 class LoginPage_2;
 }
 class LoginPage_2 : public QMainWindow
@@ -22,8 +23,9 @@ public:
 
 private slots:
 
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
+       void on_pushButton_clicked();
+
+       void on_pushButton_2_clicked();
 
        void on_pushButton_4_clicked();
 

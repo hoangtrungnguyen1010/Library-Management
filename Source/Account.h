@@ -9,7 +9,7 @@
 
 using namespace std;
 class Account{
-private:
+    private:
     QString _username;
     QString _password;
 public:

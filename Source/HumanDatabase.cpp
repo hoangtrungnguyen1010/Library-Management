@@ -165,6 +165,7 @@ HumanDatabase::~HumanDatabase(){
  {
      for(auto user:this->UserData){
          if(user->checkIsUsername(username)&&user->checkIsPassword(password)){
+             qDebug()<<user->showType();
              return user;
          }
      }

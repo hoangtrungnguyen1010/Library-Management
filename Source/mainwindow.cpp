@@ -153,7 +153,7 @@ QFrame* MainWindow::createYourBookFrame(Book book,QString time_start,int time_re
     QLabel* name=new QLabel;
     name->setText(book.getName());
     name->setMinimumHeight(35);
-    name->setStyleSheet("QLabel {font-size: 15pt;font-family: Freestyle Script}");
+    name->setStyleSheet("QLabel {font-size: 10pt;font-family: Agate Type}");
       name->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
 
 
@@ -410,8 +410,6 @@ void MainWindow::on_view_btn_clicked()
       ui->frame->layout()->setAlignment(a,Qt::AlignTop);
   }
     ui->frame->layout()->setAlignment(Qt::AlignCenter);
-
-
     ui->MainFrame->setCurrentWidget(ui->ViewListBookPage);
     delete proxy;
 }

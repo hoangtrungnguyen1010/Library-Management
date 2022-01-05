@@ -5,20 +5,46 @@ Person::Person(){
     this->_name ="unknown";
     this->_gender="unknown";
     this->_address="unknown";
-    Account temp("unknown", "unknown");
+    Account* temp=new Account("unknown", "unknown");
     this->_acc=temp;
-    this->_type="Admin";
+    this->_type="unknown";
 }
-
-Person::Person(QString id, QString name, bool gender, QString address, QString username, QString password){
+Person::~Person()
+{
+    delete _acc;
+}
+Person::Person(QString id, QString name, bool gender, QString address, QString username, QString password,QString type){
     this->_id = id;
     this->_name =name;
     this->_gender=gender;
     this->_address=address;
-    Account temp(username, password);
+    Account* temp=new Account(username, password);
     this->_acc = temp;
+    this->_type=type;
 }
-
+Person::Person(const Person& src)
+{
+    _id=src._id;
+    this->_id =src._id;
+    this->_name =src._name;
+    this->_gender=src._gender;
+    this->_address=src._address;
+    this->_type=src._type;
+    _acc=new Account(src._acc->showUsername(),src._acc->showPass());
+}
+Person& Person::operator=(const Person& src)
+{
+    _id=src._id;
+    this->_id =src._id;
+    this->_name =src._name;
+    this->_gender=src._gender;
+    this->_address=src._address;
+    this->_type=src._type;
+    if(_acc)
+        delete _acc;
+     _acc=new Account(src._acc->showUsername(),src._acc->showPass());
+     return *this;
+}
 QString Person::toString(){
     QString buffer="";
     QTextStream out(&buffer,QIODevice::ReadWrite);
@@ -27,18 +53,18 @@ QString Person::toString(){
     out<<this->_name<<"|";
     out<<this->_gender<<"|";
     out<<this->_address<<"|";
-    out<<this->_acc.toString();
+    out<<this->_acc->toString();
 
     QString res=out.readAll();
     return res;
 }
 
 bool Person::checkIsUsername(QString username){
-    return this->_acc.checkIsUserName(username);
+    return this->_acc->checkIsUserName(username);
 }
 bool Person::checkIsPassword(QString pass)
 {
-    return this->_acc.checkIsPassword(pass);
+    return this->_acc->checkIsPassword(pass);
 }
 
 bool Person::checkIsID(QString id){
@@ -65,10 +91,10 @@ QString Person::showType(){
 }
 
 QString Person::showUsername(){
-    return _acc.showUsername();
+    return _acc->showUsername();
 }
 QString Person::showPass(){
-    return _acc.showPass();
+    return _acc->showPass();
 }
 
 
@@ -84,6 +110,5 @@ void Person::editAddress(QString newAddress){
 }
 
 void Person::editPass(QString newPass){
-    _acc.editPass(newPass);
-    qDebug()<<_acc.showPass();
+    _acc->editPass(newPass);
 }

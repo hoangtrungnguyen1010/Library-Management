@@ -24,10 +24,36 @@ Book::Book(){
     _publisher = "unknown";
     _author = "unknown";
     _tag = "unknown";
+    state=new BookState;
 }
 
 Book::~Book(){
-    delete state;
+    qDebug()<<this->_ISBN;
+    if(state){
+        delete state;
+        state=nullptr;
+    }
+}
+Book::Book(const Book& src){
+    this->_ISBN=src._ISBN;
+    _name=src._name;
+    _publisher=src._publisher;
+    _author=src._author;
+    _tag = src._tag;
+    state=new BookState(src.state->getNumOfRemaingBooks(),src.state->getNumOfOfBorrowedBooks(),src.state->getNumOfDamagedBooks());
+}
+
+Book& Book::operator=(const Book& src)
+{
+    if(state)
+        delete state;
+    this->_ISBN=src._ISBN;
+    _name=src._name;
+    _publisher=src._publisher;
+    _author=src._author;
+    _tag = src._tag;
+    state=new BookState(src.state->getNumOfRemaingBooks(),src.state->getNumOfOfBorrowedBooks(),src.state->getNumOfDamagedBooks());
+    return *this;
 }
 Book::Book(QString ISBN,QString name,  QString publisher, QString author, QString tag, int quatity, int numOfBorrowedBooks, int numOfDamagedBooks ) {
     _name = name;
@@ -35,8 +61,7 @@ Book::Book(QString ISBN,QString name,  QString publisher, QString author, QStrin
     _publisher = publisher;
     _author = author;
     _tag = tag;
-    BookState* temp= new BookState(quatity, numOfBorrowedBooks, numOfDamagedBooks);
-    state = temp;
+    state = new BookState(quatity, numOfBorrowedBooks, numOfDamagedBooks);
 }
 
 int Book::getNumOfRemaingBooks(){

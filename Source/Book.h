@@ -15,7 +15,7 @@ private:
     QString _publisher;
     QString _author;
     QString _tag;
-    BookState* state;
+    BookState* state=nullptr;
 public:
     QString getID();
     QString getName();
@@ -26,6 +26,8 @@ public:
     Book();
     Book( QString ISBN, QString name, QString publisher, QString author, QString tag, int quatity, int numOfBorrowedBooks, int numOfDamagedBooks );
     ~Book();
+    Book& operator=(const Book& src);
+    Book(const Book& src);
 
 public:
     int getNumOfRemaingBooks();

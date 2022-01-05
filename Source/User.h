@@ -10,28 +10,25 @@
 
 class User:public Person{
 
-private:
+protected:
     QVector<Book> _cart;
+    QVector<Book> _borrowedBook;
+    QVector<QDateTime> _timeWhenBorrowed;
+    QVector<bool> _checkExtended; //extend time returning book for 5 days.
 protected:
     const static int numOfBooksCanBorrowAtTheSameTime = 5;
     const static int _ExtendedBorrowingTime = 5;
     const static int _BorrowingTime = 15;
-
-    QVector<Book> _borrowedBook;
-    QVector<QDateTime> _timeWhenBorrowed;
-    QVector<bool> _checkExtended; //extend time returning book for 5 days.
-
 public:
     User();
-    ~User(){};
-    User(QString id, QString name, bool gender, QString address, QString username, QString password):Person(id,name, gender,address,username, password)
-    {};
+    virtual ~User(){};
+     User(QString id, QString name, bool gender, QString address, QString username, QString password);
 
-
+public:
 
     void addToCart(Book b);
-    bool borrowBook(Book book);
-    bool borrowBook(Book book, bool checkExtended, QString time);        //use to upload database.
+    virtual bool borrowBook(Book book);
+    virtual bool borrowBook(Book book, bool checkExtended, QString time);        //use to upload database.
 
 
     virtual int getTimeRemainingBook(Book book); //return days

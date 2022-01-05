@@ -4,7 +4,8 @@
 
 void RealLibraryDatabase::uploadBook() {
     QFile fin(_fileName);
-    fin.open(QIODevice::ReadOnly);
+    if(fin.open(QIODevice::ReadOnly))
+        qDebug()<<"File is open!";
     QTextStream in(&fin);
     while (!in.atEnd()) {
 
@@ -12,11 +13,11 @@ void RealLibraryDatabase::uploadBook() {
 
         QStringList list=line.split('|');
         if (list.size()!=7) continue;
-       Book newBook(list.at(0),list.at(1),list.at(2),list.at(3),list.at(4), list.at(5).toInt(), 0,list.at(6).toInt());
+        qDebug()<<list.at(0);
+        Book newBook(list.at(0),list.at(1),list.at(2),list.at(3),list.at(4), list.at(5).toInt(), 0,list.at(6).toInt());
        List.push_back(newBook);
     }
     fin.close();
-
 }
 
 RealLibraryDatabase* RealLibraryDatabase::getInstance()

@@ -393,9 +393,23 @@ background-color: #CD1818;
         </item>
         <item>
          <widget class="QWidget" name="widget_6" native="true">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item alignment="Qt::AlignHCenter">
             <widget class="QFrame" name="frame_4">
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+background-color: #FFEFEF;
+border-radius: 10px;
+border: 2px solid #FFCCD2
+}
+
+QPushButton:hover{
+background-color: #D3DEDC;
+}</string>
+             </property>
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
@@ -405,11 +419,22 @@ background-color: #CD1818;
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
                <widget class="QPushButton" name="pushButton_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>35</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
                 <property name="styleSheet">
                  <string notr="true">color:  #9B0000</string>
                 </property>
                 <property name="text">
-                 <string>Create an new account ?</string>
+                 <string>Create an new account?</string>
                 </property>
                </widget>
               </item>
@@ -425,6 +450,17 @@ background-color: #CD1818;
               </item>
               <item>
                <widget class="QPushButton" name="pushButton_3">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>35</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
                 <property name="styleSheet">
                  <string notr="true">color:  #9B0000</string>
                 </property>

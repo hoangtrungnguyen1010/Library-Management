@@ -609,7 +609,6 @@
         <file>Resource/Images/icon.png</file>
     </qresource>
     <qresource prefix="/Data">
-        <file>Resource/Data/account.txt</file>
         <file>Resource/Data/BookData.txt</file>
         <file>Resource/Data/UserData.txt</file>
     </qresource>

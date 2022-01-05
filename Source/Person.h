@@ -14,19 +14,23 @@
 using namespace std;
 
 class Person{
-private:
+    protected:
     QString _id;
     QString _name;
     bool _gender; //0 : male, 1: female
     QString _address;
     QString _type;
-    Account _acc;
+    Account* _acc;
 public:
     Person();
-    virtual ~Person(){};
-    Person(QString id, QString name, bool gender, QString address, QString username, QString password);
+    Person(const Person& src);
+    Person& operator=(const Person& src);
+    virtual ~Person();
+    Person(QString id, QString name, bool gender, QString address, QString username, QString password,QString type);
     QString toString();
 
+
+public:
 
     bool checkIsUsername(QString username);
     bool checkIsPassword(QString pass);

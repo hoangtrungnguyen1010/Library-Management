@@ -1,6 +1,6 @@
 #include<User.h>
 
-User::User(){
+User::User():Person(){
     QVector<Book> cart;
     QVector<Book> borrowedBook;
     QVector<bool> checkExtended; //remaining time corespoding to each book
@@ -9,7 +9,12 @@ User::User(){
     this->_borrowedBook = borrowedBook;
     this->_checkExtended=checkExtended;
     this->_timeWhenBorrowed=timeWhenBorrowed;
+    this->_type="User";
 };
+
+User::User(QString id, QString name, bool gender, QString address, QString username, QString password):Person(id,name,gender,address,username,password,"User")
+{
+}
 
 void User::addToCart(Book b){
     this->_cart.push_back(b);

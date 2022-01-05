@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
-    <height>726</height>
+    <width>841</width>
+    <height>786</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -98,7 +98,7 @@ background-color: rgb(239, 249, 254);</string>
           <string notr="true">background-color: #FF1700;</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QLabel" name="label_19">
             <property name="minimumSize">
              <size>
@@ -720,7 +720,7 @@ background-color: red;
                        <item row="1" column="2">
                         <widget class="QLabel" name="label_18">
                          <property name="text">
-                          <string>Why i'm not...</string>
+                          <string>Why i'm no...</string>
                          </property>
                         </widget>
                        </item>
@@ -810,8 +810,14 @@ background-color: red;
                           <string notr="true">background-color: #EAEAEA</string>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_9">
-                          <item>
+                          <item alignment="Qt::AlignHCenter">
                            <widget class="QFrame" name="frame_2">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>45</height>
+                             </size>
+                            </property>
                             <property name="frameShape">
                              <enum>QFrame::StyledPanel</enum>
                             </property>
@@ -1016,7 +1022,7 @@ background-color: red;
                           <string notr="true">background-color: #EAEAEA</string>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_10">
-                          <item>
+                          <item alignment="Qt::AlignHCenter">
                            <widget class="QFrame" name="frame_6">
                             <property name="frameShape">
                              <enum>QFrame::StyledPanel</enum>
@@ -1601,8 +1607,8 @@ background: none;
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>57</width>
-                   <height>32</height>
+                   <width>595</width>
+                   <height>614</height>
                   </rect>
                  </property>
                  <property name="styleSheet">
@@ -2179,7 +2185,7 @@ background-color: red;
 }</string>
                       </property>
                       <property name="text">
-                       <string>Saved</string>
+                       <string>Save</string>
                       </property>
                      </widget>
                     </item>
@@ -2313,7 +2319,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>79</width>
+                   <width>603</width>
                    <height>1022</height>
                   </rect>
                  </property>
@@ -2447,7 +2453,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>57</width>
+                   <width>581</width>
                    <height>1022</height>
                   </rect>
                  </property>
@@ -2581,7 +2587,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>57</width>
+                   <width>581</width>
                    <height>1022</height>
                   </rect>
                  </property>
@@ -3124,7 +3130,7 @@ color: white;
 }</string>
                 </property>
                 <property name="text">
-                 <string>Saved</string>
+                 <string>Save</string>
                 </property>
                 <property name="icon">
                  <iconset resource="Resource.qrc">
@@ -3145,6 +3151,18 @@ color: white;
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_88">
+                 <item alignment="Qt::AlignHCenter">
+                  <widget class="QLabel" name="label_34">
+                   <property name="font">
+                    <font>
+                     <pointsize>9</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>If the book has already been in library, you just need to fill in IBNS and quantity cell.</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QFrame" name="frame_27">
                    <property name="frameShape">

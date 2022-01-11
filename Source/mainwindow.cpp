@@ -506,10 +506,11 @@ void MainWindow::on_log_out_btn_clicked()
         }
         else if(login_admin)
             login_admin=nullptr;
-        }
+
         hide();
         LoginPage_2* login_ui=new LoginPage_2(this);
         login_ui->show();
+    }
 }
 
 // ON EXTEND TIME

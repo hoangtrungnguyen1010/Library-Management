@@ -33,22 +33,18 @@ void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
             else {
                 user = new VipUser(info[0],info[1],info[2].toInt(),info[3],info[4], info[5]);
             }
-            bool flag=false;
             int i=7;
-            if (i>=info.size()) flag=true;
-            if(!flag)
-             {
-            //Add books in the cart
-            while(info[i][0]=='c'){
+
+         //Add books in the cart
+            while(i<info.size() && info[i][0]=='c'){
                 QString string=info[i];
                 QStringList templist=string.split(",");
                 Book *temp= Lib->getBookByID(templist[1]);
                 user->addToCart(*temp);
                 i++;
-                if (i>=info.size()) continue;
             }
             //Add books borrowed
-            while( info[i][0]=='b'){
+            while( i<info.size() &&  info[i][0]=='b'){
 
                 QString string=info[i];
                 QStringList templist=string.split(",");
@@ -65,14 +61,14 @@ void HumanDatabase::loadDTB(RealLibraryDatabase* Lib){
                 qDebug()<<user->getStartedTime()[0].toString();
 
                 i++;
-                if (i>=info.size()) break;
             }
-            }
+
             this->UserData.push_back(user);
        }
     }
     file.close();
 }
+
 
 
 HumanDatabase* HumanDatabase::getInstance()

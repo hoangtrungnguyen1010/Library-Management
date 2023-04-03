@@ -43,6 +43,9 @@ We build this app with `Qt` and `C++` language.
 <h5 id="demo"></h5>
 
 ## 3. UI and Functions
+
+If you want to see how this app works in practice, please visit the [Youtube video](https://youtu.be/oHA95UozHHE).
+
 First, make sure that you have an account (you can register an account or recover your password by clicking the buttons below). 
 
 <img src="imgs/login.jpg">

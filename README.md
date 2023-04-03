@@ -27,7 +27,7 @@ We will introduce briefly about our project:
 |   Student ID   |            Name               | Profile 
 |----------------|-------------------------------|----------------------------
 |    20120596    |Nguyen Bao Tin | [@nbtin](https://github.com/nbtin)            
-|    20120607    |Le Huu Trong | [@huutrong2307](https://github.com/huutrong2307)           
+|    20120607    |Le Huu Trong | [@lhtrong](https://github.com/lhtrong)           
 |    20120609    |Nguyen Hoang Trung | [@hoangtrungnguyen1010](https://github.com/hoangtrungnguyen1010)
 
 <h5 id="set_up"></h5>
